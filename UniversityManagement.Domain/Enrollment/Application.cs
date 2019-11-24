@@ -17,5 +17,11 @@
             Major = null;
             return this;
         }
+
+        public Application SelectMajor(Major major)
+        {
+            Major = major;
+            return this;
+        }
     }
 }
