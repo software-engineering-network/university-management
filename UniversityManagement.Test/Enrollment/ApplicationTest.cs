@@ -6,15 +6,21 @@ namespace UniversityManagement.Test.Enrollment
 {
     public class ApplicationTest
     {
+        private readonly Applicant _johnDoe;
         private readonly Application _application;
         private readonly College _collegeOfEngineering;
 
         public ApplicationTest()
         {
+            _johnDoe = CreateApplicant();
+            _application = CreateApplication(_johnDoe);
             _collegeOfEngineering = new College("Engineering");
+        }
 
-            var johnDoe = new Applicant("John", "Doe");
-            _application = new Application(johnDoe);
+        [Fact]
+        public void WhenCreatingAnApplication_TheApplicantIsSet()
+        {
+            _application.Applicant.Should().Be(_johnDoe);
         }
 
         [Fact]
@@ -36,6 +42,16 @@ namespace UniversityManagement.Test.Enrollment
                 .SelectMajor(computerScience);
 
             _application.Major.Should().Be(computerScience);
+        }
+
+        private static Applicant CreateApplicant()
+        {
+            return new Applicant("John", "Doe");
+        }
+
+        private static Application CreateApplication(Applicant applicant)
+        {
+            return new Application(applicant);
         }
     }
 }
