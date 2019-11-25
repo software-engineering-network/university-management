@@ -64,7 +64,7 @@ namespace UniversityManagement.Wpf.Enrollment
         public ObservableCollection<CollegeDto> Colleges
         {
             get => _colleges;
-            set
+            private set
             {
                 if (_colleges == value)
                     return;

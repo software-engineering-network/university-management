@@ -7,7 +7,7 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Properties
 
-        ObservableCollection<CollegeDto> Colleges { get; set; }
+        ObservableCollection<CollegeDto> Colleges { get; }
         CollegeDto SelectedCollege { get; set; }
 
         #endregion

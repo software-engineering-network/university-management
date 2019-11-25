@@ -44,7 +44,8 @@
     <Compile Include="Enrollment\Applicant.cs" />
     <Compile Include="Enrollment\Application.cs" />
     <Compile Include="Enrollment\college\College.cs" />
-    <Compile Include="Enrollment\Major.cs" />
+    <Compile Include="Enrollment\major\IMajorRepository.cs" />
+    <Compile Include="Enrollment\major\Major.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Enrollment\college\ICollegeRepository.cs" />
     <Compile Include="IRepository.cs" />

@@ -4,7 +4,7 @@ using UniversityManagement.Domain.Enrollment;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
-    public class CollegeRepository : ICollegeRepository
+    public class MajorRepository : IMajorRepository
     {
         #region Fields
 
@@ -14,23 +14,29 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         #region Construction
 
-        public CollegeRepository(Context context)
+        public MajorRepository(Context context)
         {
             _context = context;
         }
 
         #endregion
 
-        #region ICollegeRepository Members
+        #region IMajorRepository Members
 
-        public IEnumerable<Domain.Enrollment.College> Fetch()
+        public IEnumerable<Major> Fetch()
         {
-            return _context.Colleges.Select(
-                x => new Domain.Enrollment.College(
+            return _context.Disciplines.Select(
+                x => new Major(
+                    x.CollegeId,
                     x.Name,
                     x.Id
                 )
             );
+        }
+
+        public IEnumerable<Major> Fetch(int collegeId)
+        {
+            return Fetch().Where(x => x.CollegeId == collegeId);
         }
 
         #endregion

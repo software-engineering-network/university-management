@@ -22,7 +22,7 @@ namespace UniversityManagement.Domain.Enrollment
 
         public Application SelectMajor(Major major)
         {
-            if (major.College != College)
+            if (major.CollegeId != College.Id)
                 throw new ArgumentException();
 
             Major = major;

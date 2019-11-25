@@ -47,9 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollegeRecord.cs" />
+    <Compile Include="database\Context.cs" />
+    <Compile Include="database\Discipline.cs" />
+    <Compile Include="database\College.cs" />
+    <Compile Include="database\DisciplineProgramType.cs" />
+    <Compile Include="database\ProgramType.cs" />
     <Compile Include="Enrollment\CollegeRepository.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="database\Entity.cs" />
+    <Compile Include="Enrollment\MajorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_ioc\InfrastructureMemoryModule.cs" />
   </ItemGroup>
