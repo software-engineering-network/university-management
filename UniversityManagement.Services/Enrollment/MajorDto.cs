@@ -16,5 +16,14 @@
         {
             Name = name;
         }
+
+        #region object Overrides
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace UniversityManagement.Wpf
         private static void RegisterViewModels(ContainerBuilder builder)
         {
             builder.RegisterType<MainWindowViewModel>();
-            builder.RegisterType<CreateApplicationViewModel>();
+            builder.RegisterType<ApplicationViewModel>();
         }
     }
 }

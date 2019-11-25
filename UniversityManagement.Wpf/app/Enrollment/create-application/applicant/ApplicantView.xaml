@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:enrollment="clr-namespace:UniversityManagement.Wpf.Enrollment"
-             mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=enrollment:ApplicantViewModel}"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +24,7 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Path=Name}" />
+            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label
             Grid.Row="1"
@@ -36,6 +34,6 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=Surname}" />
+            Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

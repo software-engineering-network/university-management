@@ -4,12 +4,12 @@ namespace UniversityManagement.Wpf
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public CreateApplicationViewModel CreateApplicationViewModel { get; }
+        public ApplicationViewModel ApplicationViewModel { get; }
         public string Title => "University Management";
 
-        public MainWindowViewModel(CreateApplicationViewModel createApplicationViewModel)
+        public MainWindowViewModel(ApplicationViewModel applicationViewModel)
         {
-            CreateApplicationViewModel = createApplicationViewModel;
+            ApplicationViewModel = applicationViewModel;
         }
     }
 }

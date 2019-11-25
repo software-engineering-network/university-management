@@ -6,7 +6,10 @@
         xmlns:wpf="clr-namespace:UniversityManagement.Wpf"
         xmlns:enrollment="clr-namespace:UniversityManagement.Wpf.Enrollment"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=wpf:MainWindowViewModel}"
-        Title="{Binding Path=Title}" Height="450" Width="800">
-    <enrollment:CreateApplicationView />
+        Title="{Binding Path=Title}" 
+        Height="450" 
+        Width="800">
+    <StackPanel>
+        <enrollment:ApplicationView />
+    </StackPanel>
 </Window>

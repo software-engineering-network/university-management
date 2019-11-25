@@ -1,4 +1,5 @@
-﻿using UniversityManagement.Services.Enrollment;
+﻿using UniversityManagement.Domain.Enrollment;
+using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
@@ -6,15 +7,25 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         private readonly ApplicationDto _application;
 
-        public ApplicantViewModel Applicant { get; }
+        public ApplicantDto Applicant
+        {
+            get => _application.Applicant;
+            set
+            {
+                if (_application.Applicant == value)
+                    return;
+
+                _application.Applicant = value;
+                OnPropertyChanged(nameof(Applicant));
+            }
+        }
+
         public ISelectorViewModel<CollegeViewModel> CollegeSelectorViewModel { get; }
         public string Title => "Create Application";
 
         public CreateApplicationViewModel(ICollegeReadService collegeReadService)
         {
             _application = new ApplicationDto();
-
-            Applicant = new ApplicantViewModel(_application.Applicant);
 
             CollegeSelectorViewModel = new CollegeSelectorViewModel(
                 _application,

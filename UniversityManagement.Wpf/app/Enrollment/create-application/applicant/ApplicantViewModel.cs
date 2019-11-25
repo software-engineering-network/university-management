@@ -4,7 +4,29 @@ namespace UniversityManagement.Wpf.Enrollment
 {
     public class ApplicantViewModel : ViewModelBase
     {
-        private readonly ApplicantDto _applicant;
+        #region Fields
+
+        private ApplicantDto _applicant;
+
+        private ApplicantDto Applicant
+        {
+            get => _applicant;
+            set
+            {
+                if (_applicant == value)
+                    return;
+
+                _applicant = value;
+
+                OnPropertyChanged(nameof(Applicant));
+                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(Surname));
+            }
+        }
+
+        #endregion
+
+        #region Properties
 
         public string Name
         {
@@ -32,9 +54,15 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
+        #endregion
+
+        #region Construction
+
         public ApplicantViewModel(ApplicantDto applicant)
         {
-            _applicant = applicant;
+            Applicant = applicant;
         }
+
+        #endregion
     }
 }
