@@ -46,7 +46,9 @@
     <Compile Include="Enrollment\college\College.cs" />
     <Compile Include="Enrollment\major\IMajorRepository.cs" />
     <Compile Include="Enrollment\major\Major.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="models\Program.cs" />
+    <Compile Include="models\ProgramType.cs" />
+    <Compile Include="models\Entity.cs" />
     <Compile Include="Enrollment\college\ICollegeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />

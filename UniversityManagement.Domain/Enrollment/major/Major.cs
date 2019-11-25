@@ -1,18 +1,18 @@
 ﻿namespace UniversityManagement.Domain.Enrollment
 {
-    public class Major : Entity
+    public class Major : Program
     {
-        public long CollegeId { get; set; }
-        public string Name { get; }
+        #region Construction
 
         public Major(
             long collegeId,
             string name,
+            ProgramType programType,
             long id = 0
-        ) : base(id)
+        ) : base(collegeId, name, programType, id)
         {
-            CollegeId = collegeId;
-            Name = name;
         }
+
+        #endregion
     }
 }
