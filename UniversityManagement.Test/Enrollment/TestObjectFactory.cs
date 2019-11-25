@@ -4,24 +4,11 @@ namespace UniversityManagement.Test.Enrollment
 {
     public class TestObjectFactory
     {
-        public static Applicant CreateJohnDoe()
-        {
-            return new Applicant("John", "Doe");
-        }
-
         public static College CreateCollegeOfEngineering()
         {
             return new College(
                 "Engineering",
                 1
-            );
-        }
-
-        public static Major CreateComputerScience()
-        {
-            return new Major(
-                "Computer Science",
-                CreateCollegeOfEngineering()
             );
         }
 
@@ -33,11 +20,24 @@ namespace UniversityManagement.Test.Enrollment
             );
         }
 
+        public static Major CreateComputerScience()
+        {
+            return new Major(
+                "Computer Science",
+                CreateCollegeOfEngineering()
+            );
+        }
+
+        public static Applicant CreateJohnDoe()
+        {
+            return new Applicant("John", "Doe");
+        }
+
         public static Major CreatePharmacyMajor()
         {
             return new Major(
                 "Pharmacy",
-                CreateCollegeOfEngineering()
+                CreateCollegeOfPharmacy()
             );
         }
     }

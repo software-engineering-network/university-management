@@ -9,6 +9,8 @@ namespace UniversityManagement.Test.Enrollment
     {
         private readonly Application _application;
         private readonly College _collegeOfEngineering;
+        private readonly College _collegeOfPharmacy;
+        private readonly Major _computerScience;
         private readonly Applicant _johnDoe;
 
         public ApplicationTest()
@@ -16,6 +18,8 @@ namespace UniversityManagement.Test.Enrollment
             _johnDoe = TestObjectFactory.CreateJohnDoe();
             _application = new Application(_johnDoe);
             _collegeOfEngineering = TestObjectFactory.CreateCollegeOfEngineering();
+            _collegeOfPharmacy = TestObjectFactory.CreateCollegeOfPharmacy();
+            _computerScience = TestObjectFactory.CreateComputerScience();
         }
 
         [Fact]
@@ -27,9 +31,12 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenSelectingACollege_TheMajorIsUnselected()
         {
-            _application.SelectCollege(_collegeOfEngineering);
+            _application
+                .SelectCollege(_collegeOfEngineering)
+                .SelectMajor(_computerScience)
+                .SelectCollege(_collegeOfPharmacy);
 
-            _application.College.Should().Be(_collegeOfEngineering);
+            _application.College.Should().Be(_collegeOfPharmacy);
             _application.Major.Should().Be(null);
         }
 
