@@ -12,6 +12,7 @@ namespace UniversityManagement.Test.Enrollment
         private readonly College _collegeOfPharmacy;
         private readonly Major _computerScience;
         private readonly Applicant _johnDoe;
+        private readonly Major _pharmacy;
 
         public ApplicationTest()
         {
@@ -20,6 +21,7 @@ namespace UniversityManagement.Test.Enrollment
             _collegeOfEngineering = TestObjectFactory.CreateCollegeOfEngineering();
             _collegeOfPharmacy = TestObjectFactory.CreateCollegeOfPharmacy();
             _computerScience = TestObjectFactory.CreateComputerScience();
+            _pharmacy = TestObjectFactory.CreatePharmacyMajor();
         }
 
         [Fact]
@@ -43,22 +45,19 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenSelectingAMajor_ProvidedByTheSelectedCollege_TheMajorIsSelected()
         {
-            var computerScience = TestObjectFactory.CreateComputerScience();
-
             _application
                 .SelectCollege(_collegeOfEngineering)
-                .SelectMajor(computerScience);
+                .SelectMajor(_computerScience);
 
-            _application.Major.Should().Be(computerScience);
+            _application.Major.Should().Be(_computerScience);
         }
 
         [Fact]
         public void WhenSelectingAMajor_NotProvidedByTheSelectedCollege_AnArgumentExceptionIsThrown()
         {
             _application.SelectCollege(_collegeOfEngineering);
-            var pharmacy = TestObjectFactory.CreatePharmacyMajor();
 
-            Action selectPharmacy = () => _application.SelectMajor(pharmacy);
+            Action selectPharmacy = () => _application.SelectMajor(_pharmacy);
 
             selectPharmacy.Should().Throw<ArgumentException>();
         }

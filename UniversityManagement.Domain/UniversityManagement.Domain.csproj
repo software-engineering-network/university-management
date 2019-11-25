@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="Enrollment\Applicant.cs" />
     <Compile Include="Enrollment\Application.cs" />
-    <Compile Include="Enrollment\College.cs" />
+    <Compile Include="Enrollment\college\College.cs" />
     <Compile Include="Enrollment\Major.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Enrollment\college\ICollegeRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
