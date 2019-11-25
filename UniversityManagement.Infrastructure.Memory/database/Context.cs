@@ -8,6 +8,8 @@ namespace UniversityManagement.Infrastructure.Memory
 
         public List<College> Colleges { get; }
         public List<Discipline> Disciplines { get; }
+        public List<Program> Programs { get; }
+        public List<ProgramType> ProgramTypes { get; }
 
         #endregion
 
@@ -17,6 +19,7 @@ namespace UniversityManagement.Infrastructure.Memory
         {
             Colleges = CreateColleges();
             Disciplines = CreateDisciplines();
+            ProgramTypes = CreateProgramTypes();
         }
 
         #endregion
@@ -142,8 +145,172 @@ namespace UniversityManagement.Infrastructure.Memory
                 new Discipline(102, 1, "Technology Systems"),
                 new Discipline(103, 1, "Theatre"),
                 new Discipline(104, 1, "Theatre Technology and Design"),
-                new Discipline(105, 1, "Undecided"),
+                //new Discipline(105, 1, "Undecided"),
                 new Discipline(106, 1, "Youth Ministry")
+            };
+        }
+
+        private static List<Program> CreatePrograms()
+        {
+            return new List<Program>
+            {
+                new Program(1, 1, 3),
+                new Program(2, 2, 2),
+                new Program(3, 3, 1),
+                new Program(4, 4, 1),
+                new Program(5, 5, 1),
+                new Program(6, 6, 1),
+                new Program(7, 7, 4),
+                new Program(8, 8, 3),
+                new Program(9, 9, 4),
+                new Program(10, 10, 1),
+                new Program(11, 10, 4),
+                new Program(12, 11, 3),
+                new Program(13, 11, 6),
+                new Program(14, 12, 1),
+                new Program(15, 13, 3),
+                new Program(16, 13, 4),
+                new Program(17, 14, 1),
+                new Program(18, 15, 3),
+                new Program(19, 15, 4),
+                new Program(20, 16, 4),
+                new Program(21, 17, 4),
+                new Program(22, 18, 4),
+                new Program(23, 19, 3),
+                new Program(24, 19, 4),
+                new Program(25, 20, 3),
+                new Program(26, 21, 1),
+                new Program(27, 22, 3),
+                new Program(28, 22, 4),
+                new Program(29, 23, 3),
+                new Program(30, 24, 3),
+                new Program(31, 24, 4),
+                new Program(32, 25, 3),
+                new Program(33, 26, 3),
+                new Program(34, 26, 4),
+                new Program(35, 27, 3),
+                new Program(36, 27, 4),
+                new Program(37, 28, 4),
+                new Program(38, 29, 3),
+                new Program(39, 29, 4),
+                new Program(40, 30, 4),
+                new Program(41, 31, 4),
+                new Program(42, 32, 3),
+                new Program(43, 33, 3),
+                new Program(44, 34, 3),
+                new Program(45, 35, 5),
+                new Program(46, 36, 5),
+                new Program(47, 37, 4),
+                new Program(48, 38, 3),
+                new Program(49, 39, 1),
+                new Program(50, 40, 4),
+                new Program(51, 41, 1),
+                new Program(52, 41, 3),
+                new Program(53, 41, 4),
+                new Program(54, 42, 3),
+                new Program(55, 43, 3),
+                new Program(56, 44, 4),
+                new Program(57, 45, 4),
+                new Program(58, 46, 3),
+                new Program(59, 47, 3),
+                new Program(60, 47, 4),
+                new Program(61, 48, 1),
+                new Program(62, 49, 4),
+                new Program(63, 50, 4),
+                new Program(64, 51, 3),
+                new Program(65, 52, 3),
+                new Program(66, 52, 6),
+                new Program(67, 53, 2),
+                new Program(68, 54, 3),
+                new Program(69, 55, 3),
+                new Program(70, 55, 4),
+                new Program(71, 56, 3),
+                new Program(72, 56, 4),
+                new Program(73, 56, 6),
+                new Program(74, 57, 3),
+                new Program(75, 58, 3),
+                new Program(76, 58, 4),
+                new Program(77, 59, 1),
+                new Program(78, 59, 3),
+                new Program(79, 59, 4),
+                new Program(80, 60, 3),
+                new Program(81, 61, 4),
+                new Program(82, 62, 3),
+                new Program(83, 63, 3),
+                new Program(84, 64, 3),
+                new Program(85, 64, 4),
+                new Program(86, 65, 3),
+                new Program(87, 65, 4),
+                new Program(88, 66, 1),
+                new Program(89, 67, 3),
+                new Program(90, 68, 1),
+                new Program(91, 69, 1),
+                new Program(92, 70, 3),
+                new Program(93, 71, 3),
+                new Program(94, 72, 3),
+                new Program(95, 73, 3),
+                new Program(96, 73, 2),
+                new Program(97, 74, 3),
+                new Program(98, 74, 4),
+                new Program(99, 75, 3),
+                new Program(100, 76, 1),
+                new Program(101, 76, 3),
+                new Program(102, 76, 4),
+                new Program(103, 77, 3),
+                new Program(104, 77, 4),
+                new Program(105, 78, 6),
+                new Program(106, 79, 6),
+                new Program(107, 80, 6),
+                new Program(108, 81, 6),
+                new Program(109, 82, 6),
+                new Program(110, 83, 6),
+                new Program(111, 84, 3),
+                new Program(112, 84, 4),
+                new Program(113, 85, 1),
+                new Program(114, 85, 3),
+                new Program(115, 85, 4),
+                new Program(116, 86, 3),
+                new Program(117, 86, 4),
+                new Program(118, 87, 4),
+                new Program(119, 88, 4),
+                new Program(120, 89, 3),
+                new Program(121, 89, 4),
+                new Program(122, 90, 3),
+                new Program(123, 90, 4),
+                new Program(124, 91, 1),
+                new Program(125, 92, 4),
+                new Program(126, 93, 3),
+                new Program(127, 94, 1),
+                new Program(128, 94, 3),
+                new Program(129, 94, 4),
+                new Program(130, 95, 1),
+                new Program(131, 96, 3),
+                new Program(132, 96, 4),
+                new Program(133, 97, 3),
+                new Program(134, 98, 3),
+                new Program(135, 99, 1),
+                new Program(136, 100, 3),
+                new Program(137, 100, 4),
+                new Program(138, 101, 3),
+                new Program(139, 102, 4),
+                new Program(140, 103, 3),
+                new Program(141, 103, 4),
+                new Program(142, 104, 4),
+                //new Program(143, 105, 3),
+                new Program(144, 106, 3)
+            };
+        }
+
+        private static List<ProgramType> CreateProgramTypes()
+        {
+            return new List<ProgramType>
+            {
+                new ProgramType(1, "Concentration"),
+                new ProgramType(2, "Graduate Program"),
+                new ProgramType(3, "Major"),
+                new ProgramType(4, "Minor"),
+                new ProgramType(5, "Pathway"),
+                new ProgramType(6, "Preprofessional Program")
             };
         }
     }

@@ -51,6 +51,7 @@
     <Compile Include="database\Discipline.cs" />
     <Compile Include="database\College.cs" />
     <Compile Include="database\DisciplineProgramType.cs" />
+    <Compile Include="database\Program.cs" />
     <Compile Include="database\ProgramType.cs" />
     <Compile Include="Enrollment\CollegeRepository.cs" />
     <Compile Include="database\Entity.cs" />
