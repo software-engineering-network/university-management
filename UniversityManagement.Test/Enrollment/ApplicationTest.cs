@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using UniversityManagement.Domain.Enrollment;
 using Xunit;
 
@@ -6,15 +7,15 @@ namespace UniversityManagement.Test.Enrollment
 {
     public class ApplicationTest
     {
-        private readonly Applicant _johnDoe;
         private readonly Application _application;
         private readonly College _collegeOfEngineering;
+        private readonly Applicant _johnDoe;
 
         public ApplicationTest()
         {
-            _johnDoe = CreateApplicant();
-            _application = CreateApplication(_johnDoe);
-            _collegeOfEngineering = new College("Engineering");
+            _johnDoe = TestObjectFactory.CreateJohnDoe();
+            _application = new Application(_johnDoe);
+            _collegeOfEngineering = TestObjectFactory.CreateCollegeOfEngineering();
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenSelectingAMajor_ProvidedByTheSelectedCollege_TheMajorIsSelected()
         {
-            var computerScience = new Major("Computer Science");
+            var computerScience = TestObjectFactory.CreateComputerScience();
 
             _application
                 .SelectCollege(_collegeOfEngineering)
@@ -44,14 +45,15 @@ namespace UniversityManagement.Test.Enrollment
             _application.Major.Should().Be(computerScience);
         }
 
-        private static Applicant CreateApplicant()
+        [Fact]
+        public void WhenSelectingAMajor_NotProvidedByTheSelectedCollege_AnArgumentExceptionIsThrown()
         {
-            return new Applicant("John", "Doe");
-        }
+            _application.SelectCollege(_collegeOfEngineering);
+            var pharmacy = TestObjectFactory.CreatePharmacyMajor();
 
-        private static Application CreateApplication(Applicant applicant)
-        {
-            return new Application(applicant);
+            Action selectPharmacy = () => _application.SelectMajor(pharmacy);
+
+            selectPharmacy.Should().Throw<ArgumentException>();
         }
     }
 }

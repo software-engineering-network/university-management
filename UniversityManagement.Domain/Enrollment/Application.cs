@@ -1,4 +1,6 @@
-﻿namespace UniversityManagement.Domain.Enrollment
+﻿using System;
+
+namespace UniversityManagement.Domain.Enrollment
 {
     public class Application : Entity
     {
@@ -20,6 +22,9 @@
 
         public Application SelectMajor(Major major)
         {
+            if (major.College != College)
+                throw new ArgumentException();
+
             Major = major;
             return this;
         }
