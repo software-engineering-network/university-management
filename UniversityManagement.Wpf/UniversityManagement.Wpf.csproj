@@ -64,21 +64,13 @@
     <Compile Include="app\Enrollment\create-application\applicant\ApplicantView.xaml.cs">
       <DependentUpon>ApplicantView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="app\Enrollment\create-application\applicant\ApplicantViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicationViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\college-selector\CollegeSelectorView.xaml.cs">
-      <DependentUpon>CollegeSelectorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="app\Enrollment\create-application\boo\CreateApplicationViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\college-selector\CollegeViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\boo\CreateApplicationView.xaml.cs">
-      <DependentUpon>CreateApplicationView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="app\Enrollment\create-application\applicant\IApplicantViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\ICollegeSelectorViewModel.cs" />
     <Compile Include="shared\selector\ISelectorItemViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\college-selector\CollegeSelectorViewModel.cs" />
     <Compile Include="shared\selector\SelectorViewModel.cs" />
     <Compile Include="shared\selector\ISelectorViewModel.cs" />
     <Compile Include="app\main-window\MainWindowViewModel.cs" />
@@ -90,14 +82,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="app\Enrollment\create-application\ApplicationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="app\Enrollment\create-application\college-selector\CollegeSelectorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="app\Enrollment\create-application\boo\CreateApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

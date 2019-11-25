@@ -7,17 +7,13 @@
         xmlns:enrollment="clr-namespace:UniversityManagement.Wpf.Enrollment"
         mc:Ignorable="d"
         Height="450" Width="800">
-    <UserControl.DataContext>
-        <enrollment:ApplicationViewModel />
-    </UserControl.DataContext>
     <StackPanel>
-        <GroupBox Header="Applicant" Margin="6">
-            <StackPanel>
-                <Label Content="First Name:" />
-                <TextBox Text="{Binding Path=ApplicantName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Label Content="Last Name:" />
-                <TextBox Text="{Binding Path=ApplicantSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-        </GroupBox>
+        <enrollment:ApplicantView />
+        <Label Content="College:" />
+        <ComboBox
+            ItemsSource="{Binding Path=Colleges}"
+            SelectedItem="{Binding Path=SelectedCollege, Mode=TwoWay}"
+            DisplayMemberPath="Name">
+        </ComboBox>
     </StackPanel>
 </UserControl>

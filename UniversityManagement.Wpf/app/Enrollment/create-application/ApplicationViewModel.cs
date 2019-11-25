@@ -1,28 +1,35 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
-    public class ApplicationViewModel : ViewModelBase
+    public class ApplicationViewModel :
+        ViewModelBase,
+        IApplicantViewModel,
+        ICollegeSelectorViewModel
     {
+        #region Fields
+
         private readonly ApplicationDto _application;
+        private ObservableCollection<CollegeDto> _colleges;
 
-        public ApplicantDto Applicant
+        #endregion
+
+        #region Construction
+
+        public ApplicationViewModel(ICollegeReadService collegeReadService)
         {
-            get => _application.Applicant;
-            set
-            {
-                if (_application.Applicant == value)
-                    return;
+            _application = new ApplicationDto();
 
-                _application.Applicant = value;
-                OnPropertyChanged(nameof(Applicant));
-                OnPropertyChanged(nameof(ApplicantName));
-                OnPropertyChanged(nameof(ApplicantSurname));
-            }
+            Colleges = new ObservableCollection<CollegeDto>(
+                collegeReadService.FetchColleges()
+            );
         }
 
-        public string Title => "Create Application";
+        #endregion
+
+        #region IApplicantViewModel Members
 
         public string ApplicantName
         {
@@ -50,10 +57,36 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public ApplicationViewModel()
+        #endregion
+
+        #region ICollegeSelectorViewModel Members
+
+        public ObservableCollection<CollegeDto> Colleges
         {
-            _application = new ApplicationDto();
-            Applicant = _application.Applicant;
+            get => _colleges;
+            set
+            {
+                if (_colleges == value)
+                    return;
+
+                _colleges = value;
+                OnPropertyChanged(nameof(Colleges));
+            }
         }
+
+        public CollegeDto SelectedCollege
+        {
+            get => _application.College;
+            set
+            {
+                if (_application.College == value)
+                    return;
+
+                _application.College = value;
+                OnPropertyChanged(nameof(SelectedCollege));
+            }
+        }
+
+        #endregion
     }
 }
