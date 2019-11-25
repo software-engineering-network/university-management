@@ -19,6 +19,7 @@ namespace UniversityManagement.Infrastructure.Memory
         {
             Colleges = CreateColleges();
             Disciplines = CreateDisciplines();
+            Programs = CreatePrograms();
             ProgramTypes = CreateProgramTypes();
         }
 
