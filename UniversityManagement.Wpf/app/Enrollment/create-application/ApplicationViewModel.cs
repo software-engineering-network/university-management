@@ -39,10 +39,9 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Applicant.Name;
             set
             {
-                if (_application.Applicant.Name == value)
+                if (!_service.SetApplicantName(_application, value))
                     return;
 
-                _application.Applicant.Name = value;
                 OnPropertyChanged(nameof(ApplicantName));
             }
         }
@@ -52,10 +51,9 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Applicant.Surname;
             set
             {
-                if (_application.Applicant.Surname == value)
+                if (!_service.SetApplicantSurname(_application, value))
                     return;
 
-                _application.Applicant.Surname = value;
                 OnPropertyChanged(nameof(ApplicantSurname));
             }
         }
