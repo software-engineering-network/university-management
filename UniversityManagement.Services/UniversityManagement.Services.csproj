@@ -47,15 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enrollment\ApplicantDto.cs" />
-    <Compile Include="Enrollment\college\CollegeDto.cs" />
+    <Compile Include="Enrollment\dtos\ApplicantDto.cs" />
+    <Compile Include="Enrollment\dtos\CollegeDto.cs" />
     <Compile Include="Enrollment\college\CollegeReadService.cs" />
-    <Compile Include="Enrollment\edit-application\ApplicationDto.cs" />
+    <Compile Include="Enrollment\dtos\ApplicationDto.cs" />
     <Compile Include="Enrollment\edit-application\EditApplicationService.cs" />
     <Compile Include="Enrollment\edit-application\IEditApplicationService.cs" />
-    <Compile Include="Enrollment\program\DisciplineDto.cs" />
+    <Compile Include="Enrollment\dtos\DisciplineDto.cs" />
     <Compile Include="Enrollment\program\IProgramReadService.cs" />
-    <Compile Include="Enrollment\program\MajorDto.cs" />
+    <Compile Include="Enrollment\dtos\MajorDto.cs" />
     <Compile Include="Enrollment\program\ProgramReadService.cs" />
     <Compile Include="Enrollment\ExpressMapperConfiguration.cs" />
     <Compile Include="EntityDto.cs" />
@@ -72,8 +72,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enrollment\dtos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
