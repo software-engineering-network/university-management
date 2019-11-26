@@ -9,19 +9,6 @@
         Height="450" Width="800">
     <StackPanel>
         <enrollment:ApplicantView />
-
-        <Label Content="College:" />
-        <ComboBox
-            ItemsSource="{Binding Path=Colleges}"
-            SelectedItem="{Binding Path=SelectedCollege, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            DisplayMemberPath="Name">
-        </ComboBox>
-
-        <Label Content="Major:" />
-        <ComboBox
-            ItemsSource="{Binding Path=Majors}"
-            SelectedItem="{Binding Path=SelectedMajor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            DisplayMemberPath="Name">
-        </ComboBox>
+        <enrollment:ProgramView />
     </StackPanel>
 </UserControl>

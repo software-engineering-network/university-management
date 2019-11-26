@@ -6,12 +6,41 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <GroupBox Header="Applicant" Margin="6">
-        <StackPanel>
-            <Label Content="First Name:" />
-            <TextBox Text="{Binding Path=ApplicantName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="Last Name:" />
-            <TextBox Text="{Binding Path=ApplicantSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
+    <GroupBox 
+        Header="Applicant" 
+        Margin="6">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="Auto" />
+                <ColumnDefinition
+                    Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label 
+                Content="First Name:" 
+                Grid.Row="0"
+                Grid.Column="0"/>
+            <TextBox
+                Text="{Binding Path=ApplicantName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="300" />
+            <Label
+                Content="Last Name:"
+                Grid.Row="1"
+                Grid.Column="0" />
+            <TextBox
+                Text="{Binding Path=ApplicantSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="300"/>
+        </Grid>
     </GroupBox>
 </UserControl>

@@ -39,9 +39,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Applicant.Name;
             set
             {
-                if (!_service.SetApplicantName(_application, value))
+                if (ApplicantName == value)
                     return;
 
+                _application.Applicant.Name = value;
                 OnPropertyChanged(nameof(ApplicantName));
             }
         }
@@ -51,9 +52,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Applicant.Surname;
             set
             {
-                if (!_service.SetApplicantSurname(_application, value))
+                if (ApplicantSurname == value)
                     return;
 
+                _application.Applicant.Surname = value;
                 OnPropertyChanged(nameof(ApplicantSurname));
             }
         }
@@ -80,9 +82,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.College;
             set
             {
-                if (!_service.SetCollege(_application, value))
+                if (_application.College == value)
                     return;
 
+                _application.College = value;
                 OnPropertyChanged(nameof(SelectedCollege));
 
                 SelectedCollegeChangedHandler();
@@ -111,9 +114,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Major;
             set
             {
-                if (!_service.SetMajor(_application, value))
+                if (_application.Major == value)
                     return;
 
+                _application.Major = value;
                 OnPropertyChanged(nameof(SelectedMajor));
 
                 SelectedMajorChangedHandler();
@@ -136,8 +140,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void SelectedCollegeChangedHandler()
         {
-            if (SelectedCollege != SelectedMajor.College)
-                UpdateMajorSelector();
+            UpdateMajorSelector();
         }
 
         private void SelectedMajorChangedHandler()
