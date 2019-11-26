@@ -7,5 +7,6 @@ namespace UniversityManagement.Domain
         ICollegeRepository CollegeRepository { get; }
         IDisciplineRepository DisciplineRepository { get; }
         IMajorRepository MajorRepository { get; }
+        IMinorRepository MinorRepository { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UniversityManagement.Services.Enrollment
 {
-    public class MajorDto : ProgramDto
+    public class MinorDto : ProgramDto
     {
     }
 }

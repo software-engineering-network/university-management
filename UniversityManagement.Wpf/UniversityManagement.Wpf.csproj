@@ -71,6 +71,10 @@
     <Compile Include="app\Enrollment\create-application\contracts\IApplicantViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\ICollegeSelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IMajorSelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\contracts\IMinorSelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\ElectivesView.xaml.cs">
+      <DependentUpon>ElectivesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="app\Enrollment\create-application\ProgramView.xaml.cs">
       <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
     <Page Include="app\Enrollment\create-application\ApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="app\Enrollment\create-application\ElectivesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="app\Enrollment\create-application\ProgramView.xaml">
       <SubType>Designer</SubType>

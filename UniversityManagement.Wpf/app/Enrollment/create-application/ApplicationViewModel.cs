@@ -8,7 +8,8 @@ namespace UniversityManagement.Wpf.Enrollment
         ViewModelBase,
         IApplicantViewModel,
         ICollegeSelectorViewModel,
-        IMajorSelectorViewModel
+        IMajorSelectorViewModel,
+        IMinorSelectorViewModel
     {
         #region Fields
 
@@ -16,6 +17,7 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly IEditApplicationService _service;
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
+        private ObservableCollection<MinorDto> _minors;
 
         #endregion
 
@@ -28,6 +30,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
             PopulateColleges();
             PopulateMajors();
+            PopulateMinors();
         }
 
         #endregion
@@ -126,6 +129,36 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
+        #region IMinorSelectorViewModel Members
+
+        public ObservableCollection<MinorDto> Minors
+        {
+            get => _minors;
+            private set
+            {
+                if (_minors == value)
+                    return;
+
+                _minors = value;
+                OnPropertyChanged(nameof(Minors));
+            }
+        }
+    
+        public MinorDto SelectedMinor
+        {
+            get => _application.Minor;
+            set
+            {
+                if (_application.Minor == value)
+                    return;
+
+                _application.Minor = value;
+                OnPropertyChanged(nameof(SelectedMinor));
+            }
+        }
+
+        #endregion
+
         private void PopulateColleges()
         {
             var colleges = _service.FetchColleges();
@@ -136,6 +169,12 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             var majors = _service.FetchMajors(_application);
             Majors = new ObservableCollection<MajorDto>(majors);
+        }
+
+        private void PopulateMinors()
+        {
+            var minors = _service.FetchMinors();
+            Minors = new ObservableCollection<MinorDto>(minors);
         }
 
         private void SelectedCollegeChangedHandler()

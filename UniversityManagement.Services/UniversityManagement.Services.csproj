@@ -51,6 +51,8 @@
     <Compile Include="Enrollment\dtos\CollegeDto.cs" />
     <Compile Include="Enrollment\college\CollegeReadService.cs" />
     <Compile Include="Enrollment\dtos\ApplicationDto.cs" />
+    <Compile Include="Enrollment\dtos\MinorDto.cs" />
+    <Compile Include="Enrollment\dtos\ProgramDto.cs" />
     <Compile Include="Enrollment\edit-application\EditApplicationService.cs" />
     <Compile Include="Enrollment\edit-application\IEditApplicationService.cs" />
     <Compile Include="Enrollment\dtos\DisciplineDto.cs" />

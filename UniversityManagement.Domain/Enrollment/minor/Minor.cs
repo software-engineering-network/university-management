@@ -1,17 +1,17 @@
 ﻿namespace UniversityManagement.Domain.Enrollment
 {
-    public class Major : Program
+    public class Minor : Program
     {
         #region Construction
 
-        public Major(
+        public Minor(
             long collegeId,
             long disciplineId,
             long id = 0
         ) : base(
             collegeId,
-            disciplineId, 
-            ProgramType.Major,
+            disciplineId,
+            ProgramType.Minor,
             id
         )
         {

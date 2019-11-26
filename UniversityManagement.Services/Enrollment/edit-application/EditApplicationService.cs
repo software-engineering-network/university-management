@@ -29,5 +29,10 @@ namespace UniversityManagement.Services.Enrollment
 
             return majors;
         }
+
+        public IEnumerable<MinorDto> FetchMinors()
+        {
+            return _programReadService.FetchMinors();
+        }
     }
 }

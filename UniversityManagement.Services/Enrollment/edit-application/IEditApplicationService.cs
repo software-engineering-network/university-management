@@ -6,5 +6,6 @@ namespace UniversityManagement.Services.Enrollment
     {
         IEnumerable<CollegeDto> FetchColleges();
         IEnumerable<MajorDto> FetchMajors(ApplicationDto application);
+        IEnumerable<MinorDto> FetchMinors();
     }
 }

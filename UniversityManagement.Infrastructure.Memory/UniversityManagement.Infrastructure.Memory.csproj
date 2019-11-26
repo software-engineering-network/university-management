@@ -57,6 +57,7 @@
     <Compile Include="database\Entity.cs" />
     <Compile Include="Enrollment\DisciplineRepository.cs" />
     <Compile Include="Enrollment\MajorRepository.cs" />
+    <Compile Include="Enrollment\MinorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_ioc\InfrastructureMemoryModule.cs" />
   </ItemGroup>
