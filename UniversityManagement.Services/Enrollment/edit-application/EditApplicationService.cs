@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace UniversityManagement.Services.Enrollment
 {
@@ -32,7 +33,9 @@ namespace UniversityManagement.Services.Enrollment
 
         public IEnumerable<MinorDto> FetchMinors()
         {
-            return _programReadService.FetchMinors();
+            return _programReadService
+                .FetchMinors()
+                .OrderBy(x => x.College.Id);
         }
     }
 }
