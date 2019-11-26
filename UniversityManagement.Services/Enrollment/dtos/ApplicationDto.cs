@@ -10,17 +10,5 @@
         public MinorDto Minor { get; set; }
 
         #endregion
-
-        #region Construction
-
-        public ApplicationDto()
-        {
-            Applicant = new ApplicantDto();
-            College = new CollegeDto();
-            Major = new MajorDto();
-            Minor = new MinorDto();
-        }
-
-        #endregion
     }
 }

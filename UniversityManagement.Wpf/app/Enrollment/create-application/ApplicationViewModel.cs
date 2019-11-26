@@ -15,24 +15,12 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private readonly IEditApplicationService _service;
 
-        private ApplicationDto _application;
+        private readonly ApplicationDto _application;
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
         private ObservableCollection<MinorDto> _minors;
 
         #endregion
-
-        private ApplicationDto Application
-        {
-            get => _application;
-            set
-            {
-                if (_application == value)
-                    return;
-
-                _application = value;
-            }
-        }
 
         #region Construction
 
@@ -51,7 +39,7 @@ namespace UniversityManagement.Wpf.Enrollment
             ApplicationDto application
         ) : this(service)
         {
-            Application = application;
+            _application = application;
         }
 
         #endregion
@@ -136,7 +124,6 @@ namespace UniversityManagement.Wpf.Enrollment
         public MajorDto SelectedMajor
         {
             get => _application.Major;
-            //get => Majors.FirstOrDefault(x => x == _application.Major);
             set
             {
                 if (_application.Major == value)
@@ -203,8 +190,8 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             UpdateMajorSelector();
 
-            if ((SelectedMajor == null || SelectedMajor.Id == 0)
-                && _majors.Count == 1)
+            if (SelectedMajor == null &&
+                _majors.Count == 1)
                 SelectedMajor = Majors.First();
         }
 
@@ -224,7 +211,6 @@ namespace UniversityManagement.Wpf.Enrollment
             PopulateMajors();
 
             if (previousMajor == null ||
-                previousMajor.Id == 0 ||
                 previousMajor.College != SelectedCollege)
                 return;
 
