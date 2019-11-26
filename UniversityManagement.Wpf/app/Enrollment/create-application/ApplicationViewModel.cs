@@ -82,10 +82,8 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.College;
             set
             {
-                if (_application.College == value)
+                if (!_service.SetCollege(_application, value))
                     return;
-
-                _application.College = value;
                 
                 OnPropertyChanged(nameof(SelectedCollege));
                 PopulateMajors();
@@ -114,12 +112,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Major;
             set
             {
-                if (_application.Major == value)
+                if (!_service.SetMajor(_application, value))
                     return;
-
-                _application.Major = value;
-
-                OnPropertyChanged(nameof(SelectedCollege));
+                
+                OnPropertyChanged(nameof(SelectedMajor));
             }
         }
 

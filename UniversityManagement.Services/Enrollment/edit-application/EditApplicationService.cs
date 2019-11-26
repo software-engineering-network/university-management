@@ -29,5 +29,23 @@ namespace UniversityManagement.Services.Enrollment
 
             return majors;
         }
+
+        public bool SetCollege(ApplicationDto application, CollegeDto college)
+        {
+            if (application.College == college)
+                return false;
+
+            application.College = college;
+            return true;
+        }
+
+        public bool SetMajor(ApplicationDto application, MajorDto major)
+        {
+            if (application.Major == major)
+                return false;
+
+            application.Major = major;
+            return true;
+        }
     }
 }
