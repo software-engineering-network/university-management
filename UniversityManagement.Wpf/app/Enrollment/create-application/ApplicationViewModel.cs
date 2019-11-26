@@ -133,10 +133,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulateMajors()
         {
-            var majors = _application.College == null || _application.College.Id == 0
-                ? _service.FetchMajors()
-                : _service.FetchMajors(_application.College.Id);
-
+            var majors = _service.FetchMajors(_application);
             Majors = new ObservableCollection<MajorDto>(majors);
         }
     }

@@ -21,14 +21,13 @@ namespace UniversityManagement.Services.Enrollment
             return _collegeReadService.Fetch();
         }
 
-        public IEnumerable<MajorDto> FetchMajors()
+        public IEnumerable<MajorDto> FetchMajors(ApplicationDto application)
         {
-            return _programReadService.Fetch();
-        }
+            var majors = application.College == null || application.College.Id == 0
+                ? _programReadService.Fetch()
+                : _programReadService.Fetch(application.College.Id);
 
-        public IEnumerable<MajorDto> FetchMajors(long collegeId)
-        {
-            return _programReadService.Fetch(collegeId);
+            return majors;
         }
     }
 }
