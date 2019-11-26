@@ -13,14 +13,14 @@
         <Label Content="College:" />
         <ComboBox
             ItemsSource="{Binding Path=Colleges}"
-            SelectedItem="{Binding Path=SelectedCollege, Mode=TwoWay}"
+            SelectedItem="{Binding Path=SelectedCollege, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             DisplayMemberPath="Name">
         </ComboBox>
 
         <Label Content="Major:" />
         <ComboBox
             ItemsSource="{Binding Path=Majors}"
-            SelectedItem="{Binding Path=SelectedMajor, Mode=TwoWay}"
+            SelectedItem="{Binding Path=SelectedMajor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             DisplayMemberPath="Name">
         </ComboBox>
     </StackPanel>

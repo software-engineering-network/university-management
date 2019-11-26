@@ -4,7 +4,13 @@ namespace UniversityManagement.Domain
 {
     public abstract class Entity : IEquatable<Entity>
     {
+        #region Properties
+
         public long Id { get; }
+
+        #endregion
+
+        #region Construction
 
         protected Entity()
         {
@@ -15,6 +21,10 @@ namespace UniversityManagement.Domain
             Id = id;
         }
 
+        #endregion
+
+        #region IEquatable<Entity> Members
+
         public bool Equals(Entity other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -22,11 +32,15 @@ namespace UniversityManagement.Domain
             return Id == other.Id;
         }
 
+        #endregion
+
+        #region object Overrides
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Entity) obj);
         }
 
@@ -34,6 +48,10 @@ namespace UniversityManagement.Domain
         {
             return Id.GetHashCode();
         }
+
+        #endregion
+
+        #region Operator Overloads
 
         public static bool operator ==(Entity left, Entity right)
         {
@@ -52,5 +70,7 @@ namespace UniversityManagement.Domain
         {
             return !(left == right);
         }
+
+        #endregion
     }
 }

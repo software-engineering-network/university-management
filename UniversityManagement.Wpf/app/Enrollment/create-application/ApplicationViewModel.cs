@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
@@ -9,7 +10,6 @@ namespace UniversityManagement.Wpf.Enrollment
         ICollegeSelectorViewModel,
         IMajorSelectorViewModel
     {
-
         #region Fields
 
         private readonly ApplicationDto _application;
@@ -82,9 +82,10 @@ namespace UniversityManagement.Wpf.Enrollment
             {
                 if (!_service.SetCollege(_application, value))
                     return;
-                
+
                 OnPropertyChanged(nameof(SelectedCollege));
-                PopulateMajors();
+
+                SelectedCollegeChangedHandler();
             }
         }
 
@@ -112,8 +113,10 @@ namespace UniversityManagement.Wpf.Enrollment
             {
                 if (!_service.SetMajor(_application, value))
                     return;
-                
+
                 OnPropertyChanged(nameof(SelectedMajor));
+
+                SelectedMajorChangedHandler();
             }
         }
 
@@ -129,6 +132,35 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             var majors = _service.FetchMajors(_application);
             Majors = new ObservableCollection<MajorDto>(majors);
+        }
+
+        private void SelectedCollegeChangedHandler()
+        {
+            if (SelectedCollege != SelectedMajor.College)
+                UpdateMajorSelector();
+        }
+
+        private void SelectedMajorChangedHandler()
+        {
+            if (SelectedMajor == null ||
+                SelectedMajor.College == SelectedCollege)
+                return;
+
+            SelectedCollege = _colleges.First(x => x == SelectedMajor.College);
+        }
+
+        private void UpdateMajorSelector()
+        {
+            var previousMajor = SelectedMajor;
+
+            PopulateMajors();
+
+            if (previousMajor == null ||
+                previousMajor.Id == 0 ||
+                previousMajor.College != SelectedCollege)
+                return;
+
+            SelectedMajor = Majors.First(x => x == previousMajor);
         }
     }
 }
