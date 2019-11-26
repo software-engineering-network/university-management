@@ -15,7 +15,7 @@ namespace UniversityManagement.Services.Enrollment
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<CollegeDto> FetchColleges()
+        public IEnumerable<CollegeDto> Fetch()
         {
             return _unitOfWork.CollegeRepository
                 .Fetch()

@@ -9,11 +9,11 @@ namespace UniversityManagement.Wpf.Enrollment
         ICollegeSelectorViewModel,
         IMajorSelectorViewModel
     {
+
         #region Fields
 
         private readonly ApplicationDto _application;
-        private readonly ICollegeReadService _collegeReadService;
-        private readonly IProgramReadService _programReadService;
+        private readonly IEditApplicationService _service;
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
 
@@ -21,14 +21,10 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region Construction
 
-        public ApplicationViewModel(
-            ICollegeReadService collegeReadService,
-            IProgramReadService programReadService
-        )
+        public ApplicationViewModel(IEditApplicationService service)
         {
             _application = new ApplicationDto();
-            _collegeReadService = collegeReadService;
-            _programReadService = programReadService;
+            _service = service;
 
             PopulateColleges();
             PopulateMajors();
@@ -131,15 +127,15 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulateColleges()
         {
-            var colleges = _collegeReadService.FetchColleges();
+            var colleges = _service.FetchColleges();
             Colleges = new ObservableCollection<CollegeDto>(colleges);
         }
 
         private void PopulateMajors()
         {
             var majors = _application.College == null || _application.College.Id == 0
-                ? _programReadService.FetchMajors()
-                : _programReadService.FetchMajors(_application.College.Id);
+                ? _service.FetchMajors()
+                : _service.FetchMajors(_application.College.Id);
 
             Majors = new ObservableCollection<MajorDto>(majors);
         }

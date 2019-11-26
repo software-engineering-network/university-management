@@ -48,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enrollment\ApplicantDto.cs" />
-    <Compile Include="Enrollment\ApplicationDto.cs" />
+    <Compile Include="Enrollment\edit-application\ApplicationDto.cs" />
     <Compile Include="Enrollment\college\CollegeDto.cs" />
     <Compile Include="Enrollment\college\CollegeReadService.cs" />
+    <Compile Include="Enrollment\edit-application\EditApplicationService.cs" />
+    <Compile Include="Enrollment\edit-application\IEditApplicationService.cs" />
     <Compile Include="Enrollment\program\DisciplineDto.cs" />
     <Compile Include="Enrollment\program\IProgramReadService.cs" />
     <Compile Include="Enrollment\program\ProgramReadService.cs" />

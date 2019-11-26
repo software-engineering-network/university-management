@@ -15,7 +15,7 @@ namespace UniversityManagement.Services.Enrollment
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<MajorDto> FetchMajors()
+        public IEnumerable<MajorDto> Fetch()
         {
             var colleges = _unitOfWork.CollegeRepository.Fetch();
             var disciplines = _unitOfWork.DisciplineRepository.Fetch();
@@ -31,7 +31,7 @@ namespace UniversityManagement.Services.Enrollment
             return majors;
         }
 
-        public IEnumerable<MajorDto> FetchMajors(long collegeId)
+        public IEnumerable<MajorDto> Fetch(long collegeId)
         {
             var colleges = _unitOfWork.CollegeRepository.Fetch();
             var disciplines = _unitOfWork.DisciplineRepository.Fetch();
