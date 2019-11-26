@@ -61,24 +61,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="app\Enrollment\create-application\applicant\ApplicantView.xaml.cs">
+    <Compile Include="app\Enrollment\create-application\ApplicantView.xaml.cs">
       <DependentUpon>ApplicantView.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicationViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\applicant\IApplicantViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\ICollegeSelectorViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application\IMajorSelectorViewModel.cs" />
-    <Compile Include="shared\selector\ISelectorItemViewModel.cs" />
-    <Compile Include="shared\selector\SelectorViewModel.cs" />
-    <Compile Include="shared\selector\ISelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\contracts\IApplicantViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\contracts\ICollegeSelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\contracts\IMajorSelectorViewModel.cs" />
     <Compile Include="app\main-window\MainWindowViewModel.cs" />
     <Compile Include="shared\ViewModelBase.cs" />
     <Compile Include="_ioc\UnitOfWork.cs" />
     <Compile Include="_ioc\WpfModule.cs" />
-    <Page Include="app\Enrollment\create-application\applicant\ApplicantView.xaml">
+    <Page Include="app\Enrollment\create-application\ApplicantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
