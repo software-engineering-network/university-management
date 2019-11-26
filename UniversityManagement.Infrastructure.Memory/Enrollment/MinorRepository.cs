@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniversityManagement.Domain.Enrollment;
 
@@ -45,6 +46,11 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                         x.Program.Id
                     )
                 );
+        }
+
+        public Minor Find(long id)
+        {
+            throw new NotSupportedException();
         }
 
         #endregion

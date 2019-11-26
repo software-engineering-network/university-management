@@ -6,8 +6,10 @@ namespace UniversityManagement.Infrastructure.Memory
     {
         #region Properties
 
+        public List<Application> Applications { get; }
         public List<College> Colleges { get; }
         public List<Discipline> Disciplines { get; }
+        public List<Person> People { get; }
         public List<Program> Programs { get; }
         public List<ProgramType> ProgramTypes { get; }
 
@@ -17,13 +19,23 @@ namespace UniversityManagement.Infrastructure.Memory
 
         public Context()
         {
+            Applications = CreateApplications();
             Colleges = CreateColleges();
             Disciplines = CreateDisciplines();
+            People = CreatePeople();
             Programs = CreatePrograms();
             ProgramTypes = CreateProgramTypes();
         }
 
         #endregion
+
+        private static List<Application> CreateApplications()
+        {
+            return new List<Application>
+            {
+                new Application(1, 1, 3, 30)
+            };
+        }
 
         private static List<College> CreateColleges()
         {
@@ -146,8 +158,17 @@ namespace UniversityManagement.Infrastructure.Memory
                 new Discipline(102, 1, "Technology Systems"),
                 new Discipline(103, 1, "Theatre"),
                 new Discipline(104, 1, "Theatre Technology and Design"),
+
                 //new Discipline(105, 1, "Undecided"),
                 new Discipline(106, 1, "Youth Ministry")
+            };
+        }
+
+        private static List<Person> CreatePeople()
+        {
+            return new List<Person>
+            {
+                new Person(1, "John", "Doe")
             };
         }
 
@@ -297,6 +318,7 @@ namespace UniversityManagement.Infrastructure.Memory
                 new Program(140, 103, 3),
                 new Program(141, 103, 4),
                 new Program(142, 104, 4),
+
                 //new Program(143, 105, 3),
                 new Program(144, 106, 3)
             };

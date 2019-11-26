@@ -24,6 +24,8 @@ namespace UniversityManagement.Wpf
 
         #region IUnitOfWork Members
 
+        public IApplicationRepository ApplicationRepository => new ApplicationRepository(_context);
+        public IApplicantRepository ApplicantRepository => new ApplicantRepository(_context);
         public ICollegeRepository CollegeRepository => new CollegeRepository(_context);
         public IDisciplineRepository DisciplineRepository => new DisciplineRepository(_context);
         public IMajorRepository MajorRepository => new MajorRepository(_context);

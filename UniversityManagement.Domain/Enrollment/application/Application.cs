@@ -4,14 +4,26 @@ namespace UniversityManagement.Domain.Enrollment
 {
     public class Application : Entity
     {
+        #region Properties
+
         public Applicant Applicant { get; }
         public College College { get; private set; }
         public Major Major { get; private set; }
+        public Minor Minor { get; private set; }
 
-        public Application(Applicant applicant)
+        #endregion
+
+        #region Construction
+
+        public Application(
+            Applicant applicant,
+            long id = 0
+        ) : base(id)
         {
             Applicant = applicant;
         }
+
+        #endregion
 
         public Application SelectCollege(College college)
         {
@@ -26,6 +38,12 @@ namespace UniversityManagement.Domain.Enrollment
                 throw new ArgumentException();
 
             Major = major;
+            return this;
+        }
+
+        public Application SelectMinor(Minor minor)
+        {
+            Minor = minor;
             return this;
         }
     }

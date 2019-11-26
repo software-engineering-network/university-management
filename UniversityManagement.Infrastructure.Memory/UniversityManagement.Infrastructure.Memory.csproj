@@ -47,12 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="database\Application.cs" />
     <Compile Include="database\Context.cs" />
     <Compile Include="database\Discipline.cs" />
     <Compile Include="database\College.cs" />
     <Compile Include="database\DisciplineProgramType.cs" />
+    <Compile Include="database\Person.cs" />
     <Compile Include="database\Program.cs" />
     <Compile Include="database\ProgramType.cs" />
+    <Compile Include="Enrollment\ApplicantRepository.cs" />
+    <Compile Include="Enrollment\ApplicationRepository.cs" />
     <Compile Include="Enrollment\CollegeRepository.cs" />
     <Compile Include="database\Entity.cs" />
     <Compile Include="Enrollment\DisciplineRepository.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniversityManagement.Domain.Enrollment;
 
@@ -31,6 +32,11 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                     x.Id
                 )
             );
+        }
+
+        public Domain.Enrollment.College Find(long id)
+        {
+            throw new NotSupportedException();
         }
 
         #endregion

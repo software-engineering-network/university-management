@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniversityManagement.Domain.Enrollment;
 
@@ -45,6 +46,11 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                         x.Program.Id
                     )
                 );
+        }
+
+        public Major Find(long id)
+        {
+            throw new NotSupportedException();
         }
 
         public IEnumerable<Major> Fetch(long collegeId)

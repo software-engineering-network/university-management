@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniversityManagement.Domain;
 
@@ -30,6 +31,11 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                     x.Id
                 )
             );
+        }
+
+        public Domain.Discipline Find(long id)
+        {
+            throw new NotSupportedException();
         }
     }
 }

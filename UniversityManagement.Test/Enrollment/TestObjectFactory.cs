@@ -24,7 +24,7 @@ namespace UniversityManagement.Test.Enrollment
         {
             return new Major(
                 CreateCollegeOfEngineering().Id,
-                "Computer Science"
+                24
             );
         }
 
@@ -37,7 +37,7 @@ namespace UniversityManagement.Test.Enrollment
         {
             return new Major(
                 CreateCollegeOfPharmacy().Id,
-                "Pharmacy"
+                73
             );
         }
     }

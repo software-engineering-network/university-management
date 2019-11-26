@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enrollment\Applicant.cs" />
-    <Compile Include="Enrollment\Application.cs" />
+    <Compile Include="Enrollment\applicant\Applicant.cs" />
+    <Compile Include="Enrollment\applicant\IApplicantRepository.cs" />
+    <Compile Include="Enrollment\application\Application.cs" />
+    <Compile Include="Enrollment\application\IApplicationRepository.cs" />
     <Compile Include="Enrollment\college\College.cs" />
     <Compile Include="Enrollment\major\IMajorRepository.cs" />
     <Compile Include="Enrollment\major\Major.cs" />

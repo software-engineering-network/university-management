@@ -13,13 +13,26 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Fields
 
-        private readonly ApplicationDto _application;
         private readonly IEditApplicationService _service;
+
+        private ApplicationDto _application;
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
         private ObservableCollection<MinorDto> _minors;
 
         #endregion
+
+        private ApplicationDto Application
+        {
+            get => _application;
+            set
+            {
+                if (_application == value)
+                    return;
+
+                _application = value;
+            }
+        }
 
         #region Construction
 
@@ -31,6 +44,14 @@ namespace UniversityManagement.Wpf.Enrollment
             PopulateColleges();
             PopulateMajors();
             PopulateMinors();
+        }
+
+        public ApplicationViewModel(
+            IEditApplicationService service,
+            ApplicationDto application
+        ) : this(service)
+        {
+            Application = application;
         }
 
         #endregion
@@ -115,6 +136,7 @@ namespace UniversityManagement.Wpf.Enrollment
         public MajorDto SelectedMajor
         {
             get => _application.Major;
+            //get => Majors.FirstOrDefault(x => x == _application.Major);
             set
             {
                 if (_application.Major == value)
