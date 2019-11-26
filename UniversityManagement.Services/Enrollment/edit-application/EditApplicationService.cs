@@ -24,8 +24,8 @@ namespace UniversityManagement.Services.Enrollment
         public IEnumerable<MajorDto> FetchMajors(ApplicationDto application)
         {
             var majors = application.College == null || application.College.Id == 0
-                ? _programReadService.Fetch()
-                : _programReadService.Fetch(application.College.Id);
+                ? _programReadService.FetchMajors()
+                : _programReadService.FetchMajors(application.College.Id);
 
             return majors;
         }

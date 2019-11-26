@@ -4,7 +4,7 @@ namespace UniversityManagement.Services.Enrollment
 {
     public interface IProgramReadService
     {
-        IEnumerable<MajorDto> Fetch();
-        IEnumerable<MajorDto> Fetch(long collegeId);
+        IEnumerable<MajorDto> FetchMajors();
+        IEnumerable<MajorDto> FetchMajors(long collegeId);
     }
 }

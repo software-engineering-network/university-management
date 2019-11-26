@@ -141,6 +141,10 @@ namespace UniversityManagement.Wpf.Enrollment
         private void SelectedCollegeChangedHandler()
         {
             UpdateMajorSelector();
+
+            if ((SelectedMajor == null || SelectedMajor.Id == 0)
+                && _majors.Count == 1)
+                SelectedMajor = Majors.First();
         }
 
         private void SelectedMajorChangedHandler()
