@@ -25,6 +25,7 @@ namespace UniversityManagement.Wpf
         #region IUnitOfWork Members
 
         public ICollegeRepository CollegeRepository => new CollegeRepository(_context);
+        public IDisciplineRepository DisciplineRepository => new DisciplineRepository(_context);
         public IMajorRepository MajorRepository => new MajorRepository(_context);
 
         #endregion

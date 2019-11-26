@@ -1,11 +1,11 @@
-﻿namespace UniversityManagement.Domain.Enrollment
+﻿namespace UniversityManagement.Domain
 {
     public class Program : Entity
     {
         #region Properties
 
+        public long DisciplineId { get; }
         public long CollegeId { get; }
-        public string Name { get; }
         public ProgramType ProgramType { get; }
 
         #endregion
@@ -14,13 +14,13 @@
 
         public Program(
             long collegeId,
-            string name,
+            long disciplineId,
             ProgramType programType,
             long id = 0
         ) : base(id)
         {
             CollegeId = collegeId;
-            Name = name;
+            DisciplineId = disciplineId;
             ProgramType = programType;
         }
 

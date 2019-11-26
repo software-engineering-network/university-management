@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
@@ -7,24 +6,32 @@ namespace UniversityManagement.Wpf.Enrollment
     public class ApplicationViewModel :
         ViewModelBase,
         IApplicantViewModel,
-        ICollegeSelectorViewModel
+        ICollegeSelectorViewModel,
+        IMajorSelectorViewModel
     {
         #region Fields
 
         private readonly ApplicationDto _application;
+        private readonly ICollegeReadService _collegeReadService;
+        private readonly IProgramReadService _programReadService;
         private ObservableCollection<CollegeDto> _colleges;
+        private ObservableCollection<MajorDto> _majors;
 
         #endregion
 
         #region Construction
 
-        public ApplicationViewModel(ICollegeReadService collegeReadService)
+        public ApplicationViewModel(
+            ICollegeReadService collegeReadService,
+            IProgramReadService programReadService
+        )
         {
             _application = new ApplicationDto();
+            _collegeReadService = collegeReadService;
+            _programReadService = programReadService;
 
-            Colleges = new ObservableCollection<CollegeDto>(
-                collegeReadService.FetchColleges()
-            );
+            PopulateColleges();
+            PopulateMajors();
         }
 
         #endregion
@@ -83,10 +90,58 @@ namespace UniversityManagement.Wpf.Enrollment
                     return;
 
                 _application.College = value;
+                
+                OnPropertyChanged(nameof(SelectedCollege));
+                PopulateMajors();
+            }
+        }
+
+        #endregion
+
+        #region IMajorSelectorViewModel Members
+
+        public ObservableCollection<MajorDto> Majors
+        {
+            get => _majors;
+            private set
+            {
+                if (_majors == value)
+                    return;
+
+                _majors = value;
+                OnPropertyChanged(nameof(Majors));
+            }
+        }
+
+        public MajorDto SelectedMajor
+        {
+            get => _application.Major;
+            set
+            {
+                if (_application.Major == value)
+                    return;
+
+                _application.Major = value;
+
                 OnPropertyChanged(nameof(SelectedCollege));
             }
         }
 
         #endregion
+
+        private void PopulateColleges()
+        {
+            var colleges = _collegeReadService.FetchColleges();
+            Colleges = new ObservableCollection<CollegeDto>(colleges);
+        }
+
+        private void PopulateMajors()
+        {
+            var majors = _application.College == null || _application.College.Id == 0
+                ? _programReadService.FetchMajors()
+                : _programReadService.FetchMajors(_application.College.Id);
+
+            Majors = new ObservableCollection<MajorDto>(majors);
+        }
     }
 }

@@ -6,10 +6,15 @@
 
         public Major(
             long collegeId,
-            string name,
+            long disciplineId,
             ProgramType programType,
             long id = 0
-        ) : base(collegeId, name, programType, id)
+        ) : base(
+            collegeId,
+            disciplineId, 
+            programType,
+            id
+        )
         {
         }
 

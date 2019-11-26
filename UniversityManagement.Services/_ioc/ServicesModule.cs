@@ -13,6 +13,7 @@ namespace UniversityManagement.Services
         private static void RegisterServices(ContainerBuilder builder)
         {
             builder.RegisterType<CollegeReadService>().As<ICollegeReadService>();
+            builder.RegisterType<ProgramReadService>().As<IProgramReadService>();
         }
     }
 }

@@ -51,7 +51,10 @@
     <Compile Include="Enrollment\ApplicationDto.cs" />
     <Compile Include="Enrollment\college\CollegeDto.cs" />
     <Compile Include="Enrollment\college\CollegeReadService.cs" />
-    <Compile Include="Enrollment\MajorDto.cs" />
+    <Compile Include="Enrollment\program\DisciplineDto.cs" />
+    <Compile Include="Enrollment\program\IProgramReadService.cs" />
+    <Compile Include="Enrollment\program\ProgramReadService.cs" />
+    <Compile Include="Enrollment\program\MajorDto.cs" />
     <Compile Include="Enrollment\ExpressMapperConfiguration.cs" />
     <Compile Include="EntityDto.cs" />
     <Compile Include="Enrollment\college\ICollegeReadService.cs" />

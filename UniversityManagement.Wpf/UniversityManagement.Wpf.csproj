@@ -70,6 +70,7 @@
     <Compile Include="app\Enrollment\create-application\ApplicationViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\applicant\IApplicantViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\ICollegeSelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\IMajorSelectorViewModel.cs" />
     <Compile Include="shared\selector\ISelectorItemViewModel.cs" />
     <Compile Include="shared\selector\SelectorViewModel.cs" />
     <Compile Include="shared\selector\ISelectorViewModel.cs" />

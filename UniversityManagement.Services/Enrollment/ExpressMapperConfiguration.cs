@@ -8,6 +8,7 @@ namespace UniversityManagement.Services.Enrollment
         public static void Configure()
         {
             Mapper.Register<College, CollegeDto>();
+            Mapper.Register<Major, MajorDto>();
         }
     }
 }

@@ -4,6 +4,6 @@ namespace UniversityManagement.Domain.Enrollment
 {
     public interface IMajorRepository : IRepository<Major>
     {
-        IEnumerable<Major> Fetch(int collegeId);
+        IEnumerable<Major> Fetch(long collegeId);
     }
 }

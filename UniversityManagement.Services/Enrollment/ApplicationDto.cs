@@ -8,11 +8,7 @@
 
         public ApplicationDto()
         {
-            Applicant = new ApplicantDto
-            {
-                Name = "John",
-                Surname = "Doe"
-            };
+            Applicant = new ApplicantDto();
             College = new CollegeDto();
             Major = new MajorDto();
         }

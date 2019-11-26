@@ -6,6 +6,8 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
     public class MajorRepository : IMajorRepository
     {
+        private const long MajorProgramTypeId = 3;
+
         #region Fields
 
         private readonly Context _context;
@@ -25,18 +27,31 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         public IEnumerable<Major> Fetch()
         {
-            return _context.Disciplines.Select(
-                x => new Major(
-                    x.CollegeId,
-                    x.Name,
-                    x.Id
+            var programs = _context.Programs;
+            var disciplines = _context.Disciplines;
+
+            return programs
+                .Where(x => x.ProgramTypeId == MajorProgramTypeId)
+                .Join(
+                    disciplines,
+                    program => program.DisciplineId,
+                    discipline => discipline.Id,
+                    (Program, Discipline) => new {Program, Discipline}
                 )
-            );
+                .Select(
+                    x => new Major(
+                        x.Discipline.CollegeId,
+                        x.Discipline.Id,
+                        Domain.ProgramType.Major,
+                        x.Program.Id
+                    )
+                );
         }
 
-        public IEnumerable<Major> Fetch(int collegeId)
+        public IEnumerable<Major> Fetch(long collegeId)
         {
-            return Fetch().Where(x => x.CollegeId == collegeId);
+            var majors = Fetch().ToList();
+            return majors.Where(x => x.CollegeId == collegeId);
         }
 
         #endregion
