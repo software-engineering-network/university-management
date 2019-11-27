@@ -62,6 +62,7 @@
     <Compile Include="Enrollment\Read\dtos\MajorDto.cs" />
     <Compile Include="Enrollment\Read\program\ProgramReadService.cs" />
     <Compile Include="Enrollment\ExpressMapperConfiguration.cs" />
+    <Compile Include="Enrollment\Write\application\ApplicationWriteService.cs" />
     <Compile Include="Enrollment\Write\application\IApplicationWriteService.cs" />
     <Compile Include="EntityDto.cs" />
     <Compile Include="Enrollment\Read\college\ICollegeReadService.cs" />

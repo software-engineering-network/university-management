@@ -1,21 +1,36 @@
 ﻿using System.Collections.Generic;
+using UniversityManagement.Domain.Enrollment.Write;
 using UniversityManagement.Services.Enrollment.Read;
+using UniversityManagement.Services.Enrollment.Write;
 
 namespace UniversityManagement.Services.Enrollment
 {
     public class EditApplicationService : IEditApplicationService
     {
+        #region Fields
+
+        private readonly IApplicationWriteService _applicationWriteService;
         private readonly ICollegeReadService _collegeReadService;
         private readonly IProgramReadService _programReadService;
 
+        #endregion
+
+        #region Construction
+
         public EditApplicationService(
+            IApplicationWriteService applicationWriteService,
             ICollegeReadService collegeReadService,
             IProgramReadService programReadService
         )
         {
+            _applicationWriteService = applicationWriteService;
             _collegeReadService = collegeReadService;
             _programReadService = programReadService;
         }
+
+        #endregion
+
+        #region IEditApplicationService Members
 
         public IEnumerable<CollegeDto> FetchColleges()
         {
@@ -35,5 +50,15 @@ namespace UniversityManagement.Services.Enrollment
         {
             return _programReadService.FetchMinors();
         }
+
+        public void CreateApplication(CreateApplication command)
+        {
+            // validate command here
+
+            // if isValid
+            _applicationWriteService.CreateApplication(command);
+        }
+
+        #endregion
     }
 }

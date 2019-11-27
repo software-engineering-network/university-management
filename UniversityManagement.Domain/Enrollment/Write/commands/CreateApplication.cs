@@ -13,7 +13,7 @@
             long applicantId,
             long collegeId,
             long majorId,
-            long minorId
+            long minorId = 0
         )
         {
             ApplicationId = applicationId;

@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicationViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IApplicantViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\contracts\IApplicationViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\ICollegeSelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IMajorSelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IMinorSelectorViewModel.cs" />

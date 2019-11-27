@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using UniversityManagement.Domain.Enrollment.Write;
 using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
@@ -8,19 +9,20 @@ namespace UniversityManagement.Wpf.Enrollment
     public class ApplicationViewModel :
         ViewModelBase,
         IApplicantViewModel,
+        IApplicationViewModel,
         ICollegeSelectorViewModel,
         IMajorSelectorViewModel,
         IMinorSelectorViewModel
     {
         #region Fields
 
-        private readonly IEditApplicationService _service;
-
         private readonly ApplicationDto _application;
+        private readonly bool _isSyncing;
+
+        private readonly IEditApplicationService _service;
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
         private ObservableCollection<MinorDto> _minors;
-        private readonly bool _isSyncing;
 
         #endregion
 
@@ -77,6 +79,16 @@ namespace UniversityManagement.Wpf.Enrollment
                 _application.Applicant.Surname = value;
                 OnPropertyChanged(nameof(ApplicantSurname));
             }
+        }
+
+        #endregion
+
+        #region IApplicationViewModel Members
+
+        public void CreateApplication()
+        {
+            var createApplication = BuildCreateApplicationCommand();
+            _service.CreateApplication(createApplication);
         }
 
         #endregion
@@ -159,7 +171,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 OnPropertyChanged(nameof(Minors));
             }
         }
-    
+
         public MinorDto SelectedMinor
         {
             get => _application.Minor;
@@ -174,6 +186,17 @@ namespace UniversityManagement.Wpf.Enrollment
         }
 
         #endregion
+
+        private CreateApplication BuildCreateApplicationCommand()
+        {
+            return new CreateApplication(
+                _application.Id,
+                _application.Applicant.Id,
+                _application.College.Id,
+                _application.Major.Id,
+                _application?.Minor?.Id ?? 0
+            );
+        }
 
         private void PopulateColleges()
         {

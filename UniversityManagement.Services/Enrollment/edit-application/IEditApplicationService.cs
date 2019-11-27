@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UniversityManagement.Domain.Enrollment.Write;
 using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Services.Enrollment
@@ -8,5 +9,7 @@ namespace UniversityManagement.Services.Enrollment
         IEnumerable<CollegeDto> FetchColleges();
         IEnumerable<MajorDto> FetchMajors(ApplicationDto application);
         IEnumerable<MinorDto> FetchMinors();
+
+        void CreateApplication(CreateApplication command);
     }
 }

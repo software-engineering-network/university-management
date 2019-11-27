@@ -1,23 +1,38 @@
 ﻿using Autofac;
 using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
+using UniversityManagement.Services.Enrollment.Write;
 
 namespace UniversityManagement.Services
 {
     public class ServicesModule : Module
     {
+        #region Module Overrides
+
         protected override void Load(ContainerBuilder builder)
         {
-            RegisterServices(builder);
+            RegisterReadServices(builder);
+            RegisterWriteServices(builder);
+            RegisterCompositeServices(builder);
         }
 
-        private static void RegisterServices(ContainerBuilder builder)
+        #endregion
+
+        private static void RegisterCompositeServices(ContainerBuilder builder)
+        {
+            builder.RegisterType<EditApplicationService>().As<IEditApplicationService>();
+        }
+
+        private static void RegisterReadServices(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationReadService>().As<IApplicationReadService>();
             builder.RegisterType<CollegeReadService>().As<ICollegeReadService>();
             builder.RegisterType<ProgramReadService>().As<IProgramReadService>();
+        }
 
-            builder.RegisterType<EditApplicationService>().As<IEditApplicationService>();
+        private static void RegisterWriteServices(ContainerBuilder builder)
+        {
+            builder.RegisterType<ApplicationWriteService>().As<IApplicationWriteService>();
         }
     }
 }
