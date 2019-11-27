@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using UniversityManagement.Domain;
-using UniversityManagement.Infrastructure.Memory;
+using UniversityManagement.Infrastructure.Memory.Database;
 using UniversityManagement.Wpf.Enrollment;
 
 namespace UniversityManagement.Wpf

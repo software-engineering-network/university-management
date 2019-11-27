@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UniversityManagement.Domain;
+using ExpressMapper;
+using UniversityManagement.Domain.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
+using Discipline = UniversityManagement.Domain.Read.Discipline;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
@@ -22,18 +25,12 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         #endregion
 
-        public IEnumerable<Domain.Discipline> Fetch()
+        public IEnumerable<Discipline> Fetch()
         {
-            return _context.Disciplines.Select(
-                x => new Domain.Discipline(
-                    x.CollegeId,
-                    x.Name,
-                    x.Id
-                )
-            );
+            return _context.Disciplines.Select(Mapper.Map<Database.Discipline, Discipline>);
         }
 
-        public Domain.Discipline Find(long id)
+        public Discipline Find(long id)
         {
             throw new NotSupportedException();
         }

@@ -41,23 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enrollment\applicant\Applicant.cs" />
-    <Compile Include="Enrollment\applicant\IApplicantRepository.cs" />
-    <Compile Include="Enrollment\application\Application.cs" />
-    <Compile Include="Enrollment\application\IApplicationRepository.cs" />
-    <Compile Include="Enrollment\college\College.cs" />
-    <Compile Include="Enrollment\major\IMajorRepository.cs" />
-    <Compile Include="Enrollment\major\Major.cs" />
-    <Compile Include="Enrollment\minor\IMinorRepository.cs" />
-    <Compile Include="Enrollment\minor\Minor.cs" />
-    <Compile Include="models\discipline\Discipline.cs" />
-    <Compile Include="models\discipline\IDisciplineRepository.cs" />
-    <Compile Include="models\Program.cs" />
+    <Compile Include="Enrollment\Read\applicant\Applicant.cs" />
+    <Compile Include="Enrollment\Read\applicant\IApplicantRepository.cs" />
+    <Compile Include="Enrollment\Read\application\Application.cs" />
+    <Compile Include="Enrollment\Write\Application.cs" />
+    <Compile Include="Enrollment\Read\application\IApplicationRepository.cs" />
+    <Compile Include="Enrollment\Read\college\College.cs" />
+    <Compile Include="Enrollment\Read\major\IMajorRepository.cs" />
+    <Compile Include="Enrollment\Read\major\Major.cs" />
+    <Compile Include="Enrollment\Read\minor\IMinorRepository.cs" />
+    <Compile Include="Enrollment\Read\minor\Minor.cs" />
+    <Compile Include="models\Read\discipline\Discipline.cs" />
+    <Compile Include="models\Read\discipline\IDisciplineRepository.cs" />
+    <Compile Include="models\Read\Program.cs" />
     <Compile Include="models\ProgramType.cs" />
-    <Compile Include="models\Entity.cs" />
-    <Compile Include="Enrollment\college\ICollegeRepository.cs" />
+    <Compile Include="models\Read\Entity.cs" />
+    <Compile Include="Enrollment\Read\college\ICollegeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="models\Write\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

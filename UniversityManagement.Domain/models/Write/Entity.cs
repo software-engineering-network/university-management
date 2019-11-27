@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UniversityManagement.Domain
+namespace UniversityManagement.Domain.Write
 {
     public abstract class Entity : IEquatable<Entity>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UniversityManagement.Domain.Enrollment
+namespace UniversityManagement.Domain.Enrollment.Read
 {
     public interface IMajorRepository : IRepository<Major>
     {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExpressMapper;
-using UniversityManagement.Domain;
-using UniversityManagement.Domain.Enrollment;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {

@@ -1,4 +1,4 @@
-﻿namespace UniversityManagement.Infrastructure.Memory
+﻿namespace UniversityManagement.Infrastructure.Memory.Database
 {
     public class Program : Entity
     {

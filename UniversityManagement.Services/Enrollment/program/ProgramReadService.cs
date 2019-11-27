@@ -2,7 +2,8 @@
 using System.Linq;
 using ExpressMapper;
 using UniversityManagement.Domain;
-using UniversityManagement.Domain.Enrollment;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Domain.Read;
 
 namespace UniversityManagement.Services.Enrollment
 {
@@ -32,15 +33,16 @@ namespace UniversityManagement.Services.Enrollment
 
             var majors = _unitOfWork.MajorRepository
                 .Fetch()
-                .WithCollegesAndDisciplines(
-                    colleges,
-                    disciplines
-                )
-                .Select(Mapper.Map<ProgramDto, MajorDto>)
+                .Select(Mapper.Map<Major, MajorDto>)
                 .ToList();
 
             return majors;
         }
+
+        //.WithCollegesAndDisciplines(
+        //    colleges,
+        //    disciplines
+        //)
 
         public IEnumerable<MajorDto> FetchMajors(long collegeId)
         {
@@ -49,11 +51,7 @@ namespace UniversityManagement.Services.Enrollment
 
             var majors = _unitOfWork.MajorRepository
                 .Fetch(collegeId)
-                .WithCollegesAndDisciplines(
-                    colleges,
-                    disciplines
-                )
-                .Select(Mapper.Map<ProgramDto, MajorDto>)
+                .Select(Mapper.Map<Major, MajorDto>)
                 .ToList();
 
             return majors;
@@ -66,11 +64,7 @@ namespace UniversityManagement.Services.Enrollment
 
             var minors = _unitOfWork.MinorRepository
                 .Fetch()
-                .WithCollegesAndDisciplines(
-                    colleges,
-                    disciplines
-                )
-                .Select(Mapper.Map<ProgramDto, MinorDto>)
+                .Select(Mapper.Map<Minor, MinorDto>)
                 .ToList();
 
             return minors;
@@ -91,7 +85,7 @@ namespace UniversityManagement.Services.Enrollment
                 .WithColleges(colleges)
                 .Join(
                     disciplines,
-                    x => x.Program.DisciplineId,
+                    x => x.Program.Discipline.Id,
                     discipline => discipline.Id,
                     (x, Discipline) => new ProgramDto
                     {
@@ -110,7 +104,7 @@ namespace UniversityManagement.Services.Enrollment
             return source
                 .Join(
                     colleges,
-                    major => major.CollegeId,
+                    major => major.College.Id,
                     college => college.Id,
                     (program, college) => new ProgramCollege
                     {

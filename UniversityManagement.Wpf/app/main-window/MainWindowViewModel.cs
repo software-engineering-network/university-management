@@ -1,5 +1,4 @@
-﻿using UniversityManagement.Domain;
-using UniversityManagement.Services.Enrollment;
+﻿using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Wpf.Enrollment;
 
 namespace UniversityManagement.Wpf

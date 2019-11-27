@@ -2,7 +2,7 @@
 using System.Linq;
 using ExpressMapper;
 using UniversityManagement.Domain;
-using UniversityManagement.Domain.Enrollment;
+using UniversityManagement.Domain.Enrollment.Read;
 
 namespace UniversityManagement.Services.Enrollment
 {

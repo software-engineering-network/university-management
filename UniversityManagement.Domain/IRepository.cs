@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UniversityManagement.Domain.Read;
 
 namespace UniversityManagement.Domain
 {

@@ -1,6 +1,7 @@
 ﻿using UniversityManagement.Domain;
-using UniversityManagement.Domain.Enrollment;
-using UniversityManagement.Infrastructure.Memory;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Domain.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
 using UniversityManagement.Infrastructure.Memory.Enrollment;
 
 namespace UniversityManagement.Wpf

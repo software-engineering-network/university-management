@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UniversityManagement.Domain.Enrollment;
+using ExpressMapper;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
+using Application = UniversityManagement.Domain.Enrollment.Read.Application;
+using College = UniversityManagement.Domain.Enrollment.Read.College;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
@@ -24,17 +28,16 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         #region IApplicationRepository Members
 
-        public IEnumerable<Domain.Enrollment.Application> Fetch()
+        public IEnumerable<Application> Fetch()
         {
             throw new NotSupportedException();
         }
 
-        public Domain.Enrollment.Application Find(long id)
+        public Application Find(long id)
         {
-            var people = _context.People;
             var spread = _context.Applications
                 .Join(
-                    people,
+                    _context.People,
                     x => x.ApplicantId,
                     applicant => applicant.Id,
                     (Application, Applicant) => new {Application, Applicant}
@@ -63,19 +66,14 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                 )
                 .FirstOrDefault(x => x.Application.Id == id);
 
-            var application = new Domain.Enrollment.Application(
-                    new Applicant(
-                        spread.Applicant.Name,
-                        spread.Applicant.Surname,
-                        spread.Applicant.Id
-                    ),
-                    spread.Application.Id
-                )
-                .SelectCollege(new Domain.Enrollment.College(spread.College.Name, spread.College.Id))
-                .SelectMajor(new Major(spread.College.Id, spread.Major.DisciplineId, spread.Major.Id));
+            if (spread == null)
+                return null;
 
-            if (spread.Minor != null)
-                application.SelectMinor(new Minor(0, spread.Minor.DisciplineId, spread.Minor.Id));
+            var application = Mapper.Map<Database.Application, Application>(spread.Application);
+            application.Applicant = Mapper.Map<Person, Applicant>(spread.Applicant);
+            application.College = Mapper.Map<Database.College, College>(spread.College);
+            application.Major = Mapper.Map<Program, Major>(spread.Major);
+            application.Minor = Mapper.Map<Program, Minor>(spread.Minor);
 
             return application;
         }

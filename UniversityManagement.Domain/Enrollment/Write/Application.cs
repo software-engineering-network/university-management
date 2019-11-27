@@ -1,23 +1,25 @@
-﻿namespace UniversityManagement.Infrastructure.Memory.Database
+﻿using UniversityManagement.Domain.Write;
+
+namespace UniversityManagement.Domain.Enrollment.Write
 {
     public class Application : Entity
     {
         #region Properties
 
-        public long ApplicantId { get; set; }
-        public long CollegeId { get; set; }
-        public long MajorId { get; set; }
-        public long MinorId { get; set; }
+        public long ApplicantId { get; }
+        public long CollegeId { get; }
+        public long MajorId { get; }
+        public long MinorId { get; }
 
         #endregion
 
         #region Construction
 
         public Application(
-            long id,
             long applicantId,
             long collegeId,
             long majorId,
+            long id = 0,
             long minorId = 0
         ) : base(id)
         {

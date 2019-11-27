@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UniversityManagement.Domain.Enrollment;
+using ExpressMapper;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
+using College = UniversityManagement.Domain.Enrollment.Read.College;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
@@ -24,17 +27,12 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         #region ICollegeRepository Members
 
-        public IEnumerable<Domain.Enrollment.College> Fetch()
+        public IEnumerable<College> Fetch()
         {
-            return _context.Colleges.Select(
-                x => new Domain.Enrollment.College(
-                    x.Name,
-                    x.Id
-                )
-            );
+            return _context.Colleges.Select(Mapper.Map<Database.College, College>);
         }
 
-        public Domain.Enrollment.College Find(long id)
+        public College Find(long id)
         {
             throw new NotSupportedException();
         }

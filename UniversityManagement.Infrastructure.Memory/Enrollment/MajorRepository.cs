@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UniversityManagement.Domain.Enrollment;
+using ExpressMapper;
+using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Infrastructure.Memory.Database;
+using College = UniversityManagement.Domain.Enrollment.Read.College;
+using Discipline = UniversityManagement.Domain.Read.Discipline;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
@@ -28,24 +32,31 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         public IEnumerable<Major> Fetch()
         {
-            var programs = _context.Programs;
-            var disciplines = _context.Disciplines;
-
-            return programs
+            var majors = _context.Programs
                 .Where(x => x.ProgramTypeId == MajorProgramTypeId)
                 .Join(
-                    disciplines,
+                    _context.Disciplines,
                     program => program.DisciplineId,
                     discipline => discipline.Id,
                     (Program, Discipline) => new {Program, Discipline}
                 )
+                .Join(
+                    _context.Colleges,
+                    x => x.Discipline.CollegeId,
+                    college => college.Id,
+                    (x, College) => new {x.Program, x.Discipline, College}
+                )
                 .Select(
-                    x => new Major(
-                        x.Discipline.CollegeId,
-                        x.Discipline.Id,
-                        x.Program.Id
-                    )
+                    x =>
+                    {
+                        var major = Mapper.Map<Program, Major>(x.Program);
+                        major.College = Mapper.Map<Database.College, College>(x.College);
+                        major.Discipline = Mapper.Map<Database.Discipline, Discipline>(x.Discipline);
+                        return major;
+                    }
                 );
+
+            return majors;
         }
 
         public Major Find(long id)
@@ -56,7 +67,7 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
         public IEnumerable<Major> Fetch(long collegeId)
         {
             var majors = Fetch().ToList();
-            return majors.Where(x => x.CollegeId == collegeId);
+            return majors.Where(x => x.College.Id == collegeId);
         }
 
         #endregion

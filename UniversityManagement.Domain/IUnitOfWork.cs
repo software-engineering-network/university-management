@@ -1,4 +1,5 @@
-﻿using UniversityManagement.Domain.Enrollment;
+﻿using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Domain.Read;
 
 namespace UniversityManagement.Domain
 {
