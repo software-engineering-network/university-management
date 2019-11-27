@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Services.Enrollment
 {

@@ -51,6 +51,7 @@
     <Compile Include="Enrollment\Read\major\Major.cs" />
     <Compile Include="Enrollment\Read\minor\IMinorRepository.cs" />
     <Compile Include="Enrollment\Read\minor\Minor.cs" />
+    <Compile Include="Enrollment\Write\commands\CreateApplication.cs" />
     <Compile Include="models\Read\discipline\Discipline.cs" />
     <Compile Include="models\Read\discipline\IDisciplineRepository.cs" />
     <Compile Include="models\Read\Program.cs" />

@@ -1,4 +1,5 @@
 ﻿using UniversityManagement.Services.Enrollment;
+using UniversityManagement.Services.Enrollment.Read;
 using UniversityManagement.Wpf.Enrollment;
 
 namespace UniversityManagement.Wpf

@@ -4,7 +4,7 @@ using ExpressMapper;
 using UniversityManagement.Domain;
 using UniversityManagement.Domain.Enrollment.Read;
 
-namespace UniversityManagement.Services.Enrollment
+namespace UniversityManagement.Services.Enrollment.Read
 {
     public class ProgramReadService : IProgramReadService
     {

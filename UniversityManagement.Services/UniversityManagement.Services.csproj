@@ -47,23 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enrollment\application\ApplicationReadService.cs" />
-    <Compile Include="Enrollment\application\IApplicationReadService.cs" />
-    <Compile Include="Enrollment\dtos\ApplicantDto.cs" />
-    <Compile Include="Enrollment\dtos\CollegeDto.cs" />
-    <Compile Include="Enrollment\college\CollegeReadService.cs" />
-    <Compile Include="Enrollment\dtos\ApplicationDto.cs" />
-    <Compile Include="Enrollment\dtos\MinorDto.cs" />
-    <Compile Include="Enrollment\dtos\ProgramDto.cs" />
+    <Compile Include="Enrollment\Read\application\ApplicationReadService.cs" />
+    <Compile Include="Enrollment\Read\application\IApplicationReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\ApplicantDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\CollegeDto.cs" />
+    <Compile Include="Enrollment\Read\college\CollegeReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\ApplicationDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\MinorDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\ProgramDto.cs" />
     <Compile Include="Enrollment\edit-application\EditApplicationService.cs" />
     <Compile Include="Enrollment\edit-application\IEditApplicationService.cs" />
-    <Compile Include="Enrollment\dtos\DisciplineDto.cs" />
-    <Compile Include="Enrollment\program\IProgramReadService.cs" />
-    <Compile Include="Enrollment\dtos\MajorDto.cs" />
-    <Compile Include="Enrollment\program\ProgramReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\DisciplineDto.cs" />
+    <Compile Include="Enrollment\Read\program\IProgramReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\MajorDto.cs" />
+    <Compile Include="Enrollment\Read\program\ProgramReadService.cs" />
     <Compile Include="Enrollment\ExpressMapperConfiguration.cs" />
+    <Compile Include="Enrollment\Write\application\IApplicationWriteService.cs" />
     <Compile Include="EntityDto.cs" />
-    <Compile Include="Enrollment\college\ICollegeReadService.cs" />
+    <Compile Include="Enrollment\Read\college\ICollegeReadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_ioc\ServicesModule.cs" />
   </ItemGroup>

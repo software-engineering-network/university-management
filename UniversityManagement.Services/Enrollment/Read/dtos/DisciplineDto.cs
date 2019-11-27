@@ -1,4 +1,4 @@
-﻿namespace UniversityManagement.Services.Enrollment
+﻿namespace UniversityManagement.Services.Enrollment.Read
 {
     public class DisciplineDto : EntityDto
     {

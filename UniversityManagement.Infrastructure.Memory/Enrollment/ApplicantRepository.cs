@@ -33,9 +33,7 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         public Applicant Find(long id)
         {
-            var applicant = _context.People
-                .FirstOrDefault(x => x.Id == id);
-
+            var applicant = _context.People.FirstOrDefault(x => x.Id == id);
             return Mapper.Map<Person, Applicant>(applicant);
         }
 

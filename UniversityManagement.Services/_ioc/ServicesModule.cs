@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using UniversityManagement.Services.Enrollment;
+using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Services
 {

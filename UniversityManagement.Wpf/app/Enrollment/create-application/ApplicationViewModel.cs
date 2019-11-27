@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using UniversityManagement.Services.Enrollment;
+using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Wpf.Enrollment
 {

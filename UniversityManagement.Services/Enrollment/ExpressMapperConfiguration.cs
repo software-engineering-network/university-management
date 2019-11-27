@@ -1,5 +1,6 @@
 ﻿using ExpressMapper;
 using UniversityManagement.Domain.Enrollment.Read;
+using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Services.Enrollment
 {
