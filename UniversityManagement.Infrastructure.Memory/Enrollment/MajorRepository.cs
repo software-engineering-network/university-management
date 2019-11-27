@@ -51,6 +51,7 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                     {
                         var major = Mapper.Map<Program, Major>(x.Program);
                         major.Discipline = Mapper.Map<Database.Discipline, Discipline>(x.Discipline);
+                        major.Discipline.College = Mapper.Map<Database.College, College>(x.College);
                         return major;
                     }
                 );

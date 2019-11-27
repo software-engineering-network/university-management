@@ -19,6 +19,7 @@ namespace UniversityManagement.Wpf.Enrollment
         private ObservableCollection<CollegeDto> _colleges;
         private ObservableCollection<MajorDto> _majors;
         private ObservableCollection<MinorDto> _minors;
+        private readonly bool _isSyncing;
 
         #endregion
 
@@ -39,7 +40,12 @@ namespace UniversityManagement.Wpf.Enrollment
             ApplicationDto application
         ) : this(service)
         {
+            _isSyncing = true;
+
             _application = application;
+            SelectedCollege = Colleges.FirstOrDefault(x => x == _application.College);
+
+            _isSyncing = false;
         }
 
         #endregion
@@ -94,7 +100,7 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.College;
             set
             {
-                if (_application.College == value)
+                if (_application.College == value && !_isSyncing)
                     return;
 
                 _application.College = value;
@@ -126,7 +132,7 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Major;
             set
             {
-                if (_application.Major == value)
+                if (_application.Major == value && !_isSyncing)
                     return;
 
                 _application.Major = value;
@@ -158,7 +164,7 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _application.Minor;
             set
             {
-                if (_application.Minor == value)
+                if (_application.Minor == value && !_isSyncing)
                     return;
 
                 _application.Minor = value;
@@ -201,7 +207,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 SelectedMajor.College == SelectedCollege)
                 return;
 
-            SelectedCollege = _colleges.First(x => x == SelectedMajor.College);
+            SelectedCollege = _colleges.FirstOrDefault(x => x == SelectedMajor.College);
         }
 
         private void UpdateMajorSelector()
@@ -214,7 +220,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 previousMajor.College != SelectedCollege)
                 return;
 
-            SelectedMajor = Majors.First(x => x == previousMajor);
+            SelectedMajor = Majors.FirstOrDefault(x => x == previousMajor);
         }
     }
 }
