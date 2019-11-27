@@ -35,10 +35,13 @@ namespace UniversityManagement.Services.Enrollment.Write
                 ? new Applicant(command.ApplicantName, command.ApplicantSurname)
                 : _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
 
-            application.SetApplicant(applicant);
+            //var college = _unitOfWork.CollegeRepository.Find(command.CollegeId);
+            var major = _unitOfWork.MajorRepository.Find(command.MajorId);
 
-            // find & add college
-            // find & add major
+            application
+                .SetApplicant(applicant)
+                .SetMajor(major);
+
             // find & add minor
 
             _unitOfWork.ApplicationRepository.Create(application);

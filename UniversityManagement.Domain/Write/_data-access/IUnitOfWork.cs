@@ -8,6 +8,8 @@ namespace UniversityManagement.Domain.Write
 
         IApplicationRepository ApplicationRepository { get; }
         IApplicantRepository ApplicantRepository { get; }
+        ICollegeRepository CollegeRepository { get; }
+        IMajorRepository MajorRepository { get; }
 
         #endregion
 

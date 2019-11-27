@@ -53,6 +53,12 @@
     <Compile Include="Read\Enrollment\major\Major.cs" />
     <Compile Include="Read\Enrollment\minor\IMinorRepository.cs" />
     <Compile Include="Read\Enrollment\minor\Minor.cs" />
+    <Compile Include="Write\Enrollment\program\IMajorRepository.cs" />
+    <Compile Include="Write\Enrollment\program\IProgramRepository.cs" />
+    <Compile Include="Write\Enrollment\program\Major.cs" />
+    <Compile Include="Write\Enrollment\program\Program.cs" />
+    <Compile Include="Write\Enrollment\college\College.cs" />
+    <Compile Include="Write\Enrollment\college\ICollegeRepository.cs" />
     <Compile Include="Write\Enrollment\_commands\CreateApplication.cs" />
     <Compile Include="Read\_models\discipline\Discipline.cs" />
     <Compile Include="Read\_models\discipline\IDisciplineRepository.cs" />

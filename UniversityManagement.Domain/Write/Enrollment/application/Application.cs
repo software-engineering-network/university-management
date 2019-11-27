@@ -16,5 +16,17 @@
             ApplicantId = applicant.Id;
             return this;
         }
+
+        public Application SetCollege(College college)
+        {
+            CollegeId = college.Id;
+            return this;
+        }
+
+        public Application SetMajor(Major major)
+        {
+            MajorId = major.Id;
+            return this;
+        }
     }
 }
