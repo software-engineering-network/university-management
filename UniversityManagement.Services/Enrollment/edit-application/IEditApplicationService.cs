@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UniversityManagement.Domain.Enrollment.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Services.Enrollment

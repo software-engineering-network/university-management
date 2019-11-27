@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UniversityManagement.Domain.Enrollment.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 using UniversityManagement.Services.Enrollment.Write;
 
@@ -53,9 +53,6 @@ namespace UniversityManagement.Services.Enrollment
 
         public void CreateApplication(CreateApplication command)
         {
-            // validate command here
-
-            // if isValid
             _applicationWriteService.CreateApplication(command);
         }
 

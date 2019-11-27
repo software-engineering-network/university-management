@@ -1,6 +1,4 @@
-﻿using UniversityManagement.Domain.Enrollment.Read;
-
-namespace UniversityManagement.Test.Enrollment
+﻿namespace UniversityManagement.Test.Enrollment
 {
     public class TestObjectFactory
     {

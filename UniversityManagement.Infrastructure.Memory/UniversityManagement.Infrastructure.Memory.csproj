@@ -55,14 +55,16 @@
     <Compile Include="Database\Person.cs" />
     <Compile Include="Database\Program.cs" />
     <Compile Include="Database\ProgramType.cs" />
-    <Compile Include="Enrollment\ApplicantRepository.cs" />
-    <Compile Include="Enrollment\ApplicationRepository.cs" />
-    <Compile Include="Enrollment\CollegeRepository.cs" />
+    <Compile Include="Read\Enrollment\ApplicantRepository.cs" />
+    <Compile Include="Read\Enrollment\ApplicationRepository.cs" />
+    <Compile Include="Read\Enrollment\CollegeRepository.cs" />
     <Compile Include="Database\Entity.cs" />
-    <Compile Include="Enrollment\DisciplineRepository.cs" />
-    <Compile Include="Enrollment\MajorRepository.cs" />
-    <Compile Include="Enrollment\MinorRepository.cs" />
+    <Compile Include="Read\Enrollment\DisciplineRepository.cs" />
+    <Compile Include="Read\Enrollment\MajorRepository.cs" />
+    <Compile Include="Read\Enrollment\MinorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Write\Enrollment\ApplicantRepository.cs" />
+    <Compile Include="Write\Enrollment\ApplicationRepository.cs" />
     <Compile Include="_ioc\InfrastructureMemoryModule.cs" />
   </ItemGroup>
   <ItemGroup>

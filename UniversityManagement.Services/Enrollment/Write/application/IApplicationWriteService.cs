@@ -1,4 +1,4 @@
-﻿using UniversityManagement.Domain.Enrollment.Write;
+﻿using UniversityManagement.Domain.Write.Enrollment;
 
 namespace UniversityManagement.Services.Enrollment.Write
 {

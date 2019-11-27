@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using UniversityManagement.Domain.Enrollment.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
@@ -192,6 +192,8 @@ namespace UniversityManagement.Wpf.Enrollment
             return new CreateApplication(
                 _application.Id,
                 _application.Applicant.Id,
+                _application.Applicant.Name,
+                _application.Applicant.Surname,
                 _application.College.Id,
                 _application.Major.Id,
                 _application?.Minor?.Id ?? 0

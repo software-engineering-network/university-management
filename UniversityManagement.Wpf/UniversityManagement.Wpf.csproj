@@ -81,8 +81,9 @@
     </Compile>
     <Compile Include="app\main-window\MainWindowViewModel.cs" />
     <Compile Include="shared\ViewModelBase.cs" />
-    <Compile Include="_ioc\UnitOfWork.cs" />
+    <Compile Include="_ioc\Read\UnitOfWork.cs" />
     <Compile Include="_ioc\WpfModule.cs" />
+    <Compile Include="_ioc\Write\UnitOfWork.cs" />
     <Page Include="app\Enrollment\create-application\ApplicantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

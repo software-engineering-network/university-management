@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using UniversityManagement.Domain.Enrollment.Read;
-using UniversityManagement.Infrastructure.Memory.Enrollment;
+using UniversityManagement.Domain.Read.Enrollment;
+using UniversityManagement.Infrastructure.Memory.Read.Enrollment;
 
 namespace UniversityManagement.Infrastructure.Memory
 {
