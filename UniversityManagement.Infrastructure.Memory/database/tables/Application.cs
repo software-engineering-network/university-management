@@ -13,6 +13,10 @@
 
         #region Construction
 
+        public Application()
+        {
+        }
+
         public Application(
             long id,
             long applicantId,

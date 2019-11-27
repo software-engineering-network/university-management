@@ -10,6 +10,6 @@ namespace UniversityManagement.Services.Enrollment
         IEnumerable<MajorDto> FetchMajors(ApplicationDto application);
         IEnumerable<MinorDto> FetchMinors();
 
-        void CreateApplication(CreateApplication command);
+        void CreateApplication(ApplicationDto application);
     }
 }

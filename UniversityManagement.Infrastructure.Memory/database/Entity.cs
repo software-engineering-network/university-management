@@ -10,6 +10,10 @@
 
         #region Construction
 
+        protected Entity()
+        {
+        }
+
         protected Entity(long id)
         {
             Id = id;

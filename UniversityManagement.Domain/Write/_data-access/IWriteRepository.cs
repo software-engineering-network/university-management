@@ -3,5 +3,6 @@
     public interface IWriteRepository<T> where T : Entity
     {
         void Create(T obj);
+        void Update(T obj);
     }
 }

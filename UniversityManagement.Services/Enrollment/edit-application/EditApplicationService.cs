@@ -51,9 +51,9 @@ namespace UniversityManagement.Services.Enrollment
             return _programReadService.FetchMinors();
         }
 
-        public void CreateApplication(CreateApplication command)
+        public void CreateApplication(ApplicationDto application)
         {
-            _applicationWriteService.CreateApplication(command);
+            _applicationWriteService.Create(application);
         }
 
         #endregion

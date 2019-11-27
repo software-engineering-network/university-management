@@ -11,6 +11,10 @@
 
         #region Construction
 
+        public Person()
+        {
+        }
+
         public Person(
             long id,
             string name,

@@ -1,17 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Infrastructure.Memory.Database
 {
-    public class Context
+    public class Context : IContext
     {
+        #region Fields
+
+        private readonly List<ISet> _sets;
+
+        #endregion
+
         #region Properties
 
-        public List<Application> Applications { get; }
-        public List<College> Colleges { get; }
-        public List<Discipline> Disciplines { get; }
-        public List<Person> People { get; }
-        public List<Program> Programs { get; }
-        public List<ProgramType> ProgramTypes { get; }
+        public Set<Application> Applications { get; }
+        public Set<College> Colleges { get; }
+        public Set<Discipline> Disciplines { get; }
+        public Set<Person> People { get; }
+        public Set<Program> Programs { get; }
+        public Set<ProgramType> ProgramTypes { get; }
 
         #endregion
 
@@ -19,12 +27,32 @@ namespace UniversityManagement.Infrastructure.Memory.Database
 
         public Context()
         {
-            Applications = CreateApplications();
-            Colleges = CreateColleges();
-            Disciplines = CreateDisciplines();
-            People = CreatePeople();
-            Programs = CreatePrograms();
-            ProgramTypes = CreateProgramTypes();
+            Applications = new Set<Application>(CreateApplications());
+            Colleges = new Set<College>(CreateColleges());
+            Disciplines = new Set<Discipline>(CreateDisciplines());
+            People = new Set<Person>(CreatePeople());
+            Programs = new Set<Program>(CreatePrograms());
+            ProgramTypes = new Set<ProgramType>(CreateProgramTypes());
+
+            _sets = new List<ISet>
+            {
+                Applications,
+                Colleges,
+                Disciplines,
+                People,
+                Programs,
+                ProgramTypes
+            };
+        }
+
+        #endregion
+
+        #region IContext Members
+
+        public void Commit()
+        {
+            foreach (var set in _sets.Where(set => set.HasChanges))
+                set.Commit();
         }
 
         #endregion

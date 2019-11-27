@@ -18,10 +18,11 @@ namespace UniversityManagement.Wpf
 
         private static void RegisterDomain(ContainerBuilder builder)
         {
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<Read.UnitOfWork>().As<Domain.Read.IUnitOfWork>();
+            builder.RegisterType<Write.UnitOfWork>().As<Domain.Write.IUnitOfWork>();
         }
 
-        private void RegisterInfrastructure(ContainerBuilder builder)
+        private static void RegisterInfrastructure(ContainerBuilder builder)
         {
             builder.RegisterType<Context>();
         }

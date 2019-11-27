@@ -32,7 +32,7 @@ namespace UniversityManagement.Wpf.Write
 
         public void Commit()
         {
-            // ¯\_(ツ)_/¯
+            _context.Commit();
         }
 
         #endregion

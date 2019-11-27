@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ExpressMapper;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using Program = UniversityManagement.Domain.Write.Enrollment.Program;
@@ -28,13 +29,31 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public Applicant Find(long id)
         {
-            var record = _context.People.Find(x => x.Id == id);
+            var record = _context.People.First(x => x.Id == id);
 
             return new Applicant(
                 record.Name,
                 record.Surname,
                 record.Id
             );
+        }
+
+        public void Create(Applicant applicant)
+        {
+            var person = Mapper.Map<Applicant, Person>(applicant);
+            _context.People.Add(person);
+        }
+
+        public void Update(Applicant applicant)
+        {
+            var candidatePerson = Mapper.Map<Applicant, Person>(applicant);
+            var person = _context.People.First(x => x.Id == applicant.Id);
+
+            if (person == candidatePerson)
+                return;
+
+            person.Name = candidatePerson.Name;
+            person.Surname = candidatePerson.Surname;
         }
 
         #endregion
@@ -61,7 +80,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public Program Find(long id)
         {
-            var record = _context.Programs.Find(x => x.Id == id);
+            var record = _context.Programs.First(x => x.Id == id);
 
             return new Program(
                 record.Id,
@@ -98,11 +117,27 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
     public class MajorRepository : IMajorRepository
     {
+        #region Fields
+
+        private readonly IProgramRepository _programRepository;
+
+        #endregion
+
+        #region Construction
+
+        public MajorRepository(Context context)
+        {
+            _programRepository = new ProgramRepository(context);
+        }
+
+        #endregion
+
         #region IMajorRepository Members
 
         public Major Find(long id)
         {
-            throw new NotImplementedException();
+            var program = _programRepository.Find(id);
+            return new Major(program.Id, program.DisciplineId);
         }
 
         #endregion

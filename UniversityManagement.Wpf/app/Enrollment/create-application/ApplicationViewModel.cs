@@ -85,10 +85,9 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region IApplicationViewModel Members
 
-        public void CreateApplication()
+        public void SaveApplication()
         {
-            var createApplication = BuildCreateApplicationCommand();
-            _service.CreateApplication(createApplication);
+            _service.CreateApplication(_application);
         }
 
         #endregion
@@ -186,19 +185,6 @@ namespace UniversityManagement.Wpf.Enrollment
         }
 
         #endregion
-
-        private CreateApplication BuildCreateApplicationCommand()
-        {
-            return new CreateApplication(
-                _application.Id,
-                _application.Applicant.Id,
-                _application.Applicant.Name,
-                _application.Applicant.Surname,
-                _application.College.Id,
-                _application.Major.Id,
-                _application?.Minor?.Id ?? 0
-            );
-        }
 
         private void PopulateColleges()
         {

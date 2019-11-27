@@ -1,6 +1,8 @@
 ﻿namespace UniversityManagement.Domain.Write.Enrollment
 {
-    public interface IApplicantRepository : IReadRepository<Applicant>
+    public interface IApplicantRepository : 
+        IReadRepository<Applicant>,
+        IWriteRepository<Applicant>
     {
     }
 }

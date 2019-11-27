@@ -2,6 +2,6 @@
 {
     public interface IApplicationViewModel
     {
-        void CreateApplication();
+        void SaveApplication();
     }
 }

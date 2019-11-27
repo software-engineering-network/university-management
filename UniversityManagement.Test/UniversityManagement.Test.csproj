@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enrollment\ApplicationTest.cs" />
+    <Compile Include="Enrollment\ApplicationProcessorTest.cs" />
     <Compile Include="Enrollment\TestObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\UniversityManagement.Domain\UniversityManagement.Domain.csproj">
       <Project>{2ec06b67-fa4d-4244-8b13-9ce66336d479}</Project>
       <Name>UniversityManagement.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversityManagement.Infrastructure.Memory\UniversityManagement.Infrastructure.Memory.csproj">
+      <Project>{3590C3C6-DE56-467C-A995-18307A5B24C6}</Project>
+      <Name>UniversityManagement.Infrastructure.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\UniversityManagement.Services\UniversityManagement.Services.csproj">
       <Project>{2a2a0efc-981f-43f9-acf1-530fe18ac3d2}</Project>

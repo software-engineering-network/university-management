@@ -1,4 +1,5 @@
-﻿using UniversityManagement.Domain.Write.Enrollment;
+﻿using System.Linq;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using College = UniversityManagement.Domain.Write.Enrollment.College;
 
@@ -25,7 +26,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public College Find(long id)
         {
-            var college = _context.Colleges.Find(x => x.Id == id);
+            var college = _context.Colleges.First(x => x.Id == id);
 
             return new College(
                 college.Id,
