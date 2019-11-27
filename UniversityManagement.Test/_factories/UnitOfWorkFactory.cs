@@ -7,7 +7,7 @@ namespace UniversityManagement.Test
     {
         public static UnitOfWork Create(Context context)
         {
-            return new UnitOfWork(ContextFactory.Create());
+            return new UnitOfWork(context);
         }
     }
 }

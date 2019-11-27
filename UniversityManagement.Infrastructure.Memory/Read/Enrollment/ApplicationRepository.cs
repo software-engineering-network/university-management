@@ -114,8 +114,7 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
             application.College = Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.College);
             application.Major = Mapper.Map<Program, Major>(spread6.Major);
             application.Major.Discipline = Mapper.Map<Discipline, Domain.Read.Discipline>(spread6.MajorDiscipline);
-            application.Major.Discipline.College =
-                Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.MajorDisciplineCollege);
+            application.Major.Discipline.College = Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.MajorDisciplineCollege);
             application.Minor = Mapper.Map<Program, Minor>(spread6.Minor);
 
             if (application.Minor == null)
