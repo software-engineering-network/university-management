@@ -8,41 +8,45 @@ namespace UniversityManagement.Test
 {
     public class TestObjectProvider
     {
-        private static Context _context;
-        private static IUnitOfWork _unitOfWork;
-        private static IApplicationProcessor _applicationProcessor;
-        private static IApplicationRepository _applicationRepository;
-        private static IApplicationWriteService _applicationWriteService;
+        #region Fields
+
+        private IApplicationProcessor _applicationProcessor;
+        private IApplicationRepository _applicationRepository;
+        private IApplicationWriteService _applicationWriteService;
+        private Context _context;
+        private IUnitOfWork _unitOfWork;
+
+        #endregion
 
         #region Properties
 
-        public static Context Context
+        public Context Context
         {
             get => _context ?? (_context = ContextFactory.Create());
             set => _context = value;
         }
 
-        public static IUnitOfWork UnitOfWork
+        public IUnitOfWork UnitOfWork
         {
             get => _unitOfWork ?? (_unitOfWork = UnitOfWorkFactory.Create(Context));
             set => _unitOfWork = value;
         }
 
-        public static IApplicationRepository ApplicationRepository
+        public IApplicationRepository ApplicationRepository
         {
             get => _applicationRepository ??
                    (_applicationRepository = RepositoryFactory.CreateApplicationRepository(Context));
             set => _applicationRepository = value;
         }
 
-        public static IApplicationWriteService ApplicationWriteService
+        public IApplicationWriteService ApplicationWriteService
         {
             get => _applicationWriteService ??
                    (_applicationWriteService = ServiceFactory.CreateApplicationWriteService(UnitOfWork));
             set => _applicationWriteService = value;
         }
 
-        public static IApplicationProcessor ApplicationProcessor
+        public IApplicationProcessor ApplicationProcessor
         {
             get => _applicationProcessor ??
                    (_applicationProcessor = ServiceFactory.CreateApplicationProcessor(ApplicationWriteService));

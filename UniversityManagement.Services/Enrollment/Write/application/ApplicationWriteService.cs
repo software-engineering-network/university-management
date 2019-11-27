@@ -1,4 +1,5 @@
-﻿using UniversityManagement.Domain.Write;
+﻿using System.Linq;
+using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
@@ -72,7 +73,15 @@ namespace UniversityManagement.Services.Enrollment.Write
                 : _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
 
             var college = _unitOfWork.CollegeRepository.Find(command.CollegeId);
+
             var major = _unitOfWork.MajorRepository.Find(command.MajorId);
+            if (major == null)
+            {
+                var majors = _unitOfWork.MajorRepository.Fetch(command.CollegeId).ToList();
+
+                if (majors.Count > 0)
+                    major = majors.First();
+            }
 
             application
                 .SetApplicant(applicant)

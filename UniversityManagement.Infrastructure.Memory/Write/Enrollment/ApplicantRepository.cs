@@ -84,15 +84,40 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         #region IProgramRepository Members
 
+        public IEnumerable<Program> Fetch(long collegeId)
+        {
+            var programs = _context.Programs
+                .Join(
+                    _context.Disciplines,
+                    program => program.DisciplineId,
+                    discipline => discipline.Id,
+                    (Program, Discipline) => new {Program, Discipline}
+                )
+                .Where(x => x.Discipline.CollegeId == collegeId)
+                .Select(
+                    x => new Program(
+                        x.Program.Id,
+                        x.Program.DisciplineId,
+                        ProgramTypeExtensions.ToEnum(x.Program.ProgramTypeId)
+                    )
+                );
+
+            return programs;
+        }
+
         public Program Find(long id)
         {
-            var record = _context.Programs.First(x => x.Id == id);
+            var record = _context.Programs.FirstOrDefault(x => x.Id == id);
 
-            return new Program(
-                record.Id,
-                record.DisciplineId,
-                ProgramTypeExtensions.ToEnum(record.ProgramTypeId)
-            );
+            var program = record == null
+                ? null
+                : new Program(
+                    record.Id,
+                    record.DisciplineId,
+                    ProgramTypeExtensions.ToEnum(record.ProgramTypeId)
+                );
+
+            return program;
         }
 
         #endregion
@@ -140,10 +165,25 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         #region IMajorRepository Members
 
+        public IEnumerable<Major> Fetch(long collegeId)
+        {
+            var majors = _programRepository
+                .Fetch(collegeId)
+                .Where(x => x.ProgramType == ProgramType.Major)
+                .Select(x => new Major(x.Id, x.DisciplineId));
+
+            return majors;
+        }
+
         public Major Find(long id)
         {
             var program = _programRepository.Find(id);
-            return new Major(program.Id, program.DisciplineId);
+
+            var major = program == null
+                ? null
+                : new Major(program.Id, program.DisciplineId);
+
+            return major;
         }
 
         #endregion
