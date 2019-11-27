@@ -6,8 +6,8 @@ namespace UniversityManagement.Domain.Read
     {
         #region Properties
 
-        public College College { get; set; }
         public Discipline Discipline { get; set; }
+        public College College => Discipline.College;
         public ProgramType ProgramType { get; set; }
 
         #endregion

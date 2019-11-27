@@ -6,6 +6,7 @@ using UniversityManagement.Domain.Enrollment.Read;
 using UniversityManagement.Infrastructure.Memory.Database;
 using Application = UniversityManagement.Domain.Enrollment.Read.Application;
 using College = UniversityManagement.Domain.Enrollment.Read.College;
+using Discipline = UniversityManagement.Domain.Read.Discipline;
 
 namespace UniversityManagement.Infrastructure.Memory.Enrollment
 {
@@ -35,6 +36,24 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
 
         public Application Find(long id)
         {
+            var disciplines = _context.Disciplines
+                .Join(
+                    _context.Colleges,
+                    discipline => discipline.CollegeId,
+                    college => college.Id,
+                    (Discipline, College) => new {Discipline, College}
+                )
+                .ToList();
+
+            var programs = _context.Programs
+                .Join(
+                    disciplines,
+                    program => program.DisciplineId,
+                    x => x.Discipline.Id,
+                    (Program, x) => new {Program, x.College, x.Discipline}
+                )
+                .ToList();
+
             var spread = _context.Applications
                 .Join(
                     _context.People,
@@ -49,20 +68,20 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
                     (x, College) => new {x.Application, x.Applicant, College}
                 )
                 .Join(
-                    _context.Programs,
+                    programs,
                     x => x.Application.MajorId,
-                    major => major.Id,
-                    (x, Major) => new {x.Application, x.Applicant, x.College, Major}
+                    x => x.Program.Id,
+                    (x, y) => new {x.Application, x.Applicant, x.College, Major = y.Program, MajorDiscipline = y.Discipline, MajorDisciplineCollege = y.College}
                 )
                 .GroupJoin(
-                    _context.Programs,
+                    programs,
                     x => x.Application.MinorId,
-                    minor => minor.Id,
-                    (x, Minors) => new {x.Application, x.Applicant, x.College, x.Major, Minors}
+                    x => x.Program.Id,
+                    (x, Minors) => new { x.Application, x.Applicant, x.College, x.Major, x.MajorDiscipline, x.MajorDisciplineCollege, Minors}
                 )
                 .SelectMany(
                     x => x.Minors.DefaultIfEmpty(),
-                    (x, Minor) => new {x.Application, x.Applicant, x.College, x.Major, Minor}
+                    (x, y) => new {x.Application, x.Applicant, x.College, x.Major, x.MajorDiscipline, x.MajorDisciplineCollege, Minor = y?.Program, MinorDiscipline = y?.Discipline, MinorDisciplineCollege = y?.College}
                 )
                 .FirstOrDefault(x => x.Application.Id == id);
 
@@ -73,7 +92,15 @@ namespace UniversityManagement.Infrastructure.Memory.Enrollment
             application.Applicant = Mapper.Map<Person, Applicant>(spread.Applicant);
             application.College = Mapper.Map<Database.College, College>(spread.College);
             application.Major = Mapper.Map<Program, Major>(spread.Major);
+            application.Major.Discipline = Mapper.Map<Database.Discipline, Discipline>(spread.MajorDiscipline);
+            application.Major.Discipline.College = Mapper.Map<Database.College, College>(spread.MajorDisciplineCollege);
             application.Minor = Mapper.Map<Program, Minor>(spread.Minor);
+            
+            if (application.Minor == null)
+                return application;
+
+            application.Minor.Discipline = Mapper.Map<Database.Discipline, Discipline>(spread.MinorDiscipline);
+            application.Minor.Discipline.College = Mapper.Map<Database.College, College>(spread.MinorDisciplineCollege);
 
             return application;
         }
