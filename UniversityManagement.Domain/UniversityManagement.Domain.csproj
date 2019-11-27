@@ -69,7 +69,7 @@
     <Compile Include="Read\_data-access\IRepository.cs" />
     <Compile Include="Read\_data-access\IUnitOfWork.cs" />
     <Compile Include="Write\Enrollment\application\IApplicationRepository.cs" />
-    <Compile Include="Write\_data-access\IContext.cs" />
+    <Compile Include="IContext.cs" />
     <Compile Include="Write\_data-access\IReadRepository.cs" />
     <Compile Include="Write\_data-access\IWriteRepository.cs" />
     <Compile Include="Write\_data-access\IUnitOfWork.cs" />

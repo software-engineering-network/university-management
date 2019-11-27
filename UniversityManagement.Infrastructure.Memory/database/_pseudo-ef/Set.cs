@@ -120,6 +120,11 @@ namespace UniversityManagement.Infrastructure.Memory.Database
             _actions.Add(() => _records.Add(record));
         }
 
+        public void Update(Action update)
+        {
+            _actions.Add(update.Invoke);
+        }
+
         #endregion
     }
 }

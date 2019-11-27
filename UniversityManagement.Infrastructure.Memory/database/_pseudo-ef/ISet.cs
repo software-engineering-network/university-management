@@ -1,4 +1,6 @@
-﻿namespace UniversityManagement.Infrastructure.Memory.Database
+﻿using System;
+
+namespace UniversityManagement.Infrastructure.Memory.Database
 {
     public interface ISet
     {
@@ -15,5 +17,6 @@
     {
         void Delete(long id);
         void Insert(T obj);
+        void Update(Action update);
     }
 }

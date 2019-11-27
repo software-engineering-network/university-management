@@ -26,12 +26,7 @@ namespace UniversityManagement.Test.Enrollment
         {
             const long expectedId = 2;
 
-            var context = new Context();
-            var unitOfWork = new UnitOfWork(context);
-            var applicationWriteService = new ApplicationWriteService(unitOfWork);
-            var applicationProcessor = new ApplicationProcessor(applicationWriteService);
-
-            var applicationRepository = new ApplicationRepository(context);
+            var applicationProcessor = TestObjectProvider.ApplicationProcessor;
 
             var createApplicationCommand = new CreateApplication(
                 applicationId,
@@ -44,6 +39,8 @@ namespace UniversityManagement.Test.Enrollment
             );
 
             applicationProcessor.CreateApplications(new[] {createApplicationCommand});
+
+            var applicationRepository = TestObjectProvider.ApplicationRepository;
             var application = applicationRepository.Find(expectedId);
 
             application.Id.Should().Be(expectedId);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExpressMapper;
 using UniversityManagement.Domain.Write.Enrollment;
@@ -52,8 +53,13 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             if (person == candidatePerson)
                 return;
 
-            person.Name = candidatePerson.Name;
-            person.Surname = candidatePerson.Surname;
+            Action update = () =>
+            {
+                person.Name = candidatePerson.Name;
+                person.Surname = candidatePerson.Surname;
+            };
+
+            _context.People.Update(update);
         }
 
         #endregion

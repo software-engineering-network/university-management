@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UniversityManagement.Domain;
 using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Infrastructure.Memory.Database
