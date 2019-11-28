@@ -15,18 +15,7 @@ namespace UniversityManagement.Services.Enrollment.Write
             long minorId
         );
 
-        void Create(CreateApplication command);
-
         void Create(ApplicationDto application);
-
-        void Create(
-            long applicationId,
-            long applicantId,
-            string applicantName,
-            string applicantSurname,
-            long collegeId,
-            long majorId,
-            long minorId
-        );
+        void Create(CreateApplication command);
     }
 }

@@ -100,29 +100,6 @@ namespace UniversityManagement.Services.Enrollment.Write
             _unitOfWork.Commit();
         }
 
-        public void Create(
-            long applicationId,
-            long applicantId,
-            string applicantName,
-            string applicantSurname,
-            long collegeId,
-            long majorId,
-            long minorId
-        )
-        {
-            var command = BuildCreateApplicationCommand(
-                applicationId,
-                applicantId,
-                applicantName,
-                applicantSurname,
-                collegeId,
-                majorId,
-                minorId
-            );
-
-            Create(command);
-        }
-
         #endregion
     }
 }
