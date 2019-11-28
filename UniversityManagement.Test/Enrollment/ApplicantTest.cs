@@ -15,6 +15,20 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Theory]
+        [InlineData(null, "Doe")]
+        [InlineData("", "Doe")]
+        [InlineData(" ", "Doe")]
+        [InlineData("John", null)]
+        [InlineData("John", "")]
+        [InlineData("John", " ")]
+        public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(string name, string surname)
+        {
+            Action createApplicant = () => new Applicant(name, surname);
+
+            createApplicant.Should().Throw<ArgumentException>();
+        }
+
+        [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
