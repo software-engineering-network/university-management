@@ -28,7 +28,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             // if !isValid return
 
-            var application = new Application();
+            var application = new Application(null);
 
             var applicant = GetApplicant(command);
             //application.SetApplicant(applicant);

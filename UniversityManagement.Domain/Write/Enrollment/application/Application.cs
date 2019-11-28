@@ -13,6 +13,11 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
+        public Application(Applicant applicant)
+        {
+            UpdateApplicant(applicant);
+        }
+
         public Application UpdateApplicant(Applicant applicant)
         {
             if (applicant == null || applicant.Id == 0)
