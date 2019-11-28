@@ -15,7 +15,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public Application UpdateApplicant(Applicant applicant)
         {
-            if (applicant.Id == 0)
+            if (applicant == null || applicant.Id == 0)
                 throw new ArgumentException();
 
             ApplicantId = applicant.Id;

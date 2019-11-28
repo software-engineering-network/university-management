@@ -19,6 +19,16 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Fact]
+        public void WhenUpdatingTheApplicant_WithNullApplicant_ThrowArgumentException()
+        {
+            var application = new Application();
+
+            Action updateApplicant = () => application.UpdateApplicant(null);
+
+            updateApplicant.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
         public void WhenUpdatingTheApplicant_WithNonExistingApplicant_ThrowArgumentException()
         {
             var application = new Application();
