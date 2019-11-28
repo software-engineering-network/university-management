@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />
+    <Compile Include="Write\Enrollment\application-processor\IApplicationProcessor.cs" />
     <Compile Include="Read\Enrollment\applicant\Applicant.cs" />
     <Compile Include="Read\Enrollment\applicant\IApplicantRepository.cs" />
     <Compile Include="Read\Enrollment\application\Application.cs" />

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
-using UniversityManagement.Services.Enrollment.Write;
 
 namespace UniversityManagement.Services.Enrollment
 {
@@ -8,7 +8,7 @@ namespace UniversityManagement.Services.Enrollment
     {
         #region Fields
 
-        private readonly IApplicationWriteService _applicationWriteService;
+        private readonly IApplicationProcessor _applicationProcessor;
         private readonly ICollegeReadService _collegeReadService;
         private readonly IProgramReadService _programReadService;
 
@@ -17,12 +17,12 @@ namespace UniversityManagement.Services.Enrollment
         #region Construction
 
         public EditApplicationService(
-            IApplicationWriteService applicationWriteService,
+            IApplicationProcessor applicationProcessor,
             ICollegeReadService collegeReadService,
             IProgramReadService programReadService
         )
         {
-            _applicationWriteService = applicationWriteService;
+            _applicationProcessor = applicationProcessor;
             _collegeReadService = collegeReadService;
             _programReadService = programReadService;
         }
@@ -52,7 +52,7 @@ namespace UniversityManagement.Services.Enrollment
 
         public void CreateApplication(ApplicationDto application)
         {
-            _applicationWriteService.Create(application);
+            //_applicationProcessor.CreateApplication(application);
         }
 
         #endregion

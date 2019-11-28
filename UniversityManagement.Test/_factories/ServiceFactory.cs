@@ -1,19 +1,13 @@
 ﻿using UniversityManagement.Domain.Write;
-using UniversityManagement.Services.Enrollment;
-using UniversityManagement.Services.Enrollment.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 
 namespace UniversityManagement.Test
 {
     public class ServiceFactory
     {
-        public static IApplicationProcessor CreateApplicationProcessor(IApplicationWriteService applicationWriteService)
+        public static IApplicationProcessor CreateApplicationProcessor(IUnitOfWork unitOfWork)
         {
-            return new ApplicationProcessor(applicationWriteService);
-        }
-
-        public static IApplicationWriteService CreateApplicationWriteService(IUnitOfWork unitOfWork)
-        {
-            return new ApplicationWriteService(unitOfWork);
+            return new ApplicationProcessor(unitOfWork);
         }
     }
 }

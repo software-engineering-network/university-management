@@ -1,8 +1,7 @@
-﻿using UniversityManagement.Domain.Read.Enrollment;
-using UniversityManagement.Domain.Write;
+﻿using UniversityManagement.Domain.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
-using UniversityManagement.Services.Enrollment;
-using UniversityManagement.Services.Enrollment.Write;
+using IApplicationRepository = UniversityManagement.Domain.Read.Enrollment.IApplicationRepository;
 
 namespace UniversityManagement.Test
 {
@@ -12,7 +11,6 @@ namespace UniversityManagement.Test
 
         private IApplicationProcessor _applicationProcessor;
         private IApplicationRepository _applicationRepository;
-        private IApplicationWriteService _applicationWriteService;
         private Context _context;
         private IUnitOfWork _unitOfWork;
 
@@ -39,17 +37,10 @@ namespace UniversityManagement.Test
             set => _applicationRepository = value;
         }
 
-        public IApplicationWriteService ApplicationWriteService
-        {
-            get => _applicationWriteService ??
-                   (_applicationWriteService = ServiceFactory.CreateApplicationWriteService(UnitOfWork));
-            set => _applicationWriteService = value;
-        }
-
         public IApplicationProcessor ApplicationProcessor
         {
-            get => _applicationProcessor ??
-                   (_applicationProcessor = ServiceFactory.CreateApplicationProcessor(ApplicationWriteService));
+            get => _applicationProcessor ?? 
+                   (_applicationProcessor = ServiceFactory.CreateApplicationProcessor(UnitOfWork));
             set => _applicationProcessor = value;
         }
 

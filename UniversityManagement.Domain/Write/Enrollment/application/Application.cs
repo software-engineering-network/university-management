@@ -1,4 +1,6 @@
-﻿namespace UniversityManagement.Domain.Write.Enrollment
+﻿using System;
+
+namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class Application : Entity
     {
@@ -11,21 +13,10 @@
 
         #endregion
 
-        public Application SetApplicant(Applicant applicant)
+        public Application UpdateApplicant(Applicant applicant)
         {
             ApplicantId = applicant.Id;
-            return this;
-        }
 
-        public Application SetCollege(College college)
-        {
-            CollegeId = college.Id;
-            return this;
-        }
-
-        public Application SetMajor(Major major)
-        {
-            MajorId = major.Id;
             return this;
         }
     }

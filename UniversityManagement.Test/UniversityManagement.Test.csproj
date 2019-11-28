@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestObjectProvider.cs" />
     <Compile Include="_factories\ContextFactory.cs" />
+    <Compile Include="_factories\PersonFactory.cs" />
     <Compile Include="_factories\RepositoryFactory.cs" />
     <Compile Include="_factories\ServiceFactory.cs" />
     <Compile Include="_factories\UnitOfWorkFactory.cs" />
