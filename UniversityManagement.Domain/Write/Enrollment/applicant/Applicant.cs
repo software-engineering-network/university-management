@@ -1,17 +1,15 @@
-﻿namespace UniversityManagement.Domain.Write.Enrollment
+﻿using System;
+
+namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class Applicant : Entity
     {
         #region Properties
 
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
 
         #endregion
-
-        public Applicant()
-        {
-        }
 
         public Applicant(
             string name,
@@ -19,8 +17,18 @@
             long id = 0
         ) : base(id)
         {
-            Name = name;
+            UpdateName(name);
             Surname = surname;
+        }
+
+        public Applicant UpdateName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException();
+
+            Name = name;
+
+            return this;
         }
     }
 }
