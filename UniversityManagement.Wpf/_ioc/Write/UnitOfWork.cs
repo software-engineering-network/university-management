@@ -1,5 +1,4 @@
-﻿using System;
-using UniversityManagement.Domain.Write;
+﻿using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using UniversityManagement.Infrastructure.Memory.Write.Enrollment;

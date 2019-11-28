@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversityManagement.Domain.Write.Enrollment
+﻿namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class College : Entity
     {

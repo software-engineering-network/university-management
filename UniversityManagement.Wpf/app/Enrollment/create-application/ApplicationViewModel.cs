@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
