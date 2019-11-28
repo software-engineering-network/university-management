@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressMapper, Version=1.9.1.0, Culture=neutral, PublicKeyToken=ac363faa09311ba0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expressmapper.1.9.1\lib\net46\ExpressMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +47,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enrollment\application-processor\IApplicationProcessor.cs" />
+    <Compile Include="Enrollment\Read\application\ApplicationReadService.cs" />
+    <Compile Include="Enrollment\Read\application\IApplicationReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\ApplicantDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\CollegeDto.cs" />
+    <Compile Include="Enrollment\Read\college\CollegeReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\ApplicationDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\MinorDto.cs" />
+    <Compile Include="Enrollment\Read\dtos\ProgramDto.cs" />
+    <Compile Include="Enrollment\edit-application\EditApplicationService.cs" />
+    <Compile Include="Enrollment\edit-application\IEditApplicationService.cs" />
+    <Compile Include="Enrollment\Read\dtos\DisciplineDto.cs" />
+    <Compile Include="Enrollment\Read\program\IProgramReadService.cs" />
+    <Compile Include="Enrollment\Read\dtos\MajorDto.cs" />
+    <Compile Include="Enrollment\Read\program\ProgramReadService.cs" />
+    <Compile Include="Enrollment\ExpressMapperConfiguration.cs" />
+    <Compile Include="Enrollment\Write\application\ApplicationWriteService.cs" />
+    <Compile Include="Enrollment\Write\application\IApplicationWriteService.cs" />
+    <Compile Include="EntityDto.cs" />
+    <Compile Include="Enrollment\Read\college\ICollegeReadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_ioc\ServicesModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniversityManagement.Domain\UniversityManagement.Domain.csproj">
@@ -49,5 +76,9 @@
       <Name>UniversityManagement.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

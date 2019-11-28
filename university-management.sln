@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityManagement.Wpf", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityManagement.Services", "UniversityManagement.Services\UniversityManagement.Services.csproj", "{2A2A0EFC-981F-43F9-ACF1-530FE18AC3D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityManagement.Infrastructure.Memory", "UniversityManagement.Infrastructure.Memory\UniversityManagement.Infrastructure.Memory.csproj", "{3590C3C6-DE56-467C-A995-18307A5B24C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{2A2A0EFC-981F-43F9-ACF1-530FE18AC3D2}.Release|x64.Build.0 = Release|Any CPU
 		{2A2A0EFC-981F-43F9-ACF1-530FE18AC3D2}.Release|x86.ActiveCfg = Release|Any CPU
 		{2A2A0EFC-981F-43F9-ACF1-530FE18AC3D2}.Release|x86.Build.0 = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|x64.Build.0 = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Debug|x86.Build.0 = Debug|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|x64.ActiveCfg = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|x64.Build.0 = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{3590C3C6-DE56-467C-A995-18307A5B24C6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +98,7 @@ Global
 		{86C394D5-F1CD-4055-8325-C586DAF41A9A} = {E3A74526-BDBA-460D-97B3-DC5562C7B224}
 		{7A265AE9-B055-4392-ADEE-EECC752C8726} = {E3A74526-BDBA-460D-97B3-DC5562C7B224}
 		{2A2A0EFC-981F-43F9-ACF1-530FE18AC3D2} = {E0CFD54D-5F81-4647-AA47-BFB7C13BFEC5}
+		{3590C3C6-DE56-467C-A995-18307A5B24C6} = {E3A74526-BDBA-460D-97B3-DC5562C7B224}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DCE72C6-3722-4C07-A4AB-DD9BF6726AD8}
