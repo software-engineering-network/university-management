@@ -29,6 +29,17 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Theory]
+        [InlineData("John", "Doe")]
+        public void WhenInstantiating_WithValidArguments_ReturnsApplicant(string name, string surname)
+        {
+            var applicant = new Applicant(name, surname);
+
+            applicant.Should().NotBeNull();
+            applicant.Name.Should().Be(name);
+            applicant.Surname.Should().Be(surname);
+        }
+
+        [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
@@ -40,6 +51,15 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Theory]
+        [InlineData("Jon")]
+        public void WhenUpdatingName_WithValidName_NameIsSet(string name)
+        {
+            _applicant.UpdateName(name);
+
+            _applicant.Name.Should().Be(name);
+        }
+
+        [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
@@ -48,6 +68,15 @@ namespace UniversityManagement.Test.Enrollment
             Action updateSurname = () => _applicant.UpdateSurname(surname);
 
             updateSurname.Should().Throw<ArgumentException>();
+        }
+
+        [Theory]
+        [InlineData("Dough")]
+        public void WhenUpdatingSurname_WithValidSurname_SurnameIsSet(string surname)
+        {
+            _applicant.UpdateSurname(surname);
+
+            _applicant.Surname.Should().Be(surname);
         }
     }
 }
