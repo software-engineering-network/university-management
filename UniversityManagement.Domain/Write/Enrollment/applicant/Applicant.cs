@@ -18,7 +18,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
         ) : base(id)
         {
             UpdateName(name);
-            Surname = surname;
+            UpdateSurname(surname);
         }
 
         public Applicant UpdateName(string name)
@@ -27,6 +27,16 @@ namespace UniversityManagement.Domain.Write.Enrollment
                 throw new ArgumentException();
 
             Name = name;
+
+            return this;
+        }
+
+        public Applicant UpdateSurname(string surname)
+        {
+            if (string.IsNullOrWhiteSpace(surname))
+                throw new ArgumentException();
+
+            Surname = surname;
 
             return this;
         }

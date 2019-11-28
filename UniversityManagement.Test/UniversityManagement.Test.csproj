@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enrollment\ApplicantTest.cs" />
     <Compile Include="Enrollment\ApplicationTest.cs" />
     <Compile Include="Enrollment\ApplicationProcessorTest.cs" />
     <Compile Include="Enrollment\TestObjectFactory.cs" />
