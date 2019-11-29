@@ -35,7 +35,7 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Fact]
-        public void WhenInstantiating_WithNullMajor_ThrowArgumentException()
+        public void WhenInstantiating_WithNullProgram_ThrowArgumentException()
         {
             Action createApplication = () => new Application(_applicant, null);
 
