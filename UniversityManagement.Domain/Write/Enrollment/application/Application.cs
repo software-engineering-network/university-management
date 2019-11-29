@@ -39,14 +39,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
             ApplicantId = applicant.Id;
         }
 
-        private void SetProgram(Program program)
-        {
-            if (program == null)
-                throw new ArgumentException();
-
-            Program = program;
-        }
-
         private void SetMinor(Minor minor)
         {
             if (minor == null)
@@ -56,6 +48,14 @@ namespace UniversityManagement.Domain.Write.Enrollment
                 throw new ArgumentException();
 
             MinorId = minor.Id;
+        }
+
+        private void SetProgram(Program program)
+        {
+            if (program == null)
+                throw new ArgumentException();
+
+            Program = program;
         }
     }
 }

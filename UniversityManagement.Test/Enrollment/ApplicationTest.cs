@@ -19,9 +19,11 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Fact]
-        public void WhenInstantiating_WithNullApplicant_ThrowArgumentException()
+        public void WhenInstantiating_WithMinorInSameDisciplineAsProgram_ThrowArgumentException()
         {
-            Action createApplication = () => new Application(null, _computerScienceMajor, _physicsMinor);
+            var computerScienceMinor = ProgramFactory.CreateComputerScienceMinor();
+
+            Action createApplication = () => new Application(_applicant, _computerScienceMajor, computerScienceMinor);
 
             createApplication.Should().Throw<ArgumentException>();
         }
@@ -37,19 +39,17 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Fact]
-        public void WhenInstantiating_WithNullProgram_ThrowArgumentException()
+        public void WhenInstantiating_WithNullApplicant_ThrowArgumentException()
         {
-            Action createApplication = () => new Application(_applicant, null, _physicsMinor);
+            Action createApplication = () => new Application(null, _computerScienceMajor, _physicsMinor);
 
             createApplication.Should().Throw<ArgumentException>();
         }
 
         [Fact]
-        public void WhenInstantiating_WithMinorInSameDisciplineAsProgram_ThrowArgumentException()
+        public void WhenInstantiating_WithNullProgram_ThrowArgumentException()
         {
-            var computerScienceMinor = ProgramFactory.CreateComputerScienceMinor();
-
-            Action createApplication = () => new Application(_applicant, _computerScienceMajor, computerScienceMinor);
+            Action createApplication = () => new Application(_applicant, null, _physicsMinor);
 
             createApplication.Should().Throw<ArgumentException>();
         }
