@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using ExpressMapper;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
-using ProgramType = UniversityManagement.Domain.ProgramType;
 
 namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 {
