@@ -65,5 +65,16 @@ namespace UniversityManagement.Test.Enrollment
 
             updateMajor.Should().Throw<ArgumentException>();
         }
+
+        [Fact]
+        public void WhenUpdatingTheMajor_ItSetsCollegeIdAndMajorId()
+        {
+            var computerScienceMajor = ProgramFactory.CreateComputerScienceMajor();
+
+            _application.UpdateMajor(computerScienceMajor);
+
+            _application.CollegeId.Should().Be(3);
+            _application.MajorId.Should().Be(computerScienceMajor.Id);
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
                 throw new ArgumentException();
 
             MajorId = major.Id;
+            CollegeId = major.CollegeId;
 
             return this;
         }

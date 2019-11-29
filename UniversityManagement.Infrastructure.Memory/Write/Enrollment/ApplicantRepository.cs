@@ -148,6 +148,9 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
     public class MajorRepository : IMajorRepository
     {
+        private const long MajorProgramTypeId = 3;
+        private readonly Context _context;
+
         #region Fields
 
         private readonly IProgramRepository _programRepository;
@@ -158,6 +161,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public MajorRepository(Context context)
         {
+            _context = context;
             _programRepository = new ProgramRepository(context);
         }
 
@@ -170,18 +174,22 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             var majors = _programRepository
                 .Fetch(collegeId)
                 .Where(x => x.ProgramType == ProgramType.Major)
-                .Select(x => new Major(x.Id, x.DisciplineId));
+                .Select(x => new Major(x.Id, x.DisciplineId, collegeId));
 
             return majors;
         }
 
         public Major Find(long id)
         {
-            var program = _programRepository.Find(id);
-
-            var major = program == null
-                ? null
-                : new Major(program.Id, program.DisciplineId);
+            var major = _context.Programs
+                .Where(x => x.Id == id && x.ProgramTypeId == MajorProgramTypeId)
+                .Join(
+                    _context.Disciplines,
+                    program => program.DisciplineId,
+                    discipline => discipline.Id,
+                    (program, discipline) => new Major(program.Id, discipline.Id, discipline.CollegeId)
+                )
+                .FirstOrDefault();
 
             return major;
         }
