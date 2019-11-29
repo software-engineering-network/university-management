@@ -15,9 +15,21 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Fact]
-        public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException()
+        public void WhenInstantiating_WithNullApplicant_ThrowArgumentException()
         {
-            Action createApplication = () => new Application(null);
+            var major = ProgramFactory.CreateComputerScienceMajor();
+
+            Action createApplication = () => new Application(null, major);
+
+            createApplication.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
+        public void WhenInstantiating_WithNullMajor_ThrowArgumentException()
+        {
+            var applicant = PersonFactory.CreateApplicant();
+
+            Action createApplication = () => new Application(applicant, null);
 
             createApplication.Should().Throw<ArgumentException>();
         }

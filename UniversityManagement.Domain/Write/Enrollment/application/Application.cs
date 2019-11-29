@@ -13,9 +13,10 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
-        public Application(Applicant applicant)
+        public Application(Applicant applicant, Major major)
         {
             UpdateApplicant(applicant);
+            UpdateMajor(major);
         }
 
         public Application UpdateApplicant(Applicant applicant)

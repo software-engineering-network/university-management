@@ -7,8 +7,9 @@ namespace UniversityManagement.Test
         public static Application Create()
         {
             var applicant = PersonFactory.CreateApplicant();
+            var major = ProgramFactory.CreateComputerScienceMajor();
 
-            return new Application(applicant);
+            return new Application(applicant, major);
         }
     }
 }

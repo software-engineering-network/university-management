@@ -29,13 +29,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
             // if !isValid return
 
             var applicant = GetApplicant(command);
-            var application = new Application(applicant);
-
-            var college = GetCollege(command.CollegeId);
-            application.UpdateCollege(college);
-
             var major = GetMajor(command);
-            application.UpdateMajor(major);
+            var application = new Application(applicant, major);
 
             // minor
 
@@ -62,11 +57,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             _unitOfWork.ApplicantRepository.Create(applicant);
             _unitOfWork.Commit();
-        }
-
-        private College GetCollege(long collegeId)
-        {
-            return _unitOfWork.CollegeRepository.Find(collegeId);
         }
 
         private Major GetMajor(CreateApplication command)
