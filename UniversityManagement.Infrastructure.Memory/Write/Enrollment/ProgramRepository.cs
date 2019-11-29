@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UniversityManagement.Domain;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using Program = UniversityManagement.Domain.Write.Enrollment.Program;
@@ -38,7 +37,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
                 )
                 .Where(x => x.Discipline.CollegeId == collegeId)
                 .Select(
-                    x => new Primary(
+                    x => new Program(
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,
@@ -60,7 +59,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
                     (Program, Discipline) => new { Program, Discipline }
                 )
                 .Select(
-                    x => new Primary(
+                    x => new Program(
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,

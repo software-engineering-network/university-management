@@ -6,8 +6,8 @@
 
         public long ApplicantId { get; set; }
         public long CollegeId { get; set; }
-        public long MajorId { get; set; }
         public long MinorId { get; set; }
+        public long ProgramId { get; set; }
 
         #endregion
 
@@ -21,14 +21,14 @@
             long id,
             long applicantId,
             long collegeId,
-            long majorId,
+            long programId,
             long minorId = 0
         ) : base(id)
         {
             ApplicantId = applicantId;
             CollegeId = collegeId;
-            MajorId = majorId;
             MinorId = minorId;
+            ProgramId = programId;
         }
 
         #endregion

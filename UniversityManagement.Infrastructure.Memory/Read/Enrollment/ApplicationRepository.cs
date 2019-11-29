@@ -5,7 +5,8 @@ using ExpressMapper;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using Application = UniversityManagement.Domain.Read.Enrollment.Application;
-using College = UniversityManagement.Infrastructure.Memory.Database.College;
+using College = UniversityManagement.Domain.Read.Enrollment.College;
+using Program = UniversityManagement.Domain.Read.Enrollment.Program;
 
 namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 {
@@ -26,8 +27,6 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         #endregion
 
-        #region IApplicationRepository Members
-
         public IEnumerable<Application> Fetch()
         {
             throw new NotSupportedException();
@@ -35,98 +34,26 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         public Application Find(long id)
         {
-            var disciplines = _context.Disciplines
-                .Join(
-                    _context.Colleges,
-                    discipline => discipline.CollegeId,
-                    college => college.Id,
-                    (Discipline, College) => new {Discipline, College}
-                )
-                .ToList();
+            var record = _context.Applications.FirstOrDefault(x => x.Id == id);
 
-            var programs = _context.Programs
-                .Join(
-                    disciplines,
-                    program => program.DisciplineId,
-                    x => x.Discipline.Id,
-                    (Program, x) => new {Program, x.College, x.Discipline}
-                )
-                .ToList();
-
-            var spread = _context.Applications
-                .Join(
-                    _context.People,
-                    x => x.ApplicantId,
-                    applicant => applicant.Id,
-                    (Application, Applicant) => new {Application, Applicant}
-                );
-
-            var spread2 = spread
-                .Join(
-                    _context.Colleges,
-                    x => x.Application.CollegeId,
-                    college => college.Id,
-                    (x, College) => new {x.Application, x.Applicant, College}
-                );
-
-            var spread3 = spread2
-                .Join(
-                    programs,
-                    x => x.Application.MajorId,
-                    x => x.Program.Id,
-                    (x, y) => new
-                    {
-                        x.Application, x.Applicant, x.College, Major = y.Program, MajorDiscipline = y.Discipline,
-                        MajorDisciplineCollege = y.College
-                    }
-                );
-
-            var spread4 = spread3
-                .GroupJoin(
-                    programs,
-                    x => x.Application.MinorId,
-                    x => x.Program.Id,
-                    (x, Minors) => new
-                    {
-                        x.Application, x.Applicant, x.College, x.Major, x.MajorDiscipline, x.MajorDisciplineCollege,
-                        Minors
-                    }
-                );
-
-            var spread5 = spread4
-                .SelectMany(
-                    x => x.Minors.DefaultIfEmpty(),
-                    (x, y) => new
-                    {
-                        x.Application, x.Applicant, x.College, x.Major, x.MajorDiscipline, x.MajorDisciplineCollege,
-                        Minor = y?.Program, MinorDiscipline = y?.Discipline, MinorDisciplineCollege = y?.College
-                    }
-                );
-
-            var spread6 = spread5
-                .FirstOrDefault(x => x.Application.Id == id);
-
-            if (spread6 == null)
+            if (record == null)
                 return null;
+            
+            var application = Mapper.Map<Database.Application, Application>(record);
 
-            var application = Mapper.Map<Database.Application, Application>(spread6.Application);
-            application.Applicant = Mapper.Map<Person, Applicant>(spread6.Applicant);
-            application.College = Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.College);
-            application.Program = Mapper.Map<Program, Major>(spread6.Major);
-            application.Program.Discipline = Mapper.Map<Discipline, Domain.Read.Discipline>(spread6.MajorDiscipline);
-            application.Program.Discipline.College = Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.MajorDisciplineCollege);
-            application.Minor = Mapper.Map<Program, Minor>(spread6.Minor);
+            application.Applicant = Mapper.Map<Person, Applicant>(
+                _context.People.FirstOrDefault(x => x.Id == record.ApplicantId)
+            );
 
-            if (application.Minor == null)
-                return application;
+            application.College = Mapper.Map<Database.College, College>(
+                _context.Colleges.FirstOrDefault(x => x.Id == record.CollegeId)
+            );
 
-            application.Minor.Discipline = Mapper.Map<Discipline, Domain.Read.Discipline>(spread6.MinorDiscipline);
-            application.Minor.Discipline.College =
-                Mapper.Map<College, Domain.Read.Enrollment.College>(spread6.MinorDisciplineCollege);
+            application.Program = Mapper.Map<Database.Program, Program>(
+                _context.Programs.FirstOrDefault(x => x.Id == record.ProgramId)
+            );
 
             return application;
         }
-
-        #endregion
     }
 }

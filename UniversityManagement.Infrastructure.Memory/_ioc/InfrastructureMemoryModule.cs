@@ -14,7 +14,7 @@ namespace UniversityManagement.Infrastructure.Memory
         private static void RegisterRepositories(ContainerBuilder builder)
         {
             builder.RegisterType<CollegeRepository>().As<ICollegeRepository>();
-            builder.RegisterType<MajorRepository>().As<IMajorRepository>();
+            builder.RegisterType<ProgramRepository>().As<IProgramRepository>();
         }
     }
 }

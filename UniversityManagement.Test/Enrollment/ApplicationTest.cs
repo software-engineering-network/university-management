@@ -15,7 +15,7 @@ namespace UniversityManagement.Test.Enrollment
         {
             _applicant = PersonFactory.CreateApplicant();
             _minor = ProgramFactory.CreatePhysicsMinor();
-            _program = ProgramFactory.CreateComputerSciencePrimary();
+            _program = ProgramFactory.CreateComputerScienceMajor();
         }
 
         [Fact]

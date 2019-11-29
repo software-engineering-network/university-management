@@ -2,7 +2,7 @@
 
 namespace UniversityManagement.Domain.Write.Enrollment
 {
-    public abstract class Program : Entity
+    public class Program : Entity
     {
         #region Properties
 
@@ -14,7 +14,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #region Construction
 
-        protected Program(
+        public Program(
             long id,
             long collegeId,
             long disciplineId,
@@ -44,6 +44,12 @@ namespace UniversityManagement.Domain.Write.Enrollment
             DisciplineId = disciplineId;
         }
 
-        protected abstract void SetProgramType(ProgramType programType);
+        protected virtual void SetProgramType(ProgramType programType)
+        {
+            if ((programType & ProgramType.Primary) == 0)
+                throw new ArgumentException();
+
+            ProgramType = programType;
+        }
     }
 }

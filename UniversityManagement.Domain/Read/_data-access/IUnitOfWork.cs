@@ -10,8 +10,8 @@ namespace UniversityManagement.Domain.Read
         IApplicantRepository ApplicantRepository { get; }
         ICollegeRepository CollegeRepository { get; }
         IDisciplineRepository DisciplineRepository { get; }
-        IMajorRepository MajorRepository { get; }
         IMinorRepository MinorRepository { get; }
+        IProgramRepository ProgramRepository { get; }
 
         #endregion
     }

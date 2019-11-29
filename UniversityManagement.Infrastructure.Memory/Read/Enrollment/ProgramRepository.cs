@@ -6,10 +6,11 @@ using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
 using Discipline = UniversityManagement.Domain.Read.Discipline;
+using Program = UniversityManagement.Domain.Read.Enrollment.Program;
 
 namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 {
-    public class MajorRepository : IMajorRepository
+    public class ProgramRepository : IProgramRepository
     {
         private const long MajorProgramTypeId = 3;
 
@@ -21,7 +22,7 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         #region Construction
 
-        public MajorRepository(Context context)
+        public ProgramRepository(Context context)
         {
             _context = context;
         }
@@ -30,7 +31,7 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         #region IMajorRepository Members
 
-        public IEnumerable<Major> Fetch()
+        public IEnumerable<Program> Fetch()
         {
             var majors = _context.Programs
                 .Where(x => x.ProgramTypeId == MajorProgramTypeId)
@@ -49,7 +50,7 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
                 .Select(
                     x =>
                     {
-                        var major = Mapper.Map<Program, Major>(x.Program);
+                        var major = Mapper.Map<Database.Program, Program>(x.Program);
                         major.Discipline = Mapper.Map<Database.Discipline, Discipline>(x.Discipline);
                         major.Discipline.College = Mapper.Map<Database.College, College>(x.College);
                         return major;
@@ -59,12 +60,12 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
             return majors;
         }
 
-        public Major Find(long id)
+        public Program Find(long id)
         {
             throw new NotSupportedException();
         }
 
-        public IEnumerable<Major> Fetch(long collegeId)
+        public IEnumerable<Program> Fetch(long collegeId)
         {
             var majors = Fetch().ToList();
             return majors.Where(x => x.College.Id == collegeId);

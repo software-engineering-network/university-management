@@ -1,6 +1,4 @@
-﻿using UniversityManagement.Domain.Read.Enrollment;
-
-namespace UniversityManagement.Domain.Read
+﻿namespace UniversityManagement.Domain.Read.Enrollment
 {
     public class Program : Entity
     {

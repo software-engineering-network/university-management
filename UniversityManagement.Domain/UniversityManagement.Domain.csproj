@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Read\Enrollment\program\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />
     <Compile Include="Write\Enrollment\application-processor\IApplicationProcessor.cs" />
     <Compile Include="Read\Enrollment\applicant\Applicant.cs" />
@@ -51,20 +52,17 @@
     <Compile Include="Write\Enrollment\application\Application.cs" />
     <Compile Include="Read\Enrollment\application\IApplicationRepository.cs" />
     <Compile Include="Read\Enrollment\college\College.cs" />
-    <Compile Include="Read\Enrollment\major\IMajorRepository.cs" />
-    <Compile Include="Read\Enrollment\major\Major.cs" />
     <Compile Include="Read\Enrollment\minor\IMinorRepository.cs" />
     <Compile Include="Read\Enrollment\minor\Minor.cs" />
     <Compile Include="Write\Enrollment\program\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\program\Minor.cs" />
-    <Compile Include="Write\Enrollment\program\Primary.cs" />
     <Compile Include="Write\Enrollment\program\Program.cs" />
     <Compile Include="Write\Enrollment\college\College.cs" />
     <Compile Include="Write\Enrollment\college\ICollegeRepository.cs" />
     <Compile Include="Write\Enrollment\_commands\CreateApplication.cs" />
     <Compile Include="Read\_models\discipline\Discipline.cs" />
     <Compile Include="Read\_models\discipline\IDisciplineRepository.cs" />
-    <Compile Include="Read\_models\Program.cs" />
+    <Compile Include="Read\Enrollment\program\Program.cs" />
     <Compile Include="_models\ProgramType.cs" />
     <Compile Include="Read\_models\Entity.cs" />
     <Compile Include="Read\Enrollment\college\ICollegeRepository.cs" />

@@ -27,7 +27,7 @@ namespace UniversityManagement.Services.Enrollment.Read
 
         public IEnumerable<ProgramDto> FetchPrograms()
         {
-            var majors = _unitOfWork.MajorRepository
+            var majors = _unitOfWork.ProgramRepository
                 .Fetch()
                 .Select(Mapper.Map<Program, ProgramDto>)
                 .ToList();
@@ -37,7 +37,7 @@ namespace UniversityManagement.Services.Enrollment.Read
 
         public IEnumerable<ProgramDto> FetchPrograms(long collegeId)
         {
-            var majors = _unitOfWork.MajorRepository
+            var majors = _unitOfWork.ProgramRepository
                 .Fetch(collegeId)
                 .Select(Mapper.Map<Program, ProgramDto>)
                 .ToList();
