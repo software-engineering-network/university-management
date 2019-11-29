@@ -27,5 +27,15 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             return this;
         }
+
+        public Application UpdateCollege(College college)
+        {
+            if (college == null || college.Id == 0)
+                throw new ArgumentException();
+
+            CollegeId = college.Id;
+
+            return this;
+        }
     }
 }
