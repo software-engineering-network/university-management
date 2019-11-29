@@ -6,9 +6,9 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Properties
 
-        public long CollegeId { get; }
-        public long DisciplineId { get; }
-        public ProgramType ProgramType { get; }
+        public long CollegeId { get; private set; }
+        public long DisciplineId { get; private set; }
+        public ProgramType ProgramType { get; private set; }
 
         #endregion
 
@@ -21,22 +21,35 @@ namespace UniversityManagement.Domain.Write.Enrollment
             ProgramType programType
         ) : base(id)
         {
+            SetCollegeId(collegeId);
+            SetDisciplineId(disciplineId);
+            SetProgramType(programType);
+        }
+
+        #endregion
+
+        private void SetCollegeId(long collegeId)
+        {
             if (collegeId == 0)
                 throw new ArgumentException();
 
             CollegeId = collegeId;
+        }
 
+        private void SetDisciplineId(long disciplineId)
+        {
             if (disciplineId == 0)
                 throw new ArgumentException();
 
             DisciplineId = disciplineId;
-            
+        }
+
+        private void SetProgramType(ProgramType programType)
+        {
             if ((programType & ProgramType.Primary) == 0)
                 throw new ArgumentException();
-            
+
             ProgramType = programType;
         }
-        
-        #endregion
     }
 }
