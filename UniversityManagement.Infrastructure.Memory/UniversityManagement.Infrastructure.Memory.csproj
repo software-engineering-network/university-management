@@ -61,7 +61,6 @@
     <Compile Include="Read\Enrollment\ApplicationRepository.cs" />
     <Compile Include="Read\Enrollment\CollegeRepository.cs" />
     <Compile Include="Database\Entity.cs" />
-    <Compile Include="Read\Enrollment\DisciplineRepository.cs" />
     <Compile Include="Read\Enrollment\ProgramRepository.cs" />
     <Compile Include="Read\Enrollment\MinorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

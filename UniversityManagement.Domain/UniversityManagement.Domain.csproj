@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,11 +67,11 @@
     <Compile Include="Read\_models\discipline\Discipline.cs" />
     <Compile Include="Read\_models\discipline\IDisciplineRepository.cs" />
     <Compile Include="Read\Enrollment\program\Program.cs" />
+    <Compile Include="_ioc\DomainModule.cs" />
     <Compile Include="_models\ProgramType.cs" />
     <Compile Include="Read\_models\Entity.cs" />
     <Compile Include="Read\Enrollment\college\ICollegeRepository.cs" />
     <Compile Include="Read\_data-access\IRepository.cs" />
-    <Compile Include="Read\_data-access\IUnitOfWork.cs" />
     <Compile Include="Write\Enrollment\application\IApplicationRepository.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="Write\_data-access\IReadRepository.cs" />
@@ -77,6 +80,8 @@
     <Compile Include="Write\_models\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

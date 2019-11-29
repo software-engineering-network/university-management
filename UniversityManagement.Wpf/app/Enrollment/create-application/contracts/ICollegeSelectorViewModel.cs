@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using UniversityManagement.Services.Enrollment.Read;
+using UniversityManagement.Domain.Read.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
@@ -7,8 +7,8 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Properties
 
-        ObservableCollection<CollegeDto> Colleges { get; }
-        CollegeDto SelectedCollege { get; set; }
+        ObservableCollection<College> Colleges { get; }
+        College SelectedCollege { get; set; }
 
         #endregion
     }

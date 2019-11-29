@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 
@@ -20,6 +22,11 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
         }
 
         #endregion
+
+        public IEnumerable<Minor> Fetch()
+        {
+            throw new NotSupportedException();
+        }
 
         public Minor Find(long id)
         {

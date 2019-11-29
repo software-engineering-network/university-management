@@ -1,5 +1,5 @@
-﻿using UniversityManagement.Services.Enrollment;
-using UniversityManagement.Services.Enrollment.Read;
+﻿using UniversityManagement.Domain.Read.Enrollment;
+using UniversityManagement.Services.Enrollment;
 using UniversityManagement.Wpf.Enrollment;
 
 namespace UniversityManagement.Wpf
@@ -17,17 +17,17 @@ namespace UniversityManagement.Wpf
         #region Construction
 
         public MainWindowViewModel(
-            IApplicationReadService applicationReadService,
-            IEditApplicationService editApplicationService
+            IApplicationRepository applicationRepository,
+            ICreateApplicationService createApplicationService
         )
         {
             var applicationId = 1;
 
             ApplicationViewModel = applicationId == 0
-                ? new ApplicationViewModel(editApplicationService)
+                ? new ApplicationViewModel(createApplicationService)
                 : new ApplicationViewModel(
-                    editApplicationService,
-                    applicationReadService.Find(applicationId)
+                    createApplicationService,
+                    applicationRepository.Find(applicationId)
                 );
         }
 

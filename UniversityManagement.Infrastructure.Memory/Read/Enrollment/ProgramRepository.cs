@@ -29,7 +29,7 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         #endregion
 
-        #region IMajorRepository Members
+        #region IProgramRepository Members
 
         public IEnumerable<Program> Fetch()
         {

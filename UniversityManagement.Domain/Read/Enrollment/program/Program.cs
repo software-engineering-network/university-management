@@ -4,8 +4,8 @@
     {
         #region Properties
 
+        public College College => Discipline?.College;
         public Discipline Discipline { get; set; }
-        public College College => Discipline.College;
         public ProgramType ProgramType { get; set; }
 
         #endregion

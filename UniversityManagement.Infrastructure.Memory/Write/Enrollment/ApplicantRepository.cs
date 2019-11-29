@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExpressMapper;
 using UniversityManagement.Domain.Write.Enrollment;
@@ -24,6 +25,11 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
         #endregion
 
         #region IApplicantRepository Members
+
+        public IEnumerable<Applicant> Fetch()
+        {
+            throw new NotSupportedException();
+        }
 
         public Applicant Find(long id)
         {

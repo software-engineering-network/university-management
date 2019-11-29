@@ -26,6 +26,11 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         #region IProgramRepository Members
 
+        public IEnumerable<Program> Fetch()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Program> Fetch(long collegeId)
         {
             var programs = _context.Programs

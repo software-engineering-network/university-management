@@ -3,9 +3,9 @@ using UniversityManagement.Domain.Read.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
-    public interface IMinorSelectorViewModel
+    public interface IProgramSelectorViewModel
     {
-        ObservableCollection<Minor> Minors { get; }
-        Minor SelectedMinor { get; set; }
+        ObservableCollection<Program> Programs { get; }
+        Program SelectedProgram { get; set; }
     }
 }

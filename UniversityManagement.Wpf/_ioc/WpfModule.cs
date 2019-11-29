@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using UniversityManagement.Domain.Write;
 using UniversityManagement.Infrastructure.Memory.Database;
 using UniversityManagement.Wpf.Enrollment;
+using UniversityManagement.Wpf.Write;
 
 namespace UniversityManagement.Wpf
 {
@@ -15,8 +17,7 @@ namespace UniversityManagement.Wpf
 
         private static void RegisterDomain(ContainerBuilder builder)
         {
-            builder.RegisterType<Read.UnitOfWork>().As<Domain.Read.IUnitOfWork>();
-            builder.RegisterType<Write.UnitOfWork>().As<Domain.Write.IUnitOfWork>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
         }
 
         private static void RegisterInfrastructure(ContainerBuilder builder)

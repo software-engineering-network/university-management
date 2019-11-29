@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using UniversityManagement.Services.Enrollment;
+using UniversityManagement.Domain.Write.Enrollment;
 
-namespace UniversityManagement.Services
+namespace UniversityManagement.Domain
 {
-    public class ServicesModule : Module
+    public class DomainModule : Module
     {
         #region Module Overrides
 
@@ -16,7 +16,7 @@ namespace UniversityManagement.Services
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            builder.RegisterType<CreateApplicationService>().As<ICreateApplicationService>();
+            builder.RegisterType<ApplicationProcessor>().As<IApplicationProcessor>();
         }
     }
 }

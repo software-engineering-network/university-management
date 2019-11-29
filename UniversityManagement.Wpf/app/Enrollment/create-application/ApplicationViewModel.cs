@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Services.Enrollment;
-using UniversityManagement.Services.Enrollment.Read;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
@@ -10,26 +10,26 @@ namespace UniversityManagement.Wpf.Enrollment
         IApplicantViewModel,
         IApplicationViewModel,
         ICollegeSelectorViewModel,
-        IMajorSelectorViewModel,
-        IMinorSelectorViewModel
+        IMinorSelectorViewModel,
+        IProgramSelectorViewModel
     {
         #region Fields
 
-        private readonly ApplicationDto _application;
+        private readonly Application _application;
         private readonly bool _isSyncing;
+        private readonly ICreateApplicationService _service;
 
-        private readonly IEditApplicationService _service;
-        private ObservableCollection<CollegeDto> _colleges;
-        private ObservableCollection<MinorDto> _minors;
-        private ObservableCollection<ProgramDto> _programs;
+        private ObservableCollection<College> _colleges;
+        private ObservableCollection<Minor> _minors;
+        private ObservableCollection<Program> _programs;
 
         #endregion
 
         #region Construction
 
-        public ApplicationViewModel(IEditApplicationService service)
+        public ApplicationViewModel(ICreateApplicationService service)
         {
-            _application = new ApplicationDto();
+            _application = new Application();
             _service = service;
 
             PopulateColleges();
@@ -38,8 +38,8 @@ namespace UniversityManagement.Wpf.Enrollment
         }
 
         public ApplicationViewModel(
-            IEditApplicationService service,
-            ApplicationDto application
+            ICreateApplicationService service,
+            Application application
         ) : this(service)
         {
             _isSyncing = true;
@@ -93,7 +93,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region ICollegeSelectorViewModel Members
 
-        public ObservableCollection<CollegeDto> Colleges
+        public ObservableCollection<College> Colleges
         {
             get => _colleges;
             private set
@@ -106,7 +106,7 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public CollegeDto SelectedCollege
+        public College SelectedCollege
         {
             get => _application.College;
             set
@@ -123,9 +123,9 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
-        #region IMajorSelectorViewModel Members
+        #region IProgramSelectorViewModel Members
 
-        public ObservableCollection<ProgramDto> Programs
+        public ObservableCollection<Program> Programs
         {
             get => _programs;
             private set
@@ -138,7 +138,7 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public ProgramDto SelectedProgram
+        public Program SelectedProgram
         {
             get => _application.Program;
             set
@@ -157,7 +157,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region IMinorSelectorViewModel Members
 
-        public ObservableCollection<MinorDto> Minors
+        public ObservableCollection<Minor> Minors
         {
             get => _minors;
             private set
@@ -170,7 +170,7 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public MinorDto SelectedMinor
+        public Minor SelectedMinor
         {
             get => _application.Minor;
             set
@@ -188,24 +188,24 @@ namespace UniversityManagement.Wpf.Enrollment
         private void PopulateColleges()
         {
             var colleges = _service.FetchColleges();
-            Colleges = new ObservableCollection<CollegeDto>(colleges);
+            Colleges = new ObservableCollection<College>(colleges);
         }
 
         private void PopulateMinors()
         {
             var minors = _service.FetchMinors();
-            Minors = new ObservableCollection<MinorDto>(minors);
+            Minors = new ObservableCollection<Minor>(minors);
         }
 
         private void PopulatePrograms()
         {
             var programs = _service.FetchPrograms(_application);
-            Programs = new ObservableCollection<ProgramDto>(programs);
+            Programs = new ObservableCollection<Program>(programs);
         }
 
         private void SelectedCollegeChangedHandler()
         {
-            UpdateMajorSelector();
+            UpdateProgramSelector();
 
             if (SelectedProgram == null &&
                 _programs.Count == 1)
@@ -221,17 +221,17 @@ namespace UniversityManagement.Wpf.Enrollment
             SelectedCollege = _colleges.FirstOrDefault(x => x == SelectedProgram.College);
         }
 
-        private void UpdateMajorSelector()
+        private void UpdateProgramSelector()
         {
-            var previousMajor = SelectedProgram;
+            var previousProgram = SelectedProgram;
 
             PopulatePrograms();
 
-            if (previousMajor == null ||
-                previousMajor.College != SelectedCollege)
+            if (previousProgram == null ||
+                previousProgram.College != SelectedCollege)
                 return;
 
-            SelectedProgram = Programs.FirstOrDefault(x => x == previousMajor);
+            SelectedProgram = Programs.FirstOrDefault(x => x == previousProgram);
         }
     }
 }

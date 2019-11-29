@@ -11,25 +11,25 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Properties
 
+        private Program Program { get; set; }
+
         public long ApplicantId { get; private set; }
         public long CollegeId => Program.CollegeId;
         public long MinorId { get; private set; }
         public long ProgramId => Program.Id;
 
-        private Program Program { get; set; }
-
         #endregion
 
-        public Application(
-            Applicant applicant, 
-            Program program, 
-            Minor minor
-        )
+        #region Construction
+
+        public Application(Applicant applicant, Program program, Minor minor)
         {
             SetApplicant(applicant);
             SetProgram(program);
             SetMinor(minor);
         }
+
+        #endregion
 
         private void SetApplicant(Applicant applicant)
         {
