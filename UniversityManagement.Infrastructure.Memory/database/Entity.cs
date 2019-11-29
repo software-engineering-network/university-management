@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UniversityManagement.Infrastructure.Memory.Database
+﻿namespace UniversityManagement.Infrastructure.Memory.Database
 {
     public abstract class Entity
     {
