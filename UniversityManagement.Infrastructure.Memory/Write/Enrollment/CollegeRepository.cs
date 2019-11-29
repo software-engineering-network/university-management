@@ -26,11 +26,11 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public College Find(long id)
         {
-            var college = _context.Colleges.First(x => x.Id == id);
+            var record = _context.Colleges.First(x => x.Id == id);
 
             return new College(
-                college.Id,
-                college.Name
+                record.Id,
+                record.Name
             );
         }
 
