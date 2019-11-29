@@ -1,4 +1,5 @@
 ﻿using ExpressMapper;
+using UniversityManagement.Domain.Read;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Services.Enrollment.Read;
 
@@ -9,7 +10,7 @@ namespace UniversityManagement.Services.Enrollment
         public static void Configure()
         {
             Mapper.Register<College, CollegeDto>();
-            Mapper.Register<Major, MajorDto>();
+            Mapper.Register<Program, ProgramDto>();
         }
     }
 }

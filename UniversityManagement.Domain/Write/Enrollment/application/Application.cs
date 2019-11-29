@@ -1,4 +1,5 @@
 ﻿using System;
+using UniversityManagement.Domain.Read.Enrollment;
 
 namespace UniversityManagement.Domain.Write.Enrollment
 {
@@ -13,14 +14,18 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public long ApplicantId { get; private set; }
         public long CollegeId { get; private set; }
-        public long MajorId { get; private set; }
+        public long MinorId { get; private set; }
+        public long ProgramId { get; private set; }
 
         #endregion
 
-        public Application(Applicant applicant, Program program)
+        public Application(Applicant applicant, Program program, Minor minor)
         {
             SetApplicant(applicant);
             SetProgram(program);
+
+            if (minor != null)
+                SetMinor(minor);
         }
 
         private void SetApplicant(Applicant applicant)
@@ -36,8 +41,16 @@ namespace UniversityManagement.Domain.Write.Enrollment
             if (program == null)
                 throw new ArgumentException();
 
-            MajorId = program.Id;
+            ProgramId = program.Id;
             CollegeId = program.CollegeId;
+        }
+
+        private void SetMinor(Minor minor)
+        {
+            if (minor.Id == ProgramId)
+                throw new ArgumentException();
+
+            MinorId = minor.Id;
         }
     }
 }

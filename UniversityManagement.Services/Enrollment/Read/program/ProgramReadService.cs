@@ -25,21 +25,21 @@ namespace UniversityManagement.Services.Enrollment.Read
 
         #region IProgramReadService Members
 
-        public IEnumerable<MajorDto> FetchMajors()
+        public IEnumerable<ProgramDto> FetchPrograms()
         {
             var majors = _unitOfWork.MajorRepository
                 .Fetch()
-                .Select(Mapper.Map<Major, MajorDto>)
+                .Select(Mapper.Map<Program, ProgramDto>)
                 .ToList();
 
             return majors;
         }
 
-        public IEnumerable<MajorDto> FetchMajors(long collegeId)
+        public IEnumerable<ProgramDto> FetchPrograms(long collegeId)
         {
             var majors = _unitOfWork.MajorRepository
                 .Fetch(collegeId)
-                .Select(Mapper.Map<Major, MajorDto>)
+                .Select(Mapper.Map<Program, ProgramDto>)
                 .ToList();
 
             return majors;

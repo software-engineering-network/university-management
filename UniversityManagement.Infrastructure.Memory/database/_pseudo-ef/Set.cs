@@ -100,6 +100,8 @@ namespace UniversityManagement.Infrastructure.Memory.Database
         {
             foreach (var action in _actions)
                 action.Invoke();
+
+            _actions.Clear();
         }
 
         public void Delete(long id)

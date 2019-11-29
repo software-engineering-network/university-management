@@ -30,7 +30,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             var applicant = GetApplicant(command);
             var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
-            var application = new Application(applicant, program);
+            var application = new Application(applicant, program, null);
 
             _unitOfWork.ApplicationRepository.Create(application);
             _unitOfWork.ApplicantRepository.Update(applicant);

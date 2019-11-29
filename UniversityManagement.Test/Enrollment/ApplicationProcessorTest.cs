@@ -22,16 +22,15 @@ namespace UniversityManagement.Test.Enrollment
         #endregion
 
         [Theory]
-        [InlineData(1, 1, "John", "Doe", 30, 0, 30)]
+        [InlineData(1, 1, "John", "Doe", 0, 30)]
         //[InlineData(1, 1, "John", "Doe", 0, 0, 68)]
         public void WhenCreatingApplications_ItCreatesAllApplications(
             long applicationId,
             long applicantId,
             string applicantName,
             string applicantSurname,
-            long majorId,
             long minorId,
-            long expectedMajorId
+            long programId
         )
         {
             const long expectedId = 2;
@@ -43,7 +42,7 @@ namespace UniversityManagement.Test.Enrollment
                 applicantId,
                 applicantName,
                 applicantSurname,
-                majorId,
+                programId,
                 minorId
             );
 
@@ -56,7 +55,7 @@ namespace UniversityManagement.Test.Enrollment
             application.Applicant.Id.Should().Be(applicantId);
             application.Applicant.Name.Should().Be(applicantName);
             application.Applicant.Surname.Should().Be(applicantSurname);
-            application.Major.Id.Should().Be(expectedMajorId);
+            application.Program.Id.Should().Be(programId);
             application.Minor.Should().BeNull();
         }
     }

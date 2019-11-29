@@ -6,7 +6,7 @@
 
         public ApplicantDto Applicant { get; set; }
         public CollegeDto College { get; set; }
-        public MajorDto Major { get; set; }
+        public ProgramDto Program { get; set; }
         public MinorDto Minor { get; set; }
 
         #endregion

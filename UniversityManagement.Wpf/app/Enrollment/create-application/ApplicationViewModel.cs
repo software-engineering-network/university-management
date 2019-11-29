@@ -20,8 +20,8 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private readonly IEditApplicationService _service;
         private ObservableCollection<CollegeDto> _colleges;
-        private ObservableCollection<MajorDto> _majors;
         private ObservableCollection<MinorDto> _minors;
+        private ObservableCollection<ProgramDto> _programs;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace UniversityManagement.Wpf.Enrollment
             _service = service;
 
             PopulateColleges();
-            PopulateMajors();
+            PopulatePrograms();
             PopulateMinors();
         }
 
@@ -125,31 +125,31 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region IMajorSelectorViewModel Members
 
-        public ObservableCollection<MajorDto> Majors
+        public ObservableCollection<ProgramDto> Programs
         {
-            get => _majors;
+            get => _programs;
             private set
             {
-                if (_majors == value)
+                if (_programs == value)
                     return;
 
-                _majors = value;
-                OnPropertyChanged(nameof(Majors));
+                _programs = value;
+                OnPropertyChanged(nameof(Programs));
             }
         }
 
-        public MajorDto SelectedMajor
+        public ProgramDto SelectedProgram
         {
-            get => _application.Major;
+            get => _application.Program;
             set
             {
-                if (_application.Major == value && !_isSyncing)
+                if (_application.Program == value && !_isSyncing)
                     return;
 
-                _application.Major = value;
-                OnPropertyChanged(nameof(SelectedMajor));
+                _application.Program = value;
+                OnPropertyChanged(nameof(SelectedProgram));
 
-                SelectedMajorChangedHandler();
+                SelectedProgramChangedHandler();
             }
         }
 
@@ -191,47 +191,47 @@ namespace UniversityManagement.Wpf.Enrollment
             Colleges = new ObservableCollection<CollegeDto>(colleges);
         }
 
-        private void PopulateMajors()
-        {
-            var majors = _service.FetchMajors(_application);
-            Majors = new ObservableCollection<MajorDto>(majors);
-        }
-
         private void PopulateMinors()
         {
             var minors = _service.FetchMinors();
             Minors = new ObservableCollection<MinorDto>(minors);
         }
 
+        private void PopulatePrograms()
+        {
+            var programs = _service.FetchPrograms(_application);
+            Programs = new ObservableCollection<ProgramDto>(programs);
+        }
+
         private void SelectedCollegeChangedHandler()
         {
             UpdateMajorSelector();
 
-            if (SelectedMajor == null &&
-                _majors.Count == 1)
-                SelectedMajor = Majors.First();
+            if (SelectedProgram == null &&
+                _programs.Count == 1)
+                SelectedProgram = Programs.First();
         }
 
-        private void SelectedMajorChangedHandler()
+        private void SelectedProgramChangedHandler()
         {
-            if (SelectedMajor == null ||
-                SelectedMajor.College == SelectedCollege)
+            if (SelectedProgram == null ||
+                SelectedProgram.College == SelectedCollege)
                 return;
 
-            SelectedCollege = _colleges.FirstOrDefault(x => x == SelectedMajor.College);
+            SelectedCollege = _colleges.FirstOrDefault(x => x == SelectedProgram.College);
         }
 
         private void UpdateMajorSelector()
         {
-            var previousMajor = SelectedMajor;
+            var previousMajor = SelectedProgram;
 
-            PopulateMajors();
+            PopulatePrograms();
 
             if (previousMajor == null ||
                 previousMajor.College != SelectedCollege)
                 return;
 
-            SelectedMajor = Majors.FirstOrDefault(x => x == previousMajor);
+            SelectedProgram = Programs.FirstOrDefault(x => x == previousMajor);
         }
     }
 }

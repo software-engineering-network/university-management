@@ -38,7 +38,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
                 )
                 .Where(x => x.Discipline.CollegeId == collegeId)
                 .Select(
-                    x => new Program(
+                    x => new Primary(
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,
@@ -60,7 +60,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
                     (Program, Discipline) => new { Program, Discipline }
                 )
                 .Select(
-                    x => new Program(
+                    x => new Primary(
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,

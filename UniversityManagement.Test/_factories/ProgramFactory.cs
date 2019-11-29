@@ -5,9 +5,14 @@ namespace UniversityManagement.Test
 {
     public class ProgramFactory
     {
-        public static Program CreateComputerScienceMajor()
+        public static Primary CreateComputerSciencePrimary()
         {
-            return new Program(30, 24, 3, ProgramType.Major);
+            return new Primary(30, 3, 24, ProgramType.Major);
+        }
+
+        public static Minor CreatePhysicsMinor()
+        {
+            return new Minor(102, 3, 76, ProgramType.Minor);
         }
     }
 }

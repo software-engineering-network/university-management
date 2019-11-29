@@ -31,11 +31,11 @@ namespace UniversityManagement.Services.Enrollment.Read
                 Id = application.Id,
                 Applicant = Mapper.Map<Applicant, ApplicantDto>(application.Applicant),
                 College = Mapper.Map<College, CollegeDto>(application.College),
-                Major = Mapper.Map<Major, MajorDto>(application.Major),
                 Minor = Mapper.Map<Minor, MinorDto>(application.Minor),
+                Program = Mapper.Map<Program, ProgramDto>(application.Program)
             };
 
-            dto.Major.College = Mapper.Map<College, CollegeDto>(application.College);
+            dto.Program.College = Mapper.Map<College, CollegeDto>(application.College);
 
             return dto;
         }

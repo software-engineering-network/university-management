@@ -6,8 +6,8 @@ namespace UniversityManagement.Services.Enrollment
     public interface IEditApplicationService
     {
         IEnumerable<CollegeDto> FetchColleges();
-        IEnumerable<MajorDto> FetchMajors(ApplicationDto application);
         IEnumerable<MinorDto> FetchMinors();
+        IEnumerable<ProgramDto> FetchPrograms(ApplicationDto application);
 
         void CreateApplication(ApplicationDto application);
     }
