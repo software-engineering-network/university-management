@@ -23,6 +23,8 @@ namespace UniversityManagement.Test.Enrollment
 
         [Theory]
         [InlineData(1, 1, "John", "Doe", 0, 30)]
+        [InlineData(1, 1, "Jon", "Doe", 0, 30)]
+        [InlineData(1, 1, "John", "Dough", 0, 30)]
         [InlineData(1, 1, "John", "Doe", 102, 30)]
         //[InlineData(1, 1, "John", "Doe", 0, 0, 68)]
         public void WhenCreatingApplications_ItCreatesAllApplications(
@@ -38,7 +40,7 @@ namespace UniversityManagement.Test.Enrollment
 
             var applicationProcessor = _provider.ApplicationProcessor;
 
-            var createApplicationCommand = new CreateApplication(
+            var command = new CreateApplication(
                 applicationId,
                 applicantId,
                 applicantName,
@@ -47,7 +49,7 @@ namespace UniversityManagement.Test.Enrollment
                 minorId
             );
 
-            applicationProcessor.CreateApplications(new[] {createApplicationCommand});
+            applicationProcessor.CreateApplication(command);
 
             var applicationRepository = _provider.ApplicationRepository;
             var application = applicationRepository.Find(expectedId);

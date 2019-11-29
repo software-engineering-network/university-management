@@ -6,7 +6,7 @@ using Xunit;
 
 namespace UniversityManagement.Test.Enrollment
 {
-    public class PrimaryTest
+    public class ProgramTest
     {
         [Theory]
         [InlineData(0, 1, 1, ProgramType.Major)]
@@ -17,9 +17,9 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(1, 1, 1, ProgramType.Minor)]
         public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(long id, long disciplineId, long collegeId, ProgramType programType)
         {
-            Action createPrimary = () => new Program(id, disciplineId, collegeId, programType);
+            Action createProgram = () => new Program(id, disciplineId, collegeId, programType);
 
-            createPrimary.Should().Throw<ArgumentException>();
+            createProgram.Should().Throw<ArgumentException>();
         }
     }
 }

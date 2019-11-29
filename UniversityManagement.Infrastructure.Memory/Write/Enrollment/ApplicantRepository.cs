@@ -44,16 +44,15 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
         public void Update(Applicant applicant)
         {
-            var candidatePerson = Mapper.Map<Applicant, Person>(applicant);
-            var person = _context.People.First(x => x.Id == applicant.Id);
-
-            if (person == candidatePerson)
+            if (!applicant.HasChanged)
                 return;
+
+            var record = _context.People.First(x => x.Id == applicant.Id);
 
             Action update = () =>
             {
-                person.Name = candidatePerson.Name;
-                person.Surname = candidatePerson.Surname;
+                record.Name = applicant.Name;
+                record.Surname = applicant.Surname;
             };
 
             _context.People.Update(update);

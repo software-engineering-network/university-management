@@ -30,11 +30,10 @@ namespace UniversityManagement.Test.Enrollment
 
         [Theory]
         [InlineData("John", "Doe")]
-        public void WhenInstantiating_WithValidArguments_ReturnsApplicant(string name, string surname)
+        public void WhenInstantiating_WithValidArguments_AllPropertiesAreSet(string name, string surname)
         {
             var applicant = new Applicant(name, surname);
 
-            applicant.Should().NotBeNull();
             applicant.Name.Should().Be(name);
             applicant.Surname.Should().Be(surname);
         }
