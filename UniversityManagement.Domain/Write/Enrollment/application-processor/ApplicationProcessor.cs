@@ -62,14 +62,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
         private Major GetMajor(CreateApplication command)
         {
             var major = _unitOfWork.MajorRepository.Find(command.MajorId);
-            if (major != null)
-                return major;
-
-            var majors = _unitOfWork.MajorRepository.Fetch(command.CollegeId).ToList();
-
-            if (majors.Count > 0)
-                major = majors.First();
-
             return major;
         }
 
