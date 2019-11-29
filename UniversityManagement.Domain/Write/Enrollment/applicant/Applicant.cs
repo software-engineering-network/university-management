@@ -4,38 +4,10 @@ namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class Applicant : Entity
     {
-        private string _name;
-        private string _surname;
-
         #region Properties
 
-        public string Name
-        {
-            get => _name;
-            private set
-            {
-                if (_name == value)
-                    return;
-
-                _name = value;
-                HasChanged = true;
-            }
-        }
-
-        public string Surname
-        {
-            get => _surname;
-            private set
-            {
-                if (_surname == value)
-                    return;
-
-                _surname = value;
-                HasChanged = true;
-            }
-        }
-
-        public bool HasChanged { get; private set; }
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
 
         #endregion
 
