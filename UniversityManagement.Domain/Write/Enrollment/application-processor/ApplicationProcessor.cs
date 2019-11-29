@@ -28,16 +28,14 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             // if !isValid return
 
-            var application = new Application(null);
-
             var applicant = GetApplicant(command);
-            //application.SetApplicant(applicant);
+            var application = new Application(applicant);
 
             var college = GetCollege(command.CollegeId);
-            //application.SetCollege(college);
+            application.UpdateCollege(college);
 
             var major = GetMajor(command);
-            //application.SetMajor(major);
+            application.UpdateMajor(major);
 
             // minor
 
@@ -46,11 +44,22 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         private Applicant GetApplicant(CreateApplication command)
         {
-            var applicant = command.ApplicantId == 0
-                ? new Applicant(command.ApplicantName, command.ApplicantSurname)
-                : _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
+            if (command.ApplicantId == 0)
+                CreateApplicant(command.ApplicantName, command.ApplicantSurname);
+
+            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
+            applicant.UpdateName(command.ApplicantName);
+            applicant.UpdateSurname(command.ApplicantSurname);
 
             return applicant;
+        }
+
+        private void CreateApplicant(string name, string surname)
+        {
+            var applicant = new Applicant(name, surname);
+
+            _unitOfWork.ApplicantRepository.Create(applicant);
+            _unitOfWork.Commit();
         }
 
         private College GetCollege(long collegeId)

@@ -4,13 +4,8 @@
     {
         #region Properties
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         #endregion
-
-        public College(long id, string name) : base(id)
-        {
-            Name = name;
-        }
     }
 }

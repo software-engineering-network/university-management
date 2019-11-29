@@ -6,7 +6,7 @@ namespace UniversityManagement.Domain.Read
     {
         #region Properties
 
-        public long Id { get; }
+        public long Id { get; set; }
 
         #endregion
 
