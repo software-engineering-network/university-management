@@ -6,7 +6,23 @@ namespace UniversityManagement.Domain.Read
     {
         #region Properties
 
-        public long Id { get; set; }
+        public long Id { get; }
+
+        #endregion
+
+        #region Construction
+
+        protected Entity()
+        {
+        }
+
+        protected Entity(long id)
+        {
+            if (id == 0)
+                throw new ArgumentException();
+
+            Id = id;
+        }
 
         #endregion
 
