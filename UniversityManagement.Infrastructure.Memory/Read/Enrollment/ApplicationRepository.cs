@@ -49,6 +49,10 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
                 _context.Colleges.FirstOrDefault(x => x.Id == record.CollegeId)
             );
 
+            application.Minor = Mapper.Map<Database.Program, Minor>(
+                _context.Programs.FirstOrDefault(x => x.Id == record.MinorId)
+            );
+
             application.Program = Mapper.Map<Database.Program, Program>(
                 _context.Programs.FirstOrDefault(x => x.Id == record.ProgramId)
             );

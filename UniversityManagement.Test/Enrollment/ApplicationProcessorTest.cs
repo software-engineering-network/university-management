@@ -22,7 +22,7 @@ namespace UniversityManagement.Test.Enrollment
         #endregion
 
         [Theory]
-        [InlineData(1, 1, "John", "Doe", 0, 30)]
+        [InlineData(1, 1, "John", "Doe", 102, 30)]
         //[InlineData(1, 1, "John", "Doe", 0, 0, 68)]
         public void WhenCreatingApplications_ItCreatesAllApplications(
             long applicationId,
@@ -56,7 +56,7 @@ namespace UniversityManagement.Test.Enrollment
             application.Applicant.Name.Should().Be(applicantName);
             application.Applicant.Surname.Should().Be(applicantSurname);
             application.Program.Id.Should().Be(programId);
-            application.Minor.Should().BeNull();
+            application.Minor.Id.Should().Be(minorId);
         }
     }
 }

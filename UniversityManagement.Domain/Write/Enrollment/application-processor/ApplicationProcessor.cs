@@ -30,12 +30,21 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             var applicant = GetApplicant(command);
             var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
-            var application = new Application(applicant, program, null);
+            var minor = _unitOfWork.MinorRepository.Find(command.MinorId);
+            var application = new Application(applicant, program, minor);
 
             _unitOfWork.ApplicationRepository.Create(application);
             _unitOfWork.ApplicantRepository.Update(applicant);
             _unitOfWork.Commit();
         }
+
+        public void CreateApplications(IEnumerable<CreateApplication> commands)
+        {
+            foreach (var command in commands)
+                CreateApplication(command);
+        }
+
+        #endregion
 
         private Applicant GetApplicant(CreateApplication command)
         {
@@ -56,13 +65,5 @@ namespace UniversityManagement.Domain.Write.Enrollment
             _unitOfWork.ApplicantRepository.Create(applicant);
             _unitOfWork.Commit();
         }
-
-        public void CreateApplications(IEnumerable<CreateApplication> commands)
-        {
-            foreach (var command in commands)
-                CreateApplication(command);
-        }
-
-        #endregion
     }
 }

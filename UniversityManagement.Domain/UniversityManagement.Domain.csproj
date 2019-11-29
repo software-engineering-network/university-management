@@ -54,8 +54,9 @@
     <Compile Include="Read\Enrollment\college\College.cs" />
     <Compile Include="Read\Enrollment\minor\IMinorRepository.cs" />
     <Compile Include="Read\Enrollment\minor\Minor.cs" />
+    <Compile Include="Write\Enrollment\program\minor\IMinorRepository.cs" />
     <Compile Include="Write\Enrollment\program\IProgramRepository.cs" />
-    <Compile Include="Write\Enrollment\program\Minor.cs" />
+    <Compile Include="Write\Enrollment\program\minor\Minor.cs" />
     <Compile Include="Write\Enrollment\program\Program.cs" />
     <Compile Include="Write\Enrollment\college\College.cs" />
     <Compile Include="Write\Enrollment\college\ICollegeRepository.cs" />
