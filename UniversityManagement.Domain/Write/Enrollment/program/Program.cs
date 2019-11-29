@@ -1,4 +1,6 @@
-﻿namespace UniversityManagement.Domain.Write.Enrollment
+﻿using System;
+
+namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class Program : Entity
     {
@@ -17,6 +19,9 @@
             ProgramType programType
         ) : base(id)
         {
+            if (disciplineId == 0)
+                throw new ArgumentException();
+
             DisciplineId = disciplineId;
             ProgramType = programType;
         }

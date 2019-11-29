@@ -11,10 +11,16 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
+        public Applicant(string name, string surname)
+        {
+            UpdateName(name);
+            UpdateSurname(surname);
+        }
+
         public Applicant(
+            long id,
             string name,
-            string surname,
-            long id = 0
+            string surname
         ) : base(id)
         {
             UpdateName(name);

@@ -4,14 +4,7 @@
     {
         #region Construction
 
-        public Major(
-            long id,
-            long disciplineId
-        ) : base(
-            id,
-            disciplineId,
-            ProgramType.Major
-        )
+        public Major(long id, long disciplineId) : base(id, disciplineId, ProgramType.Major)
         {
         }
 

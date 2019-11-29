@@ -1,16 +1,20 @@
-﻿namespace UniversityManagement.Domain.Write.Enrollment
+﻿using System;
+
+namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class College : Entity
     {
-        private readonly string _name;
-        public string Name { get; set; }
+        public string Name { get; }
 
         public College(
             long id,
             string name
         ) : base(id)
         {
-            _name = name;
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException();
+
+            Name = name;
         }
     }
 }

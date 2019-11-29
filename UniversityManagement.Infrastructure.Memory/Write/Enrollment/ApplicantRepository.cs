@@ -33,9 +33,9 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             var record = _context.People.First(x => x.Id == id);
 
             return new Applicant(
+                record.Id,
                 record.Name,
-                record.Surname,
-                record.Id
+                record.Surname
             );
         }
 

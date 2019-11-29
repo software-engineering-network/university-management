@@ -6,7 +6,7 @@ namespace UniversityManagement.Test
     {
         public static Applicant CreateApplicant()
         {
-            return new Applicant("John", "Doe", 1);
+            return new Applicant(1, "John", "Doe");
         }
     }
 }

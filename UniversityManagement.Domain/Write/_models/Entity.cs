@@ -18,6 +18,9 @@ namespace UniversityManagement.Domain.Write
 
         protected Entity(long id)
         {
+            if (id == 0)
+                throw new ArgumentException();
+
             Id = id;
         }
 

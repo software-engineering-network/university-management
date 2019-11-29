@@ -18,9 +18,6 @@ namespace UniversityManagement.Domain.Read
 
         protected Entity(long id)
         {
-            if (id == 0)
-                throw new ArgumentException();
-
             Id = id;
         }
 
