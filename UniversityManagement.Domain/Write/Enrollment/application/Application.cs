@@ -15,39 +15,25 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public Application(Applicant applicant, Major major)
         {
-            UpdateApplicant(applicant);
-            UpdateMajor(major);
+            SetApplicant(applicant);
+            SetMajor(major);
         }
 
-        public Application UpdateApplicant(Applicant applicant)
+        private void SetApplicant(Applicant applicant)
         {
             if (applicant == null || applicant.Id == 0)
                 throw new ArgumentException();
 
             ApplicantId = applicant.Id;
-
-            return this;
         }
 
-        public Application UpdateCollege(College college)
-        {
-            if (college == null)
-                throw new ArgumentException();
-
-            CollegeId = college.Id;
-
-            return this;
-        }
-
-        public Application UpdateMajor(Major major)
+        private void SetMajor(Major major)
         {
             if (major == null)
                 throw new ArgumentException();
 
             MajorId = major.Id;
             CollegeId = major.CollegeId;
-
-            return this;
         }
     }
 }

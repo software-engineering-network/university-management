@@ -7,19 +7,31 @@ namespace UniversityManagement.Test.Enrollment
 {
     public class ApplicationTest
     {
+        private readonly Applicant _applicant;
         private readonly Application _application;
+        private readonly Major _major;
 
         public ApplicationTest()
         {
+            _applicant = PersonFactory.CreateApplicant();
             _application = ApplicationFactory.Create();
+            _major = ProgramFactory.CreateComputerScienceMajor();
         }
 
         [Fact]
         public void WhenInstantiating_WithNullApplicant_ThrowArgumentException()
         {
-            var major = ProgramFactory.CreateComputerScienceMajor();
+            Action createApplication = () => new Application(null, _major);
 
-            Action createApplication = () => new Application(null, major);
+            createApplication.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
+        public void WhenInstantiating_WithNonExistingApplicant_ThrowArgumentException()
+        {
+            var applicant = new Applicant("John", "Doe");
+
+            Action createApplication = () => new Application(applicant, _major);
 
             createApplication.Should().Throw<ArgumentException>();
         }
@@ -27,66 +39,19 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenInstantiating_WithNullMajor_ThrowArgumentException()
         {
-            var applicant = PersonFactory.CreateApplicant();
-
-            Action createApplication = () => new Application(applicant, null);
+            Action createApplication = () => new Application(_applicant, null);
 
             createApplication.Should().Throw<ArgumentException>();
         }
 
         [Fact]
-        public void WhenUpdatingTheApplicant_WithExistingApplicant_ApplicantIdIsSet()
+        public void WhenInstantiating_WithValidArguments_AllPropertiesAreSet()
         {
-            var applicant = PersonFactory.CreateApplicant();
+            var application = new Application(_applicant, _major);
 
-            _application.UpdateApplicant(applicant);
-
-            _application.ApplicantId.Should().Be(applicant.Id);
-        }
-
-        [Fact]
-        public void WhenUpdatingTheApplicant_WithNullApplicant_ThrowArgumentException()
-        {
-            Action updateApplicant = () => _application.UpdateApplicant(null);
-
-            updateApplicant.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void WhenUpdatingTheApplicant_WithNonExistingApplicant_ThrowArgumentException()
-        {
-            var applicant = new Applicant("John", "Doe");
-
-            Action updateApplicant = () => _application.UpdateApplicant(applicant);
-
-            updateApplicant.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void WhenUpdatingTheCollege_WithNullCollege_ThrowArgumentException()
-        {
-            Action updateCollege = () => _application.UpdateCollege(null);
-
-            updateCollege.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void WhenUpdatingTheMajor_WithNullMajor_ThrowArgumentException()
-        {
-            Action updateMajor = () => _application.UpdateMajor(null);
-
-            updateMajor.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void WhenUpdatingTheMajor_ItSetsCollegeIdAndMajorId()
-        {
-            var computerScienceMajor = ProgramFactory.CreateComputerScienceMajor();
-
-            _application.UpdateMajor(computerScienceMajor);
-
-            _application.CollegeId.Should().Be(3);
-            _application.MajorId.Should().Be(computerScienceMajor.Id);
+            application.ApplicantId.Should().Be(_applicant.Id);
+            application.CollegeId.Should().Be(_major.CollegeId);
+            application.MajorId.Should().Be(_major.Id);
         }
     }
 }

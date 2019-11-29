@@ -29,10 +29,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
             // if !isValid return
 
             var applicant = GetApplicant(command);
-            var major = GetMajor(command);
+            var major = _unitOfWork.MajorRepository.Find(command.MajorId);
             var application = new Application(applicant, major);
-
-            // minor
 
             _unitOfWork.ApplicationRepository.Create(application);
             _unitOfWork.ApplicantRepository.Update(applicant);
@@ -57,12 +55,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             _unitOfWork.ApplicantRepository.Create(applicant);
             _unitOfWork.Commit();
-        }
-
-        private Major GetMajor(CreateApplication command)
-        {
-            var major = _unitOfWork.MajorRepository.Find(command.MajorId);
-            return major;
         }
 
         public void CreateApplications(IEnumerable<CreateApplication> commands)
