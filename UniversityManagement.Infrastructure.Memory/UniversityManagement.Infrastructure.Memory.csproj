@@ -68,6 +68,7 @@
     <Compile Include="Write\Enrollment\ApplicantRepository.cs" />
     <Compile Include="Write\Enrollment\ApplicationRepository.cs" />
     <Compile Include="Write\Enrollment\CollegeRepository.cs" />
+    <Compile Include="Write\Enrollment\ProgramRepository.cs" />
     <Compile Include="_ioc\InfrastructureMemoryModule.cs" />
   </ItemGroup>
   <ItemGroup>

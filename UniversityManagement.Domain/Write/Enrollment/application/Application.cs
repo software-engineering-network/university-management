@@ -17,10 +17,10 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
-        public Application(Applicant applicant, Major major)
+        public Application(Applicant applicant, Program program)
         {
             SetApplicant(applicant);
-            SetMajor(major);
+            SetProgram(program);
         }
 
         private void SetApplicant(Applicant applicant)
@@ -31,13 +31,13 @@ namespace UniversityManagement.Domain.Write.Enrollment
             ApplicantId = applicant.Id;
         }
 
-        private void SetMajor(Major major)
+        private void SetProgram(Program program)
         {
-            if (major == null)
+            if (program == null)
                 throw new ArgumentException();
 
-            MajorId = major.Id;
-            CollegeId = major.CollegeId;
+            MajorId = program.Id;
+            CollegeId = program.CollegeId;
         }
     }
 }

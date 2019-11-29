@@ -8,18 +8,18 @@ namespace UniversityManagement.Test.Enrollment
     public class ApplicationTest
     {
         private readonly Applicant _applicant;
-        private readonly Major _major;
+        private readonly Program _program;
 
         public ApplicationTest()
         {
             _applicant = PersonFactory.CreateApplicant();
-            _major = ProgramFactory.CreateComputerScienceMajor();
+            _program = ProgramFactory.CreateComputerScienceMajor();
         }
 
         [Fact]
         public void WhenInstantiating_WithNullApplicant_ThrowArgumentException()
         {
-            Action createApplication = () => new Application(null, _major);
+            Action createApplication = () => new Application(null, _program);
 
             createApplication.Should().Throw<ArgumentException>();
         }
@@ -29,7 +29,7 @@ namespace UniversityManagement.Test.Enrollment
         {
             var applicant = new Applicant("John", "Doe");
 
-            Action createApplication = () => new Application(applicant, _major);
+            Action createApplication = () => new Application(applicant, _program);
 
             createApplication.Should().Throw<ArgumentException>();
         }
@@ -45,11 +45,11 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenInstantiating_WithValidArguments_AllPropertiesAreSet()
         {
-            var application = new Application(_applicant, _major);
+            var application = new Application(_applicant, _program);
 
             application.ApplicantId.Should().Be(_applicant.Id);
-            application.CollegeId.Should().Be(_major.CollegeId);
-            application.MajorId.Should().Be(_major.Id);
+            application.CollegeId.Should().Be(_program.CollegeId);
+            application.MajorId.Should().Be(_program.Id);
         }
     }
 }

@@ -6,15 +6,15 @@
         public long ApplicantId { get; }
         public string ApplicantName { get; }
         public string ApplicantSurname { get; }
-        public long MajorId { get; }
         public long MinorId { get; }
+        public long ProgramId { get; }
 
         public CreateApplication(
             long applicationId,
             long applicantId,
             string applicantName,
             string applicantSurname,
-            long majorId,
+            long programId,
             long minorId = 0
         )
         {
@@ -22,8 +22,8 @@
             ApplicantId = applicantId;
             ApplicantName = applicantName;
             ApplicantSurname = applicantSurname;
-            MajorId = majorId;
             MinorId = minorId;
+            ProgramId = programId;
         }
     }
 }

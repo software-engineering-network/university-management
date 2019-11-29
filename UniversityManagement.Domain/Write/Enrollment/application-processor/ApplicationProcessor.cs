@@ -29,8 +29,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
             // if !isValid return
 
             var applicant = GetApplicant(command);
-            var major = _unitOfWork.MajorRepository.Find(command.MajorId);
-            var application = new Application(applicant, major);
+            var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
+            var application = new Application(applicant, program);
 
             _unitOfWork.ApplicationRepository.Create(application);
             _unitOfWork.ApplicantRepository.Update(applicant);

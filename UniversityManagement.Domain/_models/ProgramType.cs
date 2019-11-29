@@ -11,6 +11,7 @@ namespace UniversityManagement.Domain
         Major = 1 << 2,
         Minor = 1 << 3,
         Pathway = 1 << 4,
-        PreprofessionalProgram = 1 << 5
+        PreprofessionalProgram = 1 << 5,
+        Primary = GraduateProgram | Major | Pathway | PreprofessionalProgram
     }
 }
