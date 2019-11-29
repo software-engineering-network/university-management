@@ -44,44 +44,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Read\Enrollment\program\IProgramRepository.cs" />
-    <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />
+    <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
+    <Compile Include="Write\Enrollment\models\ApplicationProcessor.cs" />
     <Compile Include="Write\Enrollment\application-processor\IApplicationProcessor.cs" />
-    <Compile Include="Read\Enrollment\applicant\Applicant.cs" />
-    <Compile Include="Read\Enrollment\applicant\IApplicantRepository.cs" />
-    <Compile Include="Read\Enrollment\application\Application.cs" />
-    <Compile Include="Write\Enrollment\applicant\Applicant.cs" />
-    <Compile Include="Write\Enrollment\applicant\IApplicantRepository.cs" />
-    <Compile Include="Write\Enrollment\application\Application.cs" />
-    <Compile Include="Read\Enrollment\application\IApplicationRepository.cs" />
-    <Compile Include="Read\Enrollment\college\College.cs" />
-    <Compile Include="Read\Enrollment\minor\IMinorRepository.cs" />
-    <Compile Include="Read\Enrollment\minor\Minor.cs" />
-    <Compile Include="Write\Enrollment\program\minor\IMinorRepository.cs" />
-    <Compile Include="Write\Enrollment\program\IProgramRepository.cs" />
-    <Compile Include="Write\Enrollment\program\minor\Minor.cs" />
-    <Compile Include="Write\Enrollment\program\Program.cs" />
-    <Compile Include="Write\Enrollment\college\College.cs" />
-    <Compile Include="Write\Enrollment\college\ICollegeRepository.cs" />
-    <Compile Include="Write\Enrollment\_commands\CreateApplication.cs" />
-    <Compile Include="Read\_models\discipline\Discipline.cs" />
-    <Compile Include="Read\_models\discipline\IDisciplineRepository.cs" />
-    <Compile Include="Read\Enrollment\program\Program.cs" />
+    <Compile Include="Read\Enrollment\models\Applicant.cs" />
+    <Compile Include="Read\Enrollment\repositories\IApplicantRepository.cs" />
+    <Compile Include="Read\Enrollment\models\Application.cs" />
+    <Compile Include="Write\Enrollment\models\Applicant.cs" />
+    <Compile Include="Write\Enrollment\repositories\IApplicantRepository.cs" />
+    <Compile Include="Write\Enrollment\models\Application.cs" />
+    <Compile Include="Read\Enrollment\repositories\IApplicationRepository.cs" />
+    <Compile Include="Read\Enrollment\models\College.cs" />
+    <Compile Include="Read\Enrollment\repositories\IMinorRepository.cs" />
+    <Compile Include="Read\Enrollment\models\Minor.cs" />
+    <Compile Include="Write\Enrollment\repositories\IMinorRepository.cs" />
+    <Compile Include="Write\Enrollment\repositories\IProgramRepository.cs" />
+    <Compile Include="Write\Enrollment\models\Minor.cs" />
+    <Compile Include="Write\Enrollment\models\Program.cs" />
+    <Compile Include="Write\Enrollment\models\College.cs" />
+    <Compile Include="Write\Enrollment\repositories\ICollegeRepository.cs" />
+    <Compile Include="Write\Enrollment\commands\CreateApplication.cs" />
+    <Compile Include="Read\Enrollment\models\Discipline.cs" />
+    <Compile Include="Read\Enrollment\models\Program.cs" />
     <Compile Include="_ioc\DomainModule.cs" />
-    <Compile Include="_models\ProgramType.cs" />
-    <Compile Include="Read\_models\Entity.cs" />
-    <Compile Include="Read\Enrollment\college\ICollegeRepository.cs" />
-    <Compile Include="Read\_data-access\IRepository.cs" />
-    <Compile Include="Write\Enrollment\application\IApplicationRepository.cs" />
-    <Compile Include="IContext.cs" />
-    <Compile Include="Write\_data-access\IReadRepository.cs" />
-    <Compile Include="Write\_data-access\IWriteRepository.cs" />
-    <Compile Include="Write\_data-access\IUnitOfWork.cs" />
-    <Compile Include="Write\_models\Entity.cs" />
+    <Compile Include="models\ProgramType.cs" />
+    <Compile Include="Read\Entity.cs" />
+    <Compile Include="Read\Enrollment\repositories\ICollegeRepository.cs" />
+    <Compile Include="Read\IRepository.cs" />
+    <Compile Include="Write\Enrollment\repositories\IApplicationRepository.cs" />
+    <Compile Include="Write\_unit-of-work\IContext.cs" />
+    <Compile Include="Write\_repositories\IReadRepository.cs" />
+    <Compile Include="Write\_repositories\IWriteRepository.cs" />
+    <Compile Include="Write\_unit-of-work\IUnitOfWork.cs" />
+    <Compile Include="Write\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
