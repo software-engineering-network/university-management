@@ -1,10 +1,7 @@
-﻿using UniversityManagement.Domain.Read.Enrollment;
-
-namespace UniversityManagement.Domain.Read
+﻿namespace UniversityManagement.Domain.Read.Enrollment
 {
     public class Discipline : Entity
     {
-        public College College { get; set; }
         public string Name { get; set; }
     }
 }

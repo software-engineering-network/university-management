@@ -5,7 +5,7 @@ using ExpressMapper;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
-using Discipline = UniversityManagement.Domain.Read.Discipline;
+using Discipline = UniversityManagement.Domain.Read.Enrollment.Discipline;
 
 namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 {
@@ -51,7 +51,6 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
                     {
                         var minor = Mapper.Map<Database.Program, Minor>(x.Program);
                         minor.Discipline = Mapper.Map<Database.Discipline, Discipline>(x.Discipline);
-                        minor.Discipline.College = Mapper.Map<Database.College, College>(x.College);
                         return minor;
                     }
                 );

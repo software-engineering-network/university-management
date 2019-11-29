@@ -3,7 +3,7 @@ using System.Linq;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using Program = UniversityManagement.Domain.Write.Enrollment.Program;
-using ProgramType = UniversityManagement.Domain.ProgramType;
+using ProgramType = UniversityManagement.Domain.Write.Enrollment.ProgramType;
 
 namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 {
@@ -35,10 +35,16 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
         {
             var programs = _context.Programs
                 .Join(
+                    _context.ProgramTypes,
+                    program => program.ProgramTypeId,
+                    programType => programType.Id,
+                    (Program, ProgramType) => new {Program, ProgramType}
+                )
+                .Join(
                     _context.Disciplines,
-                    program => program.DisciplineId,
+                    x => x.Program.DisciplineId,
                     discipline => discipline.Id,
-                    (Program, Discipline) => new {Program, Discipline}
+                    (x, Discipline) => new {x.Program, x.ProgramType, Discipline}
                 )
                 .Where(x => x.Discipline.CollegeId == collegeId)
                 .Select(
@@ -46,7 +52,7 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,
-                        ProgramTypeExtensions.ToEnum(x.Program.ProgramTypeId)
+                        new ProgramType(x.ProgramType.Id, x.ProgramType.Name)
                     )
                 );
 
@@ -58,45 +64,28 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             return _context.Programs
                 .Where(x => x.Id == id)
                 .Join(
+                    _context.ProgramTypes,
+                    program => program.ProgramTypeId,
+                    programType => programType.Id,
+                    (Program, ProgramType) => new { Program, ProgramType }
+                )
+                .Join(
                     _context.Disciplines,
-                    program => program.DisciplineId,
+                    x => x.Program.DisciplineId,
                     discipline => discipline.Id,
-                    (Program, Discipline) => new { Program, Discipline }
+                    (x, Discipline) => new { x.Program, x.ProgramType, Discipline }
                 )
                 .Select(
                     x => new Program(
                         x.Program.Id,
                         x.Discipline.CollegeId,
                         x.Program.DisciplineId,
-                        ProgramTypeExtensions.ToEnum(x.Program.ProgramTypeId)
+                        new ProgramType(x.ProgramType.Id, x.ProgramType.Name)
                     )
                 )
                 .FirstOrDefault();
         }
 
         #endregion
-    }
-
-    public static class ProgramTypeExtensions
-    {
-        private static readonly IDictionary<long, ProgramType> ProgramTypes = new Dictionary<long, ProgramType>
-        {
-            {1, ProgramType.Concentration},
-            {2, ProgramType.GraduateProgram},
-            {3, ProgramType.Major},
-            {4, ProgramType.Minor},
-            {5, ProgramType.Pathway},
-            {6, ProgramType.PreprofessionalProgram}
-        };
-
-        public static ProgramType ToEnum(this Database.ProgramType record)
-        {
-            return ToEnum(record.Id);
-        }
-
-        public static ProgramType ToEnum(long programTypeId)
-        {
-            return ProgramTypes[programTypeId];
-        }
     }
 }

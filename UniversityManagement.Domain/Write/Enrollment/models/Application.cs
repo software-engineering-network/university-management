@@ -52,7 +52,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         private void SetProgram(Program program)
         {
-            if (program == null)
+            if (program == null || !program.IsProgram)
                 throw new ArgumentException();
 
             Program = program;

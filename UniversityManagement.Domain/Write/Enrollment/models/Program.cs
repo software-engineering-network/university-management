@@ -6,9 +6,14 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Properties
 
+        protected ProgramType ProgramType { get; set; }
+
         public long CollegeId { get; private set; }
         public long DisciplineId { get; private set; }
-        public ProgramType ProgramType { get; protected set; }
+        public long ProgramTypeId => ProgramType.Id;
+        public bool IsConcentration => ProgramType.IsConcentration;
+        public bool IsMinor => ProgramType.IsMinor;
+        public bool IsProgram => ProgramType.IsProgram;
 
         #endregion
 
@@ -46,7 +51,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         protected virtual void SetProgramType(ProgramType programType)
         {
-            if ((programType & ProgramType.Primary) == 0)
+            if (!programType.IsProgram)
                 throw new ArgumentException();
 
             ProgramType = programType;

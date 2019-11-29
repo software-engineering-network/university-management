@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
+using ProgramType = UniversityManagement.Domain.Write.Enrollment.ProgramType;
 
 namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 {
@@ -33,14 +34,20 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             var minor = _context.Programs
                 .Where(x => x.Id == id)
                 .Join(
+                    _context.ProgramTypes,
+                    program => program.ProgramTypeId,
+                    programType => programType.Id,
+                    (Program, ProgramType) => new {Program, ProgramType}
+                )
+                .Join(
                     _context.Disciplines,
-                    program => program.DisciplineId,
+                    x => x.Program.DisciplineId,
                     discipline => discipline.Id,
-                    (program, discipline) => new Minor(
-                        program.Id,
+                    (x, discipline) => new Minor(
+                        x.Program.Id,
                         discipline.CollegeId,
                         discipline.Id,
-                        ProgramTypeExtensions.ToEnum(program.ProgramTypeId)
+                        new ProgramType(x.ProgramType.Id, x.ProgramType.Name)
                     )
                 )
                 .FirstOrDefault();

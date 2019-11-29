@@ -15,7 +15,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         protected override void SetProgramType(ProgramType programType)
         {
-            if ((programType & ProgramType.Minor) == 0)
+            if (!programType.IsMinor)
                 throw new ArgumentException();
 
             ProgramType = programType;

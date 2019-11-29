@@ -2,12 +2,8 @@
 {
     public class Program : Entity
     {
-        #region Properties
-
-        public College College => Discipline?.College;
+        public College College { get; set; }
         public Discipline Discipline { get; set; }
         public ProgramType ProgramType { get; set; }
-
-        #endregion
     }
 }

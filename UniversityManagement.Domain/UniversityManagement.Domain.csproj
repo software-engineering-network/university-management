@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Read\Enrollment\models\Discipline.cs" />
+    <Compile Include="Read\Enrollment\models\ProgramType.cs" />
     <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\models\ApplicationProcessor.cs" />
     <Compile Include="Write\Enrollment\application-processor\IApplicationProcessor.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Read\Enrollment\repositories\IApplicantRepository.cs" />
     <Compile Include="Read\Enrollment\models\Application.cs" />
     <Compile Include="Write\Enrollment\models\Applicant.cs" />
+    <Compile Include="Write\Enrollment\models\ProgramType.cs" />
     <Compile Include="Write\Enrollment\repositories\IApplicantRepository.cs" />
     <Compile Include="Write\Enrollment\models\Application.cs" />
     <Compile Include="Read\Enrollment\repositories\IApplicationRepository.cs" />
@@ -64,10 +67,8 @@
     <Compile Include="Write\Enrollment\models\College.cs" />
     <Compile Include="Write\Enrollment\repositories\ICollegeRepository.cs" />
     <Compile Include="Write\Enrollment\commands\CreateApplication.cs" />
-    <Compile Include="Read\Enrollment\models\Discipline.cs" />
     <Compile Include="Read\Enrollment\models\Program.cs" />
     <Compile Include="_ioc\DomainModule.cs" />
-    <Compile Include="models\ProgramType.cs" />
     <Compile Include="Read\Entity.cs" />
     <Compile Include="Read\Enrollment\repositories\ICollegeRepository.cs" />
     <Compile Include="Read\IRepository.cs" />
