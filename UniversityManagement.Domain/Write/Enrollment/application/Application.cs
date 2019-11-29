@@ -30,10 +30,20 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public Application UpdateCollege(College college)
         {
-            if (college == null || college.Id == 0)
+            if (college == null)
                 throw new ArgumentException();
 
             CollegeId = college.Id;
+
+            return this;
+        }
+
+        public Application UpdateMajor(Major major)
+        {
+            if (major == null)
+                throw new ArgumentException();
+
+            MajorId = major.Id;
 
             return this;
         }

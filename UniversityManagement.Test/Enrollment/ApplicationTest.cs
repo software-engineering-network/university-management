@@ -57,5 +57,13 @@ namespace UniversityManagement.Test.Enrollment
 
             updateCollege.Should().Throw<ArgumentException>();
         }
+
+        [Fact]
+        public void WhenUpdatingTheMajor_WithNullMajor_ThrowArgumentException()
+        {
+            Action updateMajor = () => _application.UpdateMajor(null);
+
+            updateMajor.Should().Throw<ArgumentException>();
+        }
     }
 }
