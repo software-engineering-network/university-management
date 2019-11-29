@@ -39,7 +39,9 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             // minor
 
-            Persist(application, applicant);
+            _unitOfWork.ApplicationRepository.Create(application);
+            _unitOfWork.ApplicantRepository.Update(applicant);
+            _unitOfWork.Commit();
         }
 
         private Applicant GetApplicant(CreateApplication command)
@@ -79,21 +81,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
                 major = majors.First();
 
             return major;
-        }
-
-        private void Persist(
-            Application application,
-            Applicant applicant
-        )
-        {
-            _unitOfWork.ApplicationRepository.Create(application);
-
-            if (application.ApplicantId == 0)
-                _unitOfWork.ApplicantRepository.Create(applicant);
-            else
-                _unitOfWork.ApplicantRepository.Update(applicant);
-
-            _unitOfWork.Commit();
         }
 
         public void CreateApplications(IEnumerable<CreateApplication> commands)
