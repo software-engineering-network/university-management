@@ -8,13 +8,11 @@ namespace UniversityManagement.Test.Enrollment
     public class ApplicationTest
     {
         private readonly Applicant _applicant;
-        private readonly Application _application;
         private readonly Major _major;
 
         public ApplicationTest()
         {
             _applicant = PersonFactory.CreateApplicant();
-            _application = ApplicationFactory.Create();
             _major = ProgramFactory.CreateComputerScienceMajor();
         }
 
