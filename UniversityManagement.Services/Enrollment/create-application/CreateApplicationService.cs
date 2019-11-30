@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
-using Application = UniversityManagement.Domain.Read.Enrollment.Application;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
 using ICollegeRepository = UniversityManagement.Domain.Read.Enrollment.ICollegeRepository;
 using IMinorRepository = UniversityManagement.Domain.Read.Enrollment.IMinorRepository;
@@ -46,13 +45,14 @@ namespace UniversityManagement.Services.Enrollment
             return _collegeRepository.Fetch();
         }
 
-        public IEnumerable<Program> FetchPrograms(Application application)
+        public IEnumerable<Program> FetchPrograms()
         {
-            var programs = application.College == null || application.College.Id == 0
-                ? _programRepository.Fetch()
-                : _programRepository.Fetch(application.College.Id);
+            return _programRepository.Fetch();
+        }
 
-            return programs;
+        public IEnumerable<Program> FetchPrograms(long collegeId)
+        {
+            return _programRepository.Fetch(collegeId);
         }
 
         public IEnumerable<Minor> FetchMinors()
@@ -60,30 +60,16 @@ namespace UniversityManagement.Services.Enrollment
             return _minorRepository.Fetch();
         }
 
-        public void CreateApplication(Application application)
+        public void CreateApplication(CreateApplication command)
         {
-            //_applicationProcessor.CreateApplication(application);
+            _applicationProcessor.CreateApplication(command);
         }
 
-        public IValidationResult Validate(Application application)
+        public IValidationResult Validate(CreateApplication command)
         {
-            var command = ToCreateApplicationCommand(application);
-            var validationResult = _applicationProcessor.Validate(command);
-            return validationResult;
+            return _applicationProcessor.Validate(command);
         }
 
         #endregion
-
-        private static CreateApplication ToCreateApplicationCommand(Application application)
-        {
-            return new CreateApplication(
-                application.Id,
-                application.Applicant?.Id ?? 0,
-                application.Applicant?.Name ?? string.Empty,
-                application.Applicant?.Surname ?? string.Empty,
-                application.Program?.Id ?? 0,
-                application.Minor?.Id ?? 0
-            );
-        }
     }
 }

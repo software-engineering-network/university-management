@@ -1,8 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
+using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment;
+using Application = UniversityManagement.Domain.Read.Enrollment.Application;
+using College = UniversityManagement.Domain.Read.Enrollment.College;
+using Minor = UniversityManagement.Domain.Read.Enrollment.Minor;
+using Program = UniversityManagement.Domain.Read.Enrollment.Program;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
@@ -20,6 +24,7 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly ICreateApplicationService _service;
 
         private Application _application;
+        private CreateApplication _createApplication;
         private IValidationResult _validationResult;
 
         private ObservableCollection<College> _colleges;
@@ -129,7 +134,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         public void SaveApplication()
         {
-            _service.CreateApplication(_application);
+            _service.CreateApplication(_createApplication);
         }
 
         #endregion
@@ -231,6 +236,18 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
+        private CreateApplication BuildCreateApplicationCommand()
+        {
+            return new CreateApplication(
+                _application.Id,
+                _application.Applicant?.Id ?? 0,
+                _application.Applicant?.Name ?? string.Empty,
+                _application.Applicant?.Surname ?? string.Empty,
+                _application.Program?.Id ?? 0,
+                _application.Minor?.Id ?? 0
+            );
+        }
+
         private void PopulateColleges()
         {
             var colleges = _service.FetchColleges();
@@ -245,7 +262,10 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulatePrograms()
         {
-            var programs = _service.FetchPrograms(_application);
+            var programs = _application.College == null
+                ? _service.FetchPrograms()
+                : _service.FetchPrograms(_application.College.Id);
+
             Programs = new ObservableCollection<Program>(programs);
         }
 
@@ -279,7 +299,8 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void Validate()
         {
-            ValidationResult = _service.Validate(_application);
+            _createApplication = BuildCreateApplicationCommand();
+            ValidationResult = _service.Validate(_createApplication);
         }
     }
 }

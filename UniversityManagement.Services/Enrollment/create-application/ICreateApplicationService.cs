@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
-using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
+using UniversityManagement.Domain.Write.Enrollment;
+using College = UniversityManagement.Domain.Read.Enrollment.College;
+using Minor = UniversityManagement.Domain.Read.Enrollment.Minor;
+using Program = UniversityManagement.Domain.Read.Enrollment.Program;
 
 namespace UniversityManagement.Services.Enrollment
 {
@@ -8,9 +11,10 @@ namespace UniversityManagement.Services.Enrollment
     {
         IEnumerable<College> FetchColleges();
         IEnumerable<Minor> FetchMinors();
-        IEnumerable<Program> FetchPrograms(Application application);
+        IEnumerable<Program> FetchPrograms();
+        IEnumerable<Program> FetchPrograms(long collegeId);
 
-        void CreateApplication(Application application);
-        IValidationResult Validate(Application application);
+        void CreateApplication(CreateApplication command);
+        IValidationResult Validate(CreateApplication command);
     }
 }
