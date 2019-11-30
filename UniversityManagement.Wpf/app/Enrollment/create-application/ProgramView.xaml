@@ -33,12 +33,12 @@
                     Width="250" />
 
                 <Label
-                    Content="Major:"
+                    Content="Program:"
                     Grid.Row="1"
                     Grid.Column="0" />
                 <ComboBox
-                    ItemsSource="{Binding Path=Majors}"
-                    SelectedItem="{Binding Path=SelectedMajor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding Path=Programs}"
+                    SelectedItem="{Binding Path=SelectedProgram, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Grid.Row="1"
                     Grid.Column="1"
                     DisplayMemberPath="Name"

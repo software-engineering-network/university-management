@@ -6,6 +6,7 @@ using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
 using Discipline = UniversityManagement.Domain.Read.Enrollment.Discipline;
+using ProgramType = UniversityManagement.Domain.Read.Enrollment.ProgramType;
 
 namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 {
@@ -46,11 +47,19 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
                     college => college.Id,
                     (x, College) => new { x.Program, x.Discipline, College }
                 )
+                .Join(
+                    _context.ProgramTypes,
+                    x => x.Program.ProgramTypeId,
+                    programType => programType.Id,
+                    (x, ProgramType) => new { x.Program, x.College, x.Discipline, ProgramType }
+                )
                 .Select(
                     x =>
                     {
                         var minor = Mapper.Map<Database.Program, Minor>(x.Program);
+                        minor.College = Mapper.Map<Database.College, College>(x.College);
                         minor.Discipline = Mapper.Map<Database.Discipline, Discipline>(x.Discipline);
+                        minor.ProgramType = Mapper.Map<Database.ProgramType, ProgramType>(x.ProgramType);
                         return minor;
                     }
                 );

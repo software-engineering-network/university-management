@@ -46,6 +46,8 @@ namespace UniversityManagement.Wpf.Enrollment
 
             _application = application;
             SelectedCollege = Colleges.FirstOrDefault(x => x == _application.College);
+            SelectedProgram = Programs.FirstOrDefault(x => x == _application.Program);
+            SelectedMinor = Minors.FirstOrDefault(x => x == _application.Minor);
 
             _isSyncing = false;
         }
