@@ -8,6 +8,7 @@ namespace UniversityManagement.Test.Enrollment
     {
         #region Fields
 
+        private readonly IApplicationProcessor _applicationProcessor;
         private readonly TestObjectProvider _provider;
 
         #endregion
@@ -17,6 +18,7 @@ namespace UniversityManagement.Test.Enrollment
         public ApplicationProcessorTest()
         {
             _provider = new TestObjectProvider();
+            _applicationProcessor = _provider.ApplicationProcessor;
         }
 
         #endregion
@@ -25,14 +27,12 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null, null, 0)]
         [InlineData("", "", 0)]
         [InlineData(" ", " ", 0)]
-        public void WhenValidatingACreateApplicationCommand(
+        public void WhenValidatingACreateApplicationCommand_WithAnInvalidCommand_ItReturnsInvalid(
             string applicantName,
             string applicantSurname,
             long programId
         )
         {
-            var applicationProcessor = _provider.ApplicationProcessor;
-
             var command = new CreateApplication(
                 1,
                 1,
@@ -41,7 +41,7 @@ namespace UniversityManagement.Test.Enrollment
                 programId
             );
 
-            var validationResult = applicationProcessor.Validate(command);
+            var validationResult = _applicationProcessor.Validate(command);
 
             validationResult.IsValid.Should().BeFalse();
             validationResult.Errors.ContainsKey(nameof(command.ApplicantName)).Should().BeTrue();
@@ -66,8 +66,6 @@ namespace UniversityManagement.Test.Enrollment
         {
             const long expectedId = 2;
 
-            var applicationProcessor = _provider.ApplicationProcessor;
-
             var command = new CreateApplication(
                 applicationId,
                 applicantId,
@@ -77,7 +75,7 @@ namespace UniversityManagement.Test.Enrollment
                 minorId
             );
 
-            applicationProcessor.CreateApplication(command);
+            _applicationProcessor.CreateApplication(command);
 
             var applicationRepository = _provider.ApplicationRepository;
             var application = applicationRepository.Find(expectedId);
