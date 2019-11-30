@@ -6,5 +6,7 @@ namespace UniversityManagement.Domain.Write
     {
         IReadOnlyDictionary<string, string> Errors { get; }
         bool IsValid { get; }
+
+        string GetMessage(string propertyName);
     }
 }

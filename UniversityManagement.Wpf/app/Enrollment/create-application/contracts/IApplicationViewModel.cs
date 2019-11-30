@@ -2,6 +2,8 @@
 {
     public interface IApplicationViewModel
     {
+        bool IsValid { get; }
+
         void SaveApplication();
     }
 }

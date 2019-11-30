@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using UniversityManagement.Domain.Read.Enrollment;
+using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
@@ -15,9 +16,10 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Fields
 
-        private readonly Application _application;
+        private Application _application;
         private readonly bool _isSyncing;
         private readonly ICreateApplicationService _service;
+        private IValidationResult _validationResult;
 
         private ObservableCollection<College> _colleges;
         private ObservableCollection<Minor> _minors;
@@ -25,12 +27,38 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
+        #region Properties
+
+        private Application Application
+        {
+            set
+            {
+                _application = value;
+                Validate();
+            }
+        }
+
+        private IValidationResult ValidationResult
+        {
+            set
+            {
+                _validationResult = value;
+
+                OnPropertyChanged(nameof(IsValid));
+                OnPropertyChanged(nameof(ApplicantNameValidationMessage));
+                OnPropertyChanged(nameof(ApplicantSurnameValidationMessage));
+            }
+        }
+
+        #endregion
+
         #region Construction
 
         public ApplicationViewModel(ICreateApplicationService service)
         {
-            _application = new Application();
             _service = service;
+
+            Application = new Application();
 
             PopulateColleges();
             PopulatePrograms();
@@ -44,7 +72,8 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             _isSyncing = true;
 
-            _application = application;
+            Application = application;
+
             SelectedCollege = Colleges.FirstOrDefault(x => x == _application.College);
             SelectedProgram = Programs.FirstOrDefault(x => x == _application.Program);
             SelectedMinor = Minors.FirstOrDefault(x => x == _application.Minor);
@@ -66,8 +95,12 @@ namespace UniversityManagement.Wpf.Enrollment
 
                 _application.Applicant.Name = value;
                 OnPropertyChanged(nameof(ApplicantName));
+
+                Validate();
             }
         }
+
+        public string ApplicantNameValidationMessage => _validationResult.GetMessage(nameof(ApplicantName));
 
         public string ApplicantSurname
         {
@@ -79,12 +112,18 @@ namespace UniversityManagement.Wpf.Enrollment
 
                 _application.Applicant.Surname = value;
                 OnPropertyChanged(nameof(ApplicantSurname));
+
+                Validate();
             }
         }
+
+        public string ApplicantSurnameValidationMessage => _validationResult.GetMessage(nameof(ApplicantSurname));
 
         #endregion
 
         #region IApplicationViewModel Members
+
+        public bool IsValid => _validationResult.IsValid;
 
         public void SaveApplication()
         {
@@ -234,6 +273,11 @@ namespace UniversityManagement.Wpf.Enrollment
                 return;
 
             SelectedProgram = Programs.FirstOrDefault(x => x == previousProgram);
+        }
+
+        private void Validate()
+        {
+            ValidationResult = _service.Validate(_application);
         }
     }
 }

@@ -11,16 +11,13 @@
         Margin="6">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="Auto" />
-                <RowDefinition
-                    Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="Auto" />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Label 
@@ -33,6 +30,11 @@
                 Grid.Column="1"
                 Width="300" />
             <Label
+                Content="{Binding Path=ApplicantNameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Foreground="#FFFF0000"
+                Grid.Row="0"
+                Grid.Column="2"/>
+            <Label
                 Content="Last Name:"
                 Grid.Row="1"
                 Grid.Column="0" />
@@ -41,6 +43,11 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"/>
+            <Label
+                Content="{Binding Path=ApplicantSurnameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Foreground="#FFFF0000"
+                Grid.Row="1"
+                Grid.Column="2"/>
         </Grid>
     </GroupBox>
 </UserControl>

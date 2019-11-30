@@ -10,14 +10,25 @@ namespace UniversityManagement.Domain.Write
         public IReadOnlyDictionary<string, string> Errors => _errors;
         public bool IsValid { get; }
 
-        public ValidationResult(FluentValidationResult fluentValidationResult)
+        public ValidationResult()
         {
             _errors = new Dictionary<string, string>();
+            IsValid = true;
+        }
 
+        public ValidationResult(FluentValidationResult fluentValidationResult) : this()
+        {
             foreach (var error in fluentValidationResult.Errors)
                 _errors.Add(error.PropertyName, error.ErrorMessage);
 
             IsValid = fluentValidationResult.IsValid;
+        }
+
+        public string GetMessage(string propertyName)
+        {
+            return Errors.ContainsKey(propertyName)
+                ? Errors[propertyName]
+                : null;
         }
     }
 }

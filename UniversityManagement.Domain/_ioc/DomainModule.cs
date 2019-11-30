@@ -10,6 +10,7 @@ namespace UniversityManagement.Domain
         protected override void Load(ContainerBuilder builder)
         {
             RegisterServices(builder);
+            RegisterValidators(builder);
         }
 
         #endregion
@@ -17,6 +18,11 @@ namespace UniversityManagement.Domain
         private static void RegisterServices(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationProcessor>().As<IApplicationProcessor>();
+        }
+
+        private static void RegisterValidators(ContainerBuilder builder)
+        {
+            builder.RegisterType<CreateApplicationValidator>();
         }
     }
 }
