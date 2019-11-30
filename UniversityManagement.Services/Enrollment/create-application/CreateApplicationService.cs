@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
+using Application = UniversityManagement.Domain.Read.Enrollment.Application;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
 using ICollegeRepository = UniversityManagement.Domain.Read.Enrollment.ICollegeRepository;
 using IMinorRepository = UniversityManagement.Domain.Read.Enrollment.IMinorRepository;
@@ -60,16 +61,30 @@ namespace UniversityManagement.Services.Enrollment
             return _minorRepository.Fetch();
         }
 
-        public void CreateApplication(CreateApplication command)
+        public void CreateApplication(Application application)
         {
+            var command = BuildCreateApplicationCommand(application);
             _applicationProcessor.CreateApplication(command);
         }
 
-        public IValidationResult Validate(CreateApplication command)
+        public IValidationResult Validate(Application application)
         {
+            var command = BuildCreateApplicationCommand(application);
             return _applicationProcessor.Validate(command);
         }
 
         #endregion
+
+        private static CreateApplication BuildCreateApplicationCommand(Application application)
+        {
+            return new CreateApplication(
+                application.Id,
+                application.Applicant?.Id ?? 0,
+                application.Applicant?.Name ?? string.Empty,
+                application.Applicant?.Surname ?? string.Empty,
+                application.Program?.Id ?? 0,
+                application.Minor?.Id ?? 0
+            );
+        }
     }
 }

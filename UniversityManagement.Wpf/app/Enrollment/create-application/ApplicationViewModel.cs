@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using UniversityManagement.Domain.Write;
-using UniversityManagement.Domain.Write.Enrollment;
 using UniversityManagement.Services.Enrollment;
 using Application = UniversityManagement.Domain.Read.Enrollment.Application;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
@@ -24,7 +23,6 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly ICreateApplicationService _service;
 
         private Application _application;
-        private CreateApplication _createApplication;
         private IValidationResult _validationResult;
 
         private ObservableCollection<College> _colleges;
@@ -134,7 +132,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         public void SaveApplication()
         {
-            _service.CreateApplication(_createApplication);
+            _service.CreateApplication(_application);
         }
 
         #endregion
@@ -236,18 +234,6 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
-        private CreateApplication BuildCreateApplicationCommand()
-        {
-            return new CreateApplication(
-                _application.Id,
-                _application.Applicant?.Id ?? 0,
-                _application.Applicant?.Name ?? string.Empty,
-                _application.Applicant?.Surname ?? string.Empty,
-                _application.Program?.Id ?? 0,
-                _application.Minor?.Id ?? 0
-            );
-        }
-
         private void PopulateColleges()
         {
             var colleges = _service.FetchColleges();
@@ -299,8 +285,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void Validate()
         {
-            _createApplication = BuildCreateApplicationCommand();
-            ValidationResult = _service.Validate(_createApplication);
+            ValidationResult = _service.Validate(_application);
         }
     }
 }
