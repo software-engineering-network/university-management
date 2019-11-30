@@ -6,5 +6,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         void CreateApplication(CreateApplication command);
         void CreateApplications(IEnumerable<CreateApplication> commands);
+        IValidationResult Validate(CreateApplication command);
     }
 }

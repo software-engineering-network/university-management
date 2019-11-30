@@ -22,12 +22,40 @@ namespace UniversityManagement.Test.Enrollment
         #endregion
 
         [Theory]
+        [InlineData(null, null, 0)]
+        [InlineData("", "", 0)]
+        [InlineData(" ", " ", 0)]
+        public void WhenValidatingACreateApplicationCommand(
+            string applicantName,
+            string applicantSurname,
+            long programId
+        )
+        {
+            var applicationProcessor = _provider.ApplicationProcessor;
+
+            var command = new CreateApplication(
+                1,
+                1,
+                applicantName,
+                applicantSurname,
+                programId
+            );
+
+            var validationResult = applicationProcessor.Validate(command);
+
+            validationResult.IsValid.Should().BeFalse();
+            validationResult.Errors.ContainsKey(nameof(command.ApplicantName)).Should().BeTrue();
+            validationResult.Errors.ContainsKey(nameof(command.ApplicantSurname)).Should().BeTrue();
+            validationResult.Errors.ContainsKey(nameof(command.ProgramId)).Should().BeTrue();
+        }
+
+        [Theory]
         [InlineData(1, 1, "John", "Doe", 0, 30)]
         [InlineData(1, 1, "Jon", "Doe", 0, 30)]
         [InlineData(1, 1, "John", "Dough", 0, 30)]
         [InlineData(1, 1, "John", "Doe", 102, 30)]
         //[InlineData(1, 1, "John", "Doe", 0, 0, 68)]
-        public void WhenCreatingApplications_ItCreatesAllApplications(
+        public void WhenCreatingAnApplication_WithValidCommands_ItCreatesAllApplications(
             long applicationId,
             long applicantId,
             string applicantName,

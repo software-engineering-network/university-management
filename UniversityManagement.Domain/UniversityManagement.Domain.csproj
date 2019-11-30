@@ -34,7 +34,15 @@
     <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.1\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,7 +55,8 @@
     <Compile Include="Read\Enrollment\models\Discipline.cs" />
     <Compile Include="Read\Enrollment\models\ProgramType.cs" />
     <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
-    <Compile Include="Write\Enrollment\models\ApplicationProcessor.cs" />
+    <Compile Include="Write\Enrollment\commands\CreateApplicationValidator.cs" />
+    <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />
     <Compile Include="Write\Enrollment\application-processor\IApplicationProcessor.cs" />
     <Compile Include="Read\Enrollment\models\Applicant.cs" />
     <Compile Include="Read\Enrollment\repositories\IApplicantRepository.cs" />
@@ -68,6 +77,8 @@
     <Compile Include="Write\Enrollment\repositories\ICollegeRepository.cs" />
     <Compile Include="Write\Enrollment\commands\CreateApplication.cs" />
     <Compile Include="Read\Enrollment\models\Program.cs" />
+    <Compile Include="Write\_validation\IValidationResult.cs" />
+    <Compile Include="Write\_validation\ValidationResult.cs" />
     <Compile Include="_ioc\DomainModule.cs" />
     <Compile Include="Read\Entity.cs" />
     <Compile Include="Read\Enrollment\repositories\ICollegeRepository.cs" />

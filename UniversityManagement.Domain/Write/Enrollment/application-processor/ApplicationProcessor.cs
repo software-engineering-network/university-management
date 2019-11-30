@@ -6,14 +6,19 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Fields
 
+        private readonly CreateApplicationValidator _createApplicationValidator;
         private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Construction
 
-        public ApplicationProcessor(IUnitOfWork unitOfWork)
+        public ApplicationProcessor(
+            IUnitOfWork unitOfWork,
+            CreateApplicationValidator createApplicationValidator
+        )
         {
+            _createApplicationValidator = createApplicationValidator;
             _unitOfWork = unitOfWork;
         }
 
@@ -23,9 +28,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public void CreateApplication(CreateApplication command)
         {
-            // validate command
-
-            // if !isValid return
+            if (!Validate(command).IsValid)
+                return;
 
             var applicant = GetApplicant(command);
             var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
@@ -41,6 +45,15 @@ namespace UniversityManagement.Domain.Write.Enrollment
         {
             foreach (var command in commands)
                 CreateApplication(command);
+        }
+
+        public IValidationResult Validate(CreateApplication command)
+        {
+            var validationResult = new ValidationResult(
+                _createApplicationValidator.Validate(command)
+            );
+
+            return validationResult;
         }
 
         #endregion

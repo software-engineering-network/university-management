@@ -7,7 +7,10 @@ namespace UniversityManagement.Test
     {
         public static IApplicationProcessor CreateApplicationProcessor(IUnitOfWork unitOfWork)
         {
-            return new ApplicationProcessor(unitOfWork);
+            return new ApplicationProcessor(
+                unitOfWork,
+                new CreateApplicationValidator()
+            );
         }
     }
 }
