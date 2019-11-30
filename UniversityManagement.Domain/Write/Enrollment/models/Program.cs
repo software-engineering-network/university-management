@@ -10,9 +10,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public long CollegeId { get; private set; }
         public long DisciplineId { get; private set; }
-        public long ProgramTypeId => ProgramType.Id;
-        public bool IsConcentration => ProgramType.IsConcentration;
-        public bool IsMinor => ProgramType.IsMinor;
         public bool IsProgram => ProgramType.IsProgram;
 
         #endregion
