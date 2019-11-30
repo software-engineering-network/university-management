@@ -17,6 +17,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Label
@@ -44,6 +45,11 @@
                     DisplayMemberPath="Name"
                     HorizontalAlignment="Left"
                     Width="250" />
+                <Label
+                    Content="{Binding Path=SelectedProgramValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Foreground="#FFFF0000"
+                    Grid.Row="1"
+                    Grid.Column="2"/>
             </Grid>
         </GroupBox>
     </StackPanel>

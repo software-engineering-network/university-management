@@ -16,9 +16,10 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Fields
 
-        private Application _application;
         private readonly bool _isSyncing;
         private readonly ICreateApplicationService _service;
+
+        private Application _application;
         private IValidationResult _validationResult;
 
         private ObservableCollection<College> _colleges;
@@ -47,6 +48,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 OnPropertyChanged(nameof(IsValid));
                 OnPropertyChanged(nameof(ApplicantNameValidationMessage));
                 OnPropertyChanged(nameof(ApplicantSurnameValidationMessage));
+                OnPropertyChanged(nameof(SelectedProgramValidationMessage));
             }
         }
 
@@ -191,8 +193,11 @@ namespace UniversityManagement.Wpf.Enrollment
                 OnPropertyChanged(nameof(SelectedProgram));
 
                 SelectedProgramChangedHandler();
+                Validate();
             }
         }
+
+        public string SelectedProgramValidationMessage => _validationResult.GetMessage("ProgramId");
 
         #endregion
 
@@ -248,15 +253,13 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             UpdateProgramSelector();
 
-            if (SelectedProgram == null &&
-                _programs.Count == 1)
+            if (SelectedProgram == null && _programs.Count == 1)
                 SelectedProgram = Programs.First();
         }
 
         private void SelectedProgramChangedHandler()
         {
-            if (SelectedProgram == null ||
-                SelectedProgram.College == SelectedCollege)
+            if (SelectedProgram == null || SelectedProgram.College == SelectedCollege)
                 return;
 
             SelectedCollege = _colleges.FirstOrDefault(x => x == SelectedProgram.College);
@@ -268,8 +271,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
             PopulatePrograms();
 
-            if (previousProgram == null ||
-                previousProgram.College != SelectedCollege)
+            if (previousProgram == null || previousProgram.College != SelectedCollege)
                 return;
 
             SelectedProgram = Programs.FirstOrDefault(x => x == previousProgram);

@@ -7,5 +7,6 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         ObservableCollection<Program> Programs { get; }
         Program SelectedProgram { get; set; }
+        string SelectedProgramValidationMessage { get; }
     }
 }
