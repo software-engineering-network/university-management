@@ -28,5 +28,26 @@
             MinorId = minorId;
             ProgramId = programId;
         }
+
+        public CreateApplication(Read.Enrollment.Application application)
+        {
+            ApplicationId = application.Id;
+            ApplicantId = application.Applicant?.Id ?? 0;
+            ApplicantName = application.Applicant?.Name;
+            ApplicantSurname = application.Applicant?.Surname;
+            ApplicantSocialSecurityNumber = application.Applicant?.SocialSecurityNumber;
+            ProgramId = application.Program?.Id ?? 0;
+            MinorId = application.Minor?.Id ?? 0;
+        }
+    }
+
+    public class UpdateApplication
+    {
+        private readonly Application _application;
+        
+        public UpdateApplication(Application application)
+        {
+            _application = application;
+        }
     }
 }

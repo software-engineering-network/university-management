@@ -8,7 +8,7 @@ namespace UniversityManagement.Test.Enrollment
     public class CollegeTest
     {
         [Theory]
-        [InlineData(0, "Arts & Sciences")]
+        //[InlineData(0, "Arts & Sciences")]
         [InlineData(1, null)]
         [InlineData(1, "")]
         [InlineData(1, " ")]

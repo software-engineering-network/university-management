@@ -64,7 +64,6 @@
     <Compile Include="Enrollment\ApplicationTest.cs" />
     <Compile Include="Enrollment\ApplicationProcessorTest.cs" />
     <Compile Include="Enrollment\CollegeTest.cs" />
-    <Compile Include="Enrollment\ProgramTest.cs" />
     <Compile Include="Enrollment\SocialSecurityNumberTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestObjectProvider.cs" />

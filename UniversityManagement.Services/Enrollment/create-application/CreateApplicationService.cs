@@ -63,29 +63,16 @@ namespace UniversityManagement.Services.Enrollment
 
         public void CreateApplication(Application application)
         {
-            var command = BuildCreateApplicationCommand(application);
+            var command = new CreateApplication(application);
             _applicationProcessor.CreateApplication(command);
         }
 
         public IValidationResult Validate(Application application)
         {
-            var command = BuildCreateApplicationCommand(application);
+            var command = new CreateApplication(application);
             return _applicationProcessor.Validate(command);
         }
 
         #endregion
-
-        private static CreateApplication BuildCreateApplicationCommand(Application application)
-        {
-            return new CreateApplication(
-                application.Id,
-                application.Applicant?.Id ?? 0,
-                application.Applicant?.Name ?? string.Empty,
-                application.Applicant?.Surname ?? string.Empty,
-                application.Applicant?.SocialSecurityNumber ?? string.Empty,
-                application.Program?.Id ?? 0,
-                application.Minor?.Id ?? 0
-            );
-        }
     }
 }

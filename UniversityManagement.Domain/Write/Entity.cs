@@ -6,6 +6,7 @@ namespace UniversityManagement.Domain.Write
     {
         #region Properties
 
+        public bool Exists => Id != 0;
         public long Id { get; }
 
         #endregion
@@ -18,9 +19,6 @@ namespace UniversityManagement.Domain.Write
 
         protected Entity(long id)
         {
-            if (id == 0)
-                throw new ArgumentException();
-
             Id = id;
         }
 
