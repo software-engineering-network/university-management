@@ -82,6 +82,7 @@ namespace UniversityManagement.Services.Enrollment
                 application.Applicant?.Id ?? 0,
                 application.Applicant?.Name ?? string.Empty,
                 application.Applicant?.Surname ?? string.Empty,
+                application.Applicant?.SocialSecurityNumber ?? string.Empty,
                 application.Program?.Id ?? 0,
                 application.Minor?.Id ?? 0
             );

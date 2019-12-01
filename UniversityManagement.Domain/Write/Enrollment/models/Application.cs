@@ -22,7 +22,23 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #region Construction
 
-        public Application(Applicant applicant, Program program, Minor minor)
+        public Application(
+            Applicant applicant, 
+            Program program, 
+            Minor minor
+        )
+        {
+            SetApplicant(applicant);
+            SetProgram(program);
+            SetMinor(minor);
+        }
+
+        public Application(
+            long id,
+            Applicant applicant,
+            Program program,
+            Minor minor
+        ) : base(id)
         {
             SetApplicant(applicant);
             SetProgram(program);

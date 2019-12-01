@@ -38,19 +38,32 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             return new Applicant(
                 record.Id,
                 record.Name,
-                record.Surname
+                record.Surname,
+                record.SocialSecurityNumber
             );
         }
 
         public void Create(Applicant applicant)
         {
-            var person = Mapper.Map<Applicant, Person>(applicant);
-            _context.People.Add(person);
+            var person = new Person(
+                applicant.Id,
+                applicant.Name,
+                applicant.Surname,
+                applicant.SocialSecurityNumber.Value
+            );
+
+            _context.People.Insert(person);
         }
 
         public void Update(Applicant applicant)
         {
-            var candidatePerson = Mapper.Map<Applicant, Person>(applicant);
+            var candidatePerson = new Person(
+                applicant.Id,
+                applicant.Name,
+                applicant.Surname,
+                applicant.SocialSecurityNumber.Value
+            );
+
             var record = _context.People.First(x => x.Id == applicant.Id);
 
             if (record == candidatePerson)
@@ -60,9 +73,27 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             {
                 record.Name = candidatePerson.Name;
                 record.Surname = candidatePerson.Surname;
+                record.SocialSecurityNumber = candidatePerson.SocialSecurityNumber;
             };
 
             _context.People.Update(update);
+        }
+
+        public Applicant Find(string socialSecurityNumber)
+        {
+            var record = _context.People.FirstOrDefault(x => x.SocialSecurityNumber == socialSecurityNumber);
+
+            if (record == null)
+                return null;
+
+            var applicant = new Applicant(
+                record.Id,
+                record.Name,
+                record.Surname,
+                record.SocialSecurityNumber
+            );
+
+            return applicant;
         }
 
         #endregion

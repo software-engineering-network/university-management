@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExpressMapper;
-using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Infrastructure.Memory.Database;
+using Applicant = UniversityManagement.Domain.Read.Enrollment.Applicant;
+using IApplicantRepository = UniversityManagement.Domain.Read.Enrollment.IApplicantRepository;
 
 namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 {
@@ -34,6 +35,12 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
         public Applicant Find(long id)
         {
             var applicant = _context.People.FirstOrDefault(x => x.Id == id);
+            return Mapper.Map<Person, Applicant>(applicant);
+        }
+
+        public Applicant Find(string socialSecurityNumber)
+        {
+            var applicant = _context.People.FirstOrDefault(x => x.SocialSecurityNumber == socialSecurityNumber);
             return Mapper.Map<Person, Applicant>(applicant);
         }
 

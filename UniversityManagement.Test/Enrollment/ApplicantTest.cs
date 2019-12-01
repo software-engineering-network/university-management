@@ -15,24 +15,33 @@ namespace UniversityManagement.Test.Enrollment
         }
 
         [Theory]
-        [InlineData(null, "Doe")]
-        [InlineData("", "Doe")]
-        [InlineData(" ", "Doe")]
-        [InlineData("John", null)]
-        [InlineData("John", "")]
-        [InlineData("John", " ")]
-        public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(string name, string surname)
+        [InlineData(null, "Doe", "111-11-1111")]
+        [InlineData("", "Doe", "111-11-1111")]
+        [InlineData(" ", "Doe", "111-11-1111")]
+        [InlineData("John", null, "111-11-1111")]
+        [InlineData("John", "", "111-11-1111")]
+        [InlineData("John", " ", "111-11-1111")]
+        [InlineData("John", "Doe", "111-11-111")]
+        public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(
+            string name, 
+            string surname, 
+            string socialSecurityNumber
+        )
         {
-            Action createApplicant = () => new Applicant(name, surname);
+            Action createApplicant = () => new Applicant(name, surname, socialSecurityNumber);
 
             createApplicant.Should().Throw<ArgumentException>();
         }
 
         [Theory]
-        [InlineData("John", "Doe")]
-        public void WhenInstantiating_WithValidArguments_AllPropertiesAreSet(string name, string surname)
+        [InlineData("John", "Doe", "111-11-1111")]
+        public void WhenInstantiating_WithValidArguments_AllPropertiesAreSet(
+            string name, 
+            string surname, 
+            string socialSecurityNumber
+        )
         {
-            var applicant = new Applicant(name, surname);
+            var applicant = new Applicant(name, surname, socialSecurityNumber);
 
             applicant.Name.Should().Be(name);
             applicant.Surname.Should().Be(surname);

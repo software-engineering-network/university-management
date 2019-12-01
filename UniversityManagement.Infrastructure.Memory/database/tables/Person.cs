@@ -8,6 +8,7 @@ namespace UniversityManagement.Infrastructure.Memory.Database
 
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string SocialSecurityNumber { get; set; }
 
         #endregion
 
@@ -20,12 +21,13 @@ namespace UniversityManagement.Infrastructure.Memory.Database
         public Person(
             long id,
             string name,
-            string surname
-        )
-            : base(id)
+            string surname,
+            string socialSecurityNumber
+        ) : base(id)
         {
             Name = name;
             Surname = surname;
+            SocialSecurityNumber = socialSecurityNumber;
         }
 
         #endregion
@@ -41,7 +43,8 @@ namespace UniversityManagement.Infrastructure.Memory.Database
             return
                 Id == other.Id &&
                 Name == other.Name &&
-                Surname == other.Surname;
+                Surname == other.Surname &&
+                SocialSecurityNumber == other.SocialSecurityNumber;
         }
 
         public override bool Equals(object obj)

@@ -31,7 +31,7 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenInstantiating_WithNonExistingApplicant_ThrowArgumentException()
         {
-            var applicant = new Applicant("John", "Doe");
+            var applicant = new Applicant("John", "Doe", "111-11-1111");
 
             Action createApplication = () => new Application(applicant, _computerScienceMajor, _physicsMinor);
 

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Read\Enrollment\models\Discipline.cs" />
     <Compile Include="Read\Enrollment\models\ProgramType.cs" />
+    <Compile Include="Write\Enrollment\models\SocialSecurityNumber.cs" />
     <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\commands\CreateApplicationValidator.cs" />
     <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />

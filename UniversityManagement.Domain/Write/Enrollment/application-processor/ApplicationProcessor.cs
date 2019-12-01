@@ -31,12 +31,24 @@ namespace UniversityManagement.Domain.Write.Enrollment
             if (!Validate(command).IsValid)
                 return;
 
-            var applicant = GetApplicant(command);
+            var applicant = command.ApplicantId == 0
+                ? CreateApplicant(command)
+                : UpdateApplicant(command);
+
             var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
             var minor = _unitOfWork.MinorRepository.Find(command.MinorId);
-            var application = new Application(applicant, program, minor);
 
-            _unitOfWork.ApplicationRepository.Create(application);
+            if (command.ApplicationId == 0)
+            {
+                var application = new Application(applicant, program, minor);
+                _unitOfWork.ApplicationRepository.Create(application);
+            }
+            else
+            {
+                var application = new Application(command.ApplicationId, applicant, program, minor);
+                _unitOfWork.ApplicationRepository.Update(application);
+            }
+
             _unitOfWork.ApplicantRepository.Update(applicant);
             _unitOfWork.Commit();
         }
@@ -49,33 +61,41 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         public IValidationResult Validate(CreateApplication command)
         {
-            var validationResult = new ValidationResult(
-                _createApplicationValidator.Validate(command)
-            );
-
+            var fluentValidationResult = _createApplicationValidator.Validate(command);
+            var validationResult = new ValidationResult(fluentValidationResult);
             return validationResult;
         }
 
         #endregion
 
-        private Applicant GetApplicant(CreateApplication command)
+        private Applicant CreateApplicant(CreateApplication command)
         {
-            if (command.ApplicantId == 0)
-                CreateApplicant(command.ApplicantName, command.ApplicantSurname);
+            var existingApplicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
 
-            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
-            applicant.UpdateName(command.ApplicantName);
-            applicant.UpdateSurname(command.ApplicantSurname);
+            if (existingApplicant != null)
+                return existingApplicant;
 
-            return applicant;
-        }
-
-        private void CreateApplicant(string name, string surname)
-        {
-            var applicant = new Applicant(name, surname);
+            var applicant = new Applicant(
+                command.ApplicantName,
+                command.ApplicantSurname,
+                command.ApplicantSocialSecurityNumber
+            );
 
             _unitOfWork.ApplicantRepository.Create(applicant);
             _unitOfWork.Commit();
+
+            return _unitOfWork.ApplicantRepository.Find(applicant.SocialSecurityNumber.Value);
+        }
+
+        private Applicant UpdateApplicant(CreateApplication command)
+        {
+            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
+
+            applicant.UpdateName(command.ApplicantName);
+            applicant.UpdateSurname(command.ApplicantSurname);
+            applicant.UpdateSocialSecurityNumber(command.ApplicantSocialSecurityNumber);
+
+            return applicant;
         }
     }
 }

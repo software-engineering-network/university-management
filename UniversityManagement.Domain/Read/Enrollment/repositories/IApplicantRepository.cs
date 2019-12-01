@@ -2,5 +2,6 @@
 {
     public interface IApplicantRepository : IRepository<Applicant>
     {
+        Applicant Find(string socialSecurityNumber);
     }
 }

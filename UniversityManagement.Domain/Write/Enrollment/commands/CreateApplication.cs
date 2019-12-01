@@ -6,6 +6,7 @@
         public long ApplicantId { get; }
         public string ApplicantName { get; }
         public string ApplicantSurname { get; }
+        public string ApplicantSocialSecurityNumber { get; }
         public long MinorId { get; }
         public long ProgramId { get; }
 
@@ -14,6 +15,7 @@
             long applicantId,
             string applicantName,
             string applicantSurname,
+            string applicantSocialSecurityNumber,
             long programId,
             long minorId = 0
         )
@@ -22,6 +24,7 @@
             ApplicantId = applicantId;
             ApplicantName = applicantName;
             ApplicantSurname = applicantSurname;
+            ApplicantSocialSecurityNumber = applicantSocialSecurityNumber;
             MinorId = minorId;
             ProgramId = programId;
         }

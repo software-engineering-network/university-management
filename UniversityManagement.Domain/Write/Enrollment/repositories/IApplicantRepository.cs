@@ -4,5 +4,6 @@
         IReadRepository<Applicant>,
         IWriteRepository<Applicant>
     {
+        Applicant Find(string socialSecurityNumber);
     }
 }

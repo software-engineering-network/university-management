@@ -196,7 +196,7 @@ namespace UniversityManagement.Infrastructure.Memory.Database
         {
             return new List<Person>
             {
-                new Person(1, "John", "Doe")
+                new Person(1, "John", "Doe", "111-11-1111")
             };
         }
 
