@@ -45,6 +45,7 @@ namespace UniversityManagement.Test.Enrollment
 
             applicant.Name.Should().Be(name);
             applicant.Surname.Should().Be(surname);
+            applicant.SocialSecurityNumber.Value.Should().Be(socialSecurityNumber);
         }
 
         [Theory]
