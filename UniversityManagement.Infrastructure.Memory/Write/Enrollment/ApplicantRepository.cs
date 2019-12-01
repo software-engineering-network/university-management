@@ -66,9 +66,6 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
 
             var record = _context.People.First(x => x.Id == applicant.Id);
 
-            if (record == candidatePerson)
-                return;
-
             Action update = () =>
             {
                 record.Name = candidatePerson.Name;

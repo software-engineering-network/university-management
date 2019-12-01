@@ -108,6 +108,10 @@ namespace UniversityManagement.Domain.Write.Enrollment
             applicant.UpdateSurname(command.ApplicantSurname);
             applicant.UpdateSocialSecurityNumber(command.ApplicantSocialSecurityNumber);
 
+            var dbApplicant = _unitOfWork.ApplicantRepository.Find(applicant.Id);
+            if (dbApplicant == applicant)
+                return;
+
             _unitOfWork.ApplicantRepository.Update(applicant);
         }
     }
