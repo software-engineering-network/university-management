@@ -58,9 +58,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         private Application BuildApplication(CreateApplication command)
         {
-            var applicant = command.ApplicantId == 0
-                ? CreateApplicant(command)
-                : UpdateApplicant(command);
+            var applicant = GetApplicant(command);
+            UpdateApplicant(applicant, command);
 
             var program = _unitOfWork.ProgramRepository.Find(command.ProgramId);
             var minor = _unitOfWork.MinorRepository.Find(command.MinorId);
@@ -75,13 +74,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
             return application;
         }
 
-        private Applicant CreateApplicant(CreateApplication command)
+        private void CreateApplicant(CreateApplication command)
         {
-            var existingApplicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
-
-            if (existingApplicant != null)
-                return existingApplicant;
-
             var applicant = new Applicant(
                 command.ApplicantName,
                 command.ApplicantSurname,
@@ -90,21 +84,31 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
             _unitOfWork.ApplicantRepository.Create(applicant);
             _unitOfWork.Commit();
-
-            return _unitOfWork.ApplicantRepository.Find(applicant.SocialSecurityNumber.Value);
         }
 
-        private Applicant UpdateApplicant(CreateApplication command)
+        private Applicant GetApplicant(CreateApplication command)
         {
-            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
+            // an associated applicant exists
+            if (command.ApplicantId != 0)
+                return _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
 
+            // applicant might exist
+            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
+            if (applicant != null)
+                return applicant;
+            
+            // applicant does not exist
+            CreateApplicant(command);
+            return _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
+        }
+
+        private void UpdateApplicant(Applicant applicant, CreateApplication command)
+        {
             applicant.UpdateName(command.ApplicantName);
             applicant.UpdateSurname(command.ApplicantSurname);
             applicant.UpdateSocialSecurityNumber(command.ApplicantSocialSecurityNumber);
 
             _unitOfWork.ApplicantRepository.Update(applicant);
-
-            return applicant;
         }
     }
 }
