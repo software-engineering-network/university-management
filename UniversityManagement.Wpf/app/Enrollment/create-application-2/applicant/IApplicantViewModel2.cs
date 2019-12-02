@@ -11,10 +11,13 @@ namespace UniversityManagement.Wpf.Enrollment
         string NameValidationMessage { get; }
         string Surname { get; set; }
         string SurnameValidationMessage { get; }
+        string SocialSecurityNumber { get; set; }
+        string SocialSecurityNumberValidationMessage { get; }
 
         #endregion
 
         event EventHandler NameChangedHandler;
         event EventHandler SurnameChangedHandler;
+        event EventHandler SocialSecurityNumberChangedHandler;
     }
 }

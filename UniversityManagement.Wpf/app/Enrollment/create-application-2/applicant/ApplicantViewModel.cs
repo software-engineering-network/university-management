@@ -24,6 +24,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 _applicant = value;
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(Surname));
+                OnPropertyChanged(nameof(SocialSecurityNumber));
             }
         }
 
@@ -55,9 +56,7 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public event EventHandler NameChangedHandler;
 
-        public string NameValidationMessage => _validationResult.GetMessage("ApplicantName");
 
         public string Surname
         {
@@ -73,9 +72,27 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public event EventHandler SurnameChangedHandler;
+        public string SocialSecurityNumber
+        {
+            get => _applicant.SocialSecurityNumber;
+            set
+            {
+                if (SocialSecurityNumber == value)
+                    return;
 
+                _applicant.SocialSecurityNumber = value;
+                OnPropertyChanged(nameof(SocialSecurityNumber));
+                SocialSecurityNumberChangedHandler?.Invoke(this, null);
+            }
+        }
+
+        public event EventHandler NameChangedHandler;
+        public event EventHandler SurnameChangedHandler;
+        public event EventHandler SocialSecurityNumberChangedHandler;
+
+        public string NameValidationMessage => _validationResult.GetMessage("ApplicantName");
         public string SurnameValidationMessage => _validationResult.GetMessage("ApplicantSurname");
+        public string SocialSecurityNumberValidationMessage => _validationResult.GetMessage("ApplicantSocialSecurityNumber");
 
         public IValidationResult ValidationResult
         {
@@ -84,6 +101,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 _validationResult = value;
                 OnPropertyChanged(nameof(NameValidationMessage));
                 OnPropertyChanged(nameof(SurnameValidationMessage));
+                OnPropertyChanged(nameof(SocialSecurityNumberValidationMessage));
             }
         }
 

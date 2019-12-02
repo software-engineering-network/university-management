@@ -32,6 +32,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 _applicant = value;
                 _applicant.NameChangedHandler += ValidateHandler;
                 _applicant.SurnameChangedHandler += ValidateHandler;
+                _applicant.SocialSecurityNumberChangedHandler += ValidateHandler;
             }
         }
 
@@ -132,7 +133,7 @@ namespace UniversityManagement.Wpf.Enrollment
             return new SelectorViewModel<Minor>(
                 "Minor:",
                 application.Minor,
-                "minorId"
+                "MinorId"
             );
         }
 
