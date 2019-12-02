@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="app\Enrollment\create-application-2\application\ApplicationView2.xaml.cs">
+      <DependentUpon>ApplicationView2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicantView.xaml.cs">
       <DependentUpon>ApplicantView.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,7 @@
     </Compile>
     <Compile Include="app\Enrollment\create-application\ApplicationViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IApplicantViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application-2\applicant\IApplicantViewModel2.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IApplicationViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\ICollegeSelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application\contracts\IProgramSelectorViewModel.cs" />
@@ -76,13 +80,22 @@
     <Compile Include="app\Enrollment\create-application\ElectivesView.xaml.cs">
       <DependentUpon>ElectivesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="app\Enrollment\create-application-2\applicant\ApplicantView2.xaml.cs">
+      <DependentUpon>ApplicantView2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="app\Enrollment\create-application-2\application\ApplicationViewModel2.cs" />
     <Compile Include="app\Enrollment\create-application\ProgramView.xaml.cs">
       <DependentUpon>ProgramView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="app\Enrollment\create-application-2\applicant\ApplicantViewModel.cs" />
     <Compile Include="app\main-window\MainWindowViewModel.cs" />
     <Compile Include="shared\ViewModelBase.cs" />
     <Compile Include="_ioc\WpfModule.cs" />
     <Compile Include="_ioc\Write\UnitOfWork.cs" />
+    <Page Include="app\Enrollment\create-application-2\application\ApplicationView2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="app\Enrollment\create-application\ApplicantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="app\Enrollment\create-application\ElectivesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="app\Enrollment\create-application-2\applicant\ApplicantView2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
