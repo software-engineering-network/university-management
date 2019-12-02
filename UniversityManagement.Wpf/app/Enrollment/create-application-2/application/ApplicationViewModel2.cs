@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -96,7 +95,7 @@ namespace UniversityManagement.Wpf.Enrollment
         )
         {
             _service = service;
-            
+
             _application = application == null
                 ? new Application()
                 : application;
@@ -181,17 +180,6 @@ namespace UniversityManagement.Wpf.Enrollment
             ProgramSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
         }
 
-        private void SelectedProgramChangedHandler(object sender, EventArgs args)
-        {
-            var selectedProgram = ((SelectedItemChangedArgs<Program>) args).SelectedItem;
-            _application.Program = selectedProgram;
-
-            if (selectedProgram != null && selectedProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
-                ProgramSelectorCollegeFilter.SelectedItem = selectedProgram.College;
-
-            Validate();
-        }
-
         private void SelectedMinorChangedHandler(object sender, EventArgs args)
         {
             var selectedMinor = ((SelectedItemChangedArgs<Minor>) args).SelectedItem;
@@ -200,9 +188,20 @@ namespace UniversityManagement.Wpf.Enrollment
             Validate();
         }
 
+        private void SelectedProgramChangedHandler(object sender, EventArgs args)
+        {
+            var selectedProgram = ((SelectedItemChangedArgs<Program>)args).SelectedItem;
+            _application.Program = selectedProgram;
+
+            if (selectedProgram != null && selectedProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
+                ProgramSelectorCollegeFilter.SelectedItem = selectedProgram.College;
+
+            Validate();
+        }
+
         private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
-            var selectedCollege = ((SelectedItemChangedArgs<College>)args).SelectedItem;
+            var selectedCollege = ((SelectedItemChangedArgs<College>) args).SelectedItem;
             _application.College = selectedCollege;
 
             UpdateProgramSelector();
