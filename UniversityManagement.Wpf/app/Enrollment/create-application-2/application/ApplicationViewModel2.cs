@@ -14,6 +14,7 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly ICreateApplicationService _service;
 
         private IApplicantViewModel2 _applicant;
+        private ISelectorViewModel<Minor> _minorSelector;
         private ISelectorViewModel<Program> _programSelector;
         private ISelectorViewModel<College> _programSelectorCollegeFilter;
         private IValidationResult _validationResult;
@@ -40,6 +41,16 @@ namespace UniversityManagement.Wpf.Enrollment
             {
                 _programSelectorCollegeFilter = value;
                 _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramChangedHandler;
+            }
+        }
+
+        public ISelectorViewModel<Minor> MinorSelector
+        {
+            get => _minorSelector;
+            set
+            {
+                _minorSelector = value;
+                _minorSelector.SelectedItemChanged += SelectedProgramChangedHandler;
             }
         }
 
@@ -87,6 +98,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 : application;
 
             Applicant = CreateApplicant(_application);
+            MinorSelector = CreateMinorSelector(_application);
             ProgramSelector = CreateProgramSelector(_application);
             ProgramSelectorCollegeFilter = CreateProgramSelectorCollegeFilter(_application);
 
@@ -101,6 +113,18 @@ namespace UniversityManagement.Wpf.Enrollment
                 application.Applicant = new Applicant();
 
             return new ApplicantViewModel(application.Applicant);
+        }
+
+        private static ISelectorViewModel<Minor> CreateMinorSelector(Application application)
+        {
+            if (application.Minor == null)
+                application.Minor = new Minor();
+
+            return new SelectorViewModel<Minor>(
+                "Minor:",
+                application.Minor,
+                "minorId"
+            );
         }
 
         private static ISelectorViewModel<Program> CreateProgramSelector(Application application)

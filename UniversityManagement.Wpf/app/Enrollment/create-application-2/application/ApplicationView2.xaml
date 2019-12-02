@@ -14,6 +14,8 @@
                 <enrollment:SelectorView DataContext="{Binding ProgramSelector}" />
             </StackPanel>
         </GroupBox>
-        <enrollment:ElectivesView />
+        <GroupBox Header="Electives" Margin="6">
+            <enrollment:SelectorView DataContext="{Binding MinorSelector}" />
+        </GroupBox>
     </StackPanel>
 </UserControl>
