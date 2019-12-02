@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -41,7 +42,7 @@ namespace UniversityManagement.Wpf.Enrollment
             set
             {
                 _programSelectorCollegeFilter = value;
-                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramChangedHandler;
+                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramSelectorCollegeFilterChangedHandler;
             }
         }
 
@@ -51,7 +52,7 @@ namespace UniversityManagement.Wpf.Enrollment
             set
             {
                 _minorSelector = value;
-                _minorSelector.SelectedItemChanged += SelectedProgramChangedHandler;
+                //_minorSelector.SelectedItemChanged += SelectedProgramChangedHandler;
             }
         }
 
@@ -80,7 +81,9 @@ namespace UniversityManagement.Wpf.Enrollment
             new List<IValidationResultViewModel>
             {
                 Applicant,
-                ProgramSelector
+                MinorSelector,
+                ProgramSelector,
+                ProgramSelectorCollegeFilter
             };
 
         #endregion
@@ -180,7 +183,33 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void SelectedProgramChangedHandler(object sender, EventArgs args)
         {
+            var selectedProgram = ((SelectedItemChangedArgs<Program>) args).SelectedItem;
+            _application.Program = selectedProgram;
+
+            if (selectedProgram != null && selectedProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
+                ProgramSelectorCollegeFilter.SelectedItem = selectedProgram.College;
+
             Validate();
+        }
+
+        private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
+        {
+            var selectedCollege = ((SelectedItemChangedArgs<College>)args).SelectedItem;
+            _application.College = selectedCollege;
+
+            UpdateProgramSelector();
+        }
+
+        private void UpdateProgramSelector()
+        {
+            var previousProgram = ProgramSelector.SelectedItem;
+
+            PopulateProgramSelector();
+
+            if (previousProgram == null || previousProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
+                return;
+
+            ProgramSelector.SelectedItem = previousProgram;
         }
 
         private void Validate()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Wpf.Enrollment
@@ -72,12 +73,23 @@ namespace UniversityManagement.Wpf.Enrollment
                 if (_selectedItem.Equals(value))
                     return;
 
-                _selectedItem = value;
+                _selectedItem = Items.First(x => x.Equals(value));
                 OnPropertyChanged(nameof(SelectedItem));
-                SelectedItemChanged?.Invoke(this, null);
+
+                var args = new SelectedItemChangedArgs<T>
+                {
+                    SelectedItem = _selectedItem
+                };
+
+                SelectedItemChanged?.Invoke(this, args);
             }
         }
 
         #endregion
+    }
+
+    public class SelectedItemChangedArgs<T> : EventArgs
+    {
+        public T SelectedItem { get; set; }
     }
 }
