@@ -8,7 +8,7 @@
              Height="450" Width="800">
     <StackPanel>
         <enrollment:ApplicantView2 DataContext="{Binding Applicant}" />
-        <enrollment:ProgramView DataContext="{Binding Program}" />
+        <enrollment:ProgramView2 DataContext="{Binding ProgramSelector}" />
         <enrollment:ElectivesView />
     </StackPanel>
 </UserControl>

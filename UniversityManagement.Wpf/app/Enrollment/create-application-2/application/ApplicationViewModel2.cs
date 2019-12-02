@@ -14,15 +14,8 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly ICreateApplicationService _service;
 
         private IApplicantViewModel2 _applicant;
-        private IProgramViewModel _program;
+        private ISelectorViewModel<Program> _programSelector;
         private IValidationResult _validationResult;
-
-        private IEnumerable<IValidationResultViewModel> ValidationResultViewModels =>
-            new List<IValidationResultViewModel>
-            {
-                Applicant,
-                Program
-            };
 
         #endregion
 
@@ -39,13 +32,13 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public IProgramViewModel Program
+        public ISelectorViewModel<Program> ProgramSelector
         {
-            get => _program;
+            get => _programSelector;
             set
             {
-                _program = value;
-                _program.SelectedProgramChanged += SelectedProgramChangedHandler;
+                _programSelector = value;
+                _programSelector.SelectedItemChanged += SelectedProgramChangedHandler;
             }
         }
 
@@ -59,6 +52,13 @@ namespace UniversityManagement.Wpf.Enrollment
                     vm.ValidationResult = _validationResult;
             }
         }
+
+        private IEnumerable<IValidationResultViewModel> ValidationResultViewModels =>
+            new List<IValidationResultViewModel>
+            {
+                Applicant,
+                ProgramSelector
+            };
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 : application;
 
             Applicant = CreateApplicantViewModel(_application);
-            Program = CreateProgramViewModel(_application);
+            ProgramSelector = CreateProgramViewModel(_application);
 
             Validate();
         }
@@ -91,12 +91,15 @@ namespace UniversityManagement.Wpf.Enrollment
             return new ApplicantViewModel(application.Applicant);
         }
 
-        private static IProgramViewModel CreateProgramViewModel(Application application)
+        private static ISelectorViewModel<Program> CreateProgramViewModel(Application application)
         {
             if (application.Program == null)
                 application.Program = new Program();
 
-            return new ProgramViewModel(application.Program);
+            return new SelectorViewModel<Program>(
+                application.Program,
+                "ProgramId"
+            );
         }
 
         private void SelectedProgramChangedHandler(object sender, EventArgs args)

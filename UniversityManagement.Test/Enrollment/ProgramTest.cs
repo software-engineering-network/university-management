@@ -16,7 +16,7 @@ namespace UniversityManagement.Test.Enrollment
         //[InlineData(1, 1, 1, ProgramType.Minor)]
         //public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(long id, long disciplineId, long collegeId, ProgramType programType)
         //{
-        //    Action createProgram = () => new Program(id, disciplineId, collegeId, programType);
+        //    Action createProgram = () => new ProgramSelector(id, disciplineId, collegeId, programType);
 
         //    createProgram.Should().Throw<ArgumentException>();
         //}
