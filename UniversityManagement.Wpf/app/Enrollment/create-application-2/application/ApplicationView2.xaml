@@ -15,7 +15,10 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Electives" Margin="6">
-            <enrollment:SelectorView DataContext="{Binding MinorSelector}" />
+            <StackPanel Orientation="Horizontal">
+                <enrollment:SelectorView DataContext="{Binding MinorSelectorCollegeFilter}" />
+                <enrollment:SelectorView DataContext="{Binding MinorSelector}" />
+            </StackPanel>
         </GroupBox>
     </StackPanel>
 </UserControl>

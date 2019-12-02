@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -16,6 +17,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private IApplicantViewModel2 _applicant;
         private ISelectorViewModel<Minor> _minorSelector;
+        private ISelectorViewModel<College> _minorSelectorCollegeFilter;
         private ISelectorViewModel<Program> _programSelector;
         private ISelectorViewModel<College> _programSelectorCollegeFilter;
         private IValidationResult _validationResult;
@@ -36,16 +38,6 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public ISelectorViewModel<College> ProgramSelectorCollegeFilter
-        {
-            get => _programSelectorCollegeFilter;
-            set
-            {
-                _programSelectorCollegeFilter = value;
-                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramSelectorCollegeFilterChangedHandler;
-            }
-        }
-
         public ISelectorViewModel<Minor> MinorSelector
         {
             get => _minorSelector;
@@ -56,6 +48,16 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
+        public ISelectorViewModel<College> MinorSelectorCollegeFilter
+        {
+            get => _minorSelectorCollegeFilter;
+            set
+            {
+                _minorSelectorCollegeFilter = value;
+                _minorSelectorCollegeFilter.SelectedItemChanged += SelectedMinorSelectorCollegeFilterChangedHandler;
+            }
+        }
+
         public ISelectorViewModel<Program> ProgramSelector
         {
             get => _programSelector;
@@ -63,6 +65,16 @@ namespace UniversityManagement.Wpf.Enrollment
             {
                 _programSelector = value;
                 _programSelector.SelectedItemChanged += SelectedProgramChangedHandler;
+            }
+        }
+
+        public ISelectorViewModel<College> ProgramSelectorCollegeFilter
+        {
+            get => _programSelectorCollegeFilter;
+            set
+            {
+                _programSelectorCollegeFilter = value;
+                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramSelectorCollegeFilterChangedHandler;
             }
         }
 
@@ -104,13 +116,13 @@ namespace UniversityManagement.Wpf.Enrollment
             Applicant = CreateApplicant(_application);
 
             MinorSelector = CreateMinorSelector(_application);
-            PopulateMinorSelector();
-
+            MinorSelectorCollegeFilter = CreateMinorSelectorCollegeFilter(_application);
             ProgramSelector = CreateProgramSelector(_application);
-            PopulateProgramSelector();
-
             ProgramSelectorCollegeFilter = CreateProgramSelectorCollegeFilter(_application);
-            PopulateProgramSelectorCollegeFilter();
+
+            PopulateMinorSelector();
+            PopulateProgramSelector();
+            PopulateCollegeFilters();
 
             Validate();
         }
@@ -134,6 +146,14 @@ namespace UniversityManagement.Wpf.Enrollment
                 "Minor:",
                 application.Minor,
                 "MinorId"
+            );
+        }
+
+        private static ISelectorViewModel<College> CreateMinorSelectorCollegeFilter(Application application)
+        {
+            return new SelectorViewModel<College>(
+                "College:",
+                null
             );
         }
 
@@ -175,9 +195,10 @@ namespace UniversityManagement.Wpf.Enrollment
             ProgramSelector.Items = new ObservableCollection<Program>(programs);
         }
 
-        private void PopulateProgramSelectorCollegeFilter()
+        private void PopulateCollegeFilters()
         {
-            var colleges = _service.FetchColleges();
+            var colleges = _service.FetchColleges().ToList();
+            MinorSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
             ProgramSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
         }
 
@@ -200,12 +221,29 @@ namespace UniversityManagement.Wpf.Enrollment
             Validate();
         }
 
+        private void SelectedMinorSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
+        {
+            var selectedCollege = ((SelectedItemChangedArgs<College>) args).SelectedItem;
+            
+            UpdateMinorSelector();
+        }
+
         private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
             var selectedCollege = ((SelectedItemChangedArgs<College>) args).SelectedItem;
             _application.College = selectedCollege;
 
             UpdateProgramSelector();
+        }
+
+        private void UpdateMinorSelector()
+        {
+            var previousMinor = MinorSelector.SelectedItem;
+
+            PopulateMinorSelector();
+
+            if (previousMinor != null && previousMinor.College == MinorSelectorCollegeFilter.SelectedItem)
+                MinorSelector.SelectedItem = previousMinor;
         }
 
         private void UpdateProgramSelector()
