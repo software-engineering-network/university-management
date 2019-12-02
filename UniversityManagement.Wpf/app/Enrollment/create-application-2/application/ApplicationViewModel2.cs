@@ -52,7 +52,7 @@ namespace UniversityManagement.Wpf.Enrollment
             set
             {
                 _minorSelector = value;
-                //_minorSelector.SelectedItemChanged += SelectedProgramChangedHandler;
+                _minorSelector.SelectedItemChanged += SelectedMinorChangedHandler;
             }
         }
 
@@ -192,6 +192,14 @@ namespace UniversityManagement.Wpf.Enrollment
             Validate();
         }
 
+        private void SelectedMinorChangedHandler(object sender, EventArgs args)
+        {
+            var selectedMinor = ((SelectedItemChangedArgs<Minor>) args).SelectedItem;
+            _application.Minor = selectedMinor;
+
+            Validate();
+        }
+
         private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
             var selectedCollege = ((SelectedItemChangedArgs<College>)args).SelectedItem;
@@ -206,10 +214,8 @@ namespace UniversityManagement.Wpf.Enrollment
 
             PopulateProgramSelector();
 
-            if (previousProgram == null || previousProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
-                return;
-
-            ProgramSelector.SelectedItem = previousProgram;
+            if (previousProgram != null && previousProgram.College == ProgramSelectorCollegeFilter.SelectedItem)
+                ProgramSelector.SelectedItem = previousProgram;
         }
 
         private void Validate()
