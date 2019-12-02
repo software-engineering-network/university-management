@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -13,7 +14,15 @@ namespace UniversityManagement.Wpf.Enrollment
         private readonly ICreateApplicationService _service;
 
         private IApplicantViewModel2 _applicant;
+        private IProgramViewModel _program;
         private IValidationResult _validationResult;
+
+        private IEnumerable<IValidationResultViewModel> ValidationResultViewModels =>
+            new List<IValidationResultViewModel>
+            {
+                Applicant,
+                Program
+            };
 
         #endregion
 
@@ -25,8 +34,18 @@ namespace UniversityManagement.Wpf.Enrollment
             set
             {
                 _applicant = value;
-                _applicant.NameChangedHandler += Validate;
-                _applicant.SurnameChangedHandler += Validate;
+                _applicant.NameChangedHandler += ValidateHandler;
+                _applicant.SurnameChangedHandler += ValidateHandler;
+            }
+        }
+
+        public IProgramViewModel Program
+        {
+            get => _program;
+            set
+            {
+                _program = value;
+                _program.SelectedProgramChanged += SelectedProgramChangedHandler;
             }
         }
 
@@ -36,7 +55,8 @@ namespace UniversityManagement.Wpf.Enrollment
             {
                 _validationResult = value;
 
-                Applicant.ValidationResult = _validationResult;
+                foreach (var vm in ValidationResultViewModels)
+                    vm.ValidationResult = _validationResult;
             }
         }
 
@@ -56,6 +76,7 @@ namespace UniversityManagement.Wpf.Enrollment
                 : application;
 
             Applicant = CreateApplicantViewModel(_application);
+            Program = CreateProgramViewModel(_application);
 
             Validate();
         }
@@ -70,12 +91,25 @@ namespace UniversityManagement.Wpf.Enrollment
             return new ApplicantViewModel(application.Applicant);
         }
 
+        private static IProgramViewModel CreateProgramViewModel(Application application)
+        {
+            if (application.Program == null)
+                application.Program = new Program();
+
+            return new ProgramViewModel(application.Program);
+        }
+
+        private void SelectedProgramChangedHandler(object sender, EventArgs args)
+        {
+            Validate();
+        }
+
         private void Validate()
         {
             ValidationResult = _service.Validate(_application);
         }
 
-        private void Validate(object sender, EventArgs args)
+        private void ValidateHandler(object sender, EventArgs args)
         {
             Validate();
         }

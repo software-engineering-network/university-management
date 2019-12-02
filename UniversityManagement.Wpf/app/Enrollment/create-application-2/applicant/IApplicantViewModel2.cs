@@ -3,7 +3,7 @@ using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
-    public interface IApplicantViewModel2
+    public interface IApplicantViewModel2 : IValidationResultViewModel
     {
         #region Properties
 
@@ -11,7 +11,6 @@ namespace UniversityManagement.Wpf.Enrollment
         string NameValidationMessage { get; }
         string Surname { get; set; }
         string SurnameValidationMessage { get; }
-        IValidationResult ValidationResult { set; }
 
         #endregion
 
