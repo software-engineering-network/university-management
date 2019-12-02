@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -92,15 +93,21 @@ namespace UniversityManagement.Wpf.Enrollment
         )
         {
             _service = service;
-
+            
             _application = application == null
                 ? new Application()
                 : application;
 
             Applicant = CreateApplicant(_application);
+
             MinorSelector = CreateMinorSelector(_application);
+            PopulateMinorSelector();
+
             ProgramSelector = CreateProgramSelector(_application);
+            PopulateProgramSelector();
+
             ProgramSelectorCollegeFilter = CreateProgramSelectorCollegeFilter(_application);
+            PopulateProgramSelectorCollegeFilter();
 
             Validate();
         }
@@ -148,6 +155,27 @@ namespace UniversityManagement.Wpf.Enrollment
                 "College:",
                 application.College
             );
+        }
+
+        private void PopulateMinorSelector()
+        {
+            var minors = _service.FetchMinors();
+            MinorSelector.Items = new ObservableCollection<Minor>(minors);
+        }
+
+        private void PopulateProgramSelector()
+        {
+            var programs = _application.College == null
+                ? _service.FetchPrograms()
+                : _service.FetchPrograms(_application.College.Id);
+
+            ProgramSelector.Items = new ObservableCollection<Program>(programs);
+        }
+
+        private void PopulateProgramSelectorCollegeFilter()
+        {
+            var colleges = _service.FetchColleges();
+            ProgramSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
         }
 
         private void SelectedProgramChangedHandler(object sender, EventArgs args)

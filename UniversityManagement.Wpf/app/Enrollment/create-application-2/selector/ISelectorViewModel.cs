@@ -8,7 +8,7 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Properties
 
-        ObservableCollection<T> Items { get; }
+        ObservableCollection<T> Items { get; set; }
         string LabelText { get; }
         T SelectedItem { get; set; }
         string SelectedItemValidationMessage { get; }

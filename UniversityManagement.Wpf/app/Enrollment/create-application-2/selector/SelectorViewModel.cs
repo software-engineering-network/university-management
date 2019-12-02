@@ -52,7 +52,7 @@ namespace UniversityManagement.Wpf.Enrollment
         public ObservableCollection<T> Items
         {
             get => _items;
-            private set
+            set
             {
                 if (_items == value)
                     return;
