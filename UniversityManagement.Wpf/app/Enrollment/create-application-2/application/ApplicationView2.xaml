@@ -9,7 +9,7 @@
     <StackPanel>
         <enrollment:ApplicantView2 DataContext="{Binding Applicant}" />
         <GroupBox Header="Program" Margin="6">
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <enrollment:SelectorView DataContext="{Binding ProgramSelectorCollegeFilter}" />
                 <enrollment:SelectorView DataContext="{Binding ProgramSelector}" />
             </StackPanel>
