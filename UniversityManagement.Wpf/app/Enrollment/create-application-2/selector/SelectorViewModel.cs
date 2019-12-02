@@ -7,7 +7,7 @@ namespace UniversityManagement.Wpf.Enrollment
 {
     public class SelectorViewModel<T> :
         ViewModelBase,
-        ISelectorViewModel<T>
+        ISelectorViewModel<T> where T : UniversityManagement.Domain.Read.Entity
     {
         #region Fields
 
@@ -70,10 +70,10 @@ namespace UniversityManagement.Wpf.Enrollment
             get => _selectedItem;
             set
             {
-                if (_selectedItem.Equals(value))
+                if (_selectedItem == value)
                     return;
 
-                _selectedItem = Items.First(x => x.Equals(value));
+                _selectedItem = Items.FirstOrDefault(x => x == value);
                 OnPropertyChanged(nameof(SelectedItem));
 
                 var args = new SelectedItemChangedArgs<T>
