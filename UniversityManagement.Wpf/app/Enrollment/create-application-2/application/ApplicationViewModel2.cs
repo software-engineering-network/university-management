@@ -15,6 +15,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private IApplicantViewModel2 _applicant;
         private ISelectorViewModel<Program> _programSelector;
+        private ISelectorViewModel<College> _programSelectorCollegeFilter;
         private IValidationResult _validationResult;
 
         #endregion
@@ -29,6 +30,16 @@ namespace UniversityManagement.Wpf.Enrollment
                 _applicant = value;
                 _applicant.NameChangedHandler += ValidateHandler;
                 _applicant.SurnameChangedHandler += ValidateHandler;
+            }
+        }
+
+        public ISelectorViewModel<College> ProgramSelectorCollegeFilter
+        {
+            get => _programSelectorCollegeFilter;
+            set
+            {
+                _programSelectorCollegeFilter = value;
+                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramChangedHandler;
             }
         }
 
@@ -75,15 +86,16 @@ namespace UniversityManagement.Wpf.Enrollment
                 ? new Application()
                 : application;
 
-            Applicant = CreateApplicantViewModel(_application);
-            ProgramSelector = CreateProgramViewModel(_application);
+            Applicant = CreateApplicant(_application);
+            ProgramSelector = CreateProgramSelector(_application);
+            ProgramSelectorCollegeFilter = CreateProgramSelectorCollegeFilter(_application);
 
             Validate();
         }
 
         #endregion
 
-        private static IApplicantViewModel2 CreateApplicantViewModel(Application application)
+        private static IApplicantViewModel2 CreateApplicant(Application application)
         {
             if (application.Applicant == null)
                 application.Applicant = new Applicant();
@@ -91,14 +103,26 @@ namespace UniversityManagement.Wpf.Enrollment
             return new ApplicantViewModel(application.Applicant);
         }
 
-        private static ISelectorViewModel<Program> CreateProgramViewModel(Application application)
+        private static ISelectorViewModel<Program> CreateProgramSelector(Application application)
         {
             if (application.Program == null)
                 application.Program = new Program();
 
             return new SelectorViewModel<Program>(
+                "Program:",
                 application.Program,
                 "ProgramId"
+            );
+        }
+
+        private static ISelectorViewModel<College> CreateProgramSelectorCollegeFilter(Application application)
+        {
+            if (application.College == null)
+                application.College = new College();
+
+            return new SelectorViewModel<College>(
+                "College:",
+                application.College
             );
         }
 

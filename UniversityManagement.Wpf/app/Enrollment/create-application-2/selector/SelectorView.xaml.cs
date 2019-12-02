@@ -3,11 +3,11 @@
 namespace UniversityManagement.Wpf.Enrollment
 {
     /// <summary>
-    /// Interaction logic for ProgramView.xaml
+    /// Interaction logic for SelectorView.xaml
     /// </summary>
-    public partial class ProgramView2 : UserControl
+    public partial class SelectorView : UserControl
     {
-        public ProgramView2()
+        public SelectorView()
         {
             InitializeComponent();
         }

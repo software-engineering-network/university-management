@@ -26,6 +26,9 @@ namespace UniversityManagement.Domain.Write
 
         public string GetMessage(string propertyName)
         {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                return null;
+
             return Errors.ContainsKey(propertyName)
                 ? Errors[propertyName]
                 : null;

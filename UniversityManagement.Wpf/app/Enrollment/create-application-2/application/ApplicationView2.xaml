@@ -8,7 +8,12 @@
              Height="450" Width="800">
     <StackPanel>
         <enrollment:ApplicantView2 DataContext="{Binding Applicant}" />
-        <enrollment:ProgramView2 DataContext="{Binding ProgramSelector}" />
+        <GroupBox Header="Program" Margin="6">
+            <StackPanel>
+                <enrollment:SelectorView DataContext="{Binding ProgramSelectorCollegeFilter}" />
+                <enrollment:SelectorView DataContext="{Binding ProgramSelector}" />
+            </StackPanel>
+        </GroupBox>
         <enrollment:ElectivesView />
     </StackPanel>
 </UserControl>

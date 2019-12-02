@@ -20,8 +20,13 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region Construction
 
-        public SelectorViewModel(T selectedItem, string validationResultKey)
+        public SelectorViewModel(
+            string labelText,
+            T selectedItem,
+            string validationResultKey = null
+        )
         {
+            LabelText = labelText;
             _selectedItem = selectedItem;
             _validationResultKey = validationResultKey;
             ValidationResult = new ValidationResult();
@@ -56,6 +61,8 @@ namespace UniversityManagement.Wpf.Enrollment
                 OnPropertyChanged(nameof(Items));
             }
         }
+
+        public string LabelText { get; }
 
         public T SelectedItem
         {

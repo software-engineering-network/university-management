@@ -61,8 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="app\Enrollment\create-application-2\ProgramView2.xaml.cs">
-      <DependentUpon>ProgramView2.xaml</DependentUpon>
+    <Compile Include="app\Enrollment\create-application-2\selector\SelectorView.xaml.cs">
+      <DependentUpon>SelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\Enrollment\create-application-2\selector\ISelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application-2\IValidationResultViewModel.cs" />
@@ -102,7 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="app\Enrollment\create-application-2\ProgramView2.xaml">
+    <Page Include="app\Enrollment\create-application-2\selector\SelectorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
