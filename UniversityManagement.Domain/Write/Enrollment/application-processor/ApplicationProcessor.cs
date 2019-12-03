@@ -6,6 +6,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Fields
 
+        private readonly IPersonService _personService;
         private readonly CreateApplicationValidator _createApplicationValidator;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -20,6 +21,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
         {
             _createApplicationValidator = createApplicationValidator;
             _unitOfWork = unitOfWork;
+            _personService = new PersonService(_unitOfWork);
         }
 
         #endregion
@@ -76,43 +78,39 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         private void CreateApplicant(CreateApplication command)
         {
-            var applicant = new Applicant(
+            var applicant = new Person(
                 command.ApplicantName,
                 command.ApplicantSurname,
                 command.ApplicantSocialSecurityNumber
             );
 
-            _unitOfWork.ApplicantRepository.Create(applicant);
+            _personService.Create(applicant);
             _unitOfWork.Commit();
         }
 
-        private Applicant GetApplicant(CreateApplication command)
+        private Person GetApplicant(CreateApplication command)
         {
             // an associated applicant exists
             if (command.ApplicantId != 0)
-                return _unitOfWork.ApplicantRepository.Find(command.ApplicantId);
+                return _unitOfWork.PersonRepository.Find(command.ApplicantId);
 
             // applicant might exist
-            var applicant = _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
+            var applicant = _unitOfWork.PersonRepository.Find(new SocialSecurityNumber(command.ApplicantSocialSecurityNumber));
             if (applicant != null)
                 return applicant;
             
             // applicant does not exist
             CreateApplicant(command);
-            return _unitOfWork.ApplicantRepository.Find(command.ApplicantSocialSecurityNumber);
+            return _unitOfWork.PersonRepository.Find(new SocialSecurityNumber(command.ApplicantSocialSecurityNumber));
         }
 
-        private void UpdateApplicant(Applicant applicant, CreateApplication command)
+        private void UpdateApplicant(Person applicant, CreateApplication command)
         {
             applicant.UpdateName(command.ApplicantName);
             applicant.UpdateSurname(command.ApplicantSurname);
             applicant.UpdateSocialSecurityNumber(command.ApplicantSocialSecurityNumber);
 
-            var dbApplicant = _unitOfWork.ApplicantRepository.Find(applicant.Id);
-            if (dbApplicant == applicant)
-                return;
-
-            _unitOfWork.ApplicantRepository.Update(applicant);
+            _personService.Update(applicant);
         }
     }
 }

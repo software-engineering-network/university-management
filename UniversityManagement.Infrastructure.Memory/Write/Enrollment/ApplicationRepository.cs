@@ -50,30 +50,6 @@ namespace UniversityManagement.Infrastructure.Memory.Write.Enrollment
             _context.Applications.Update(update);
         }
 
-        public void Update(Applicant applicant)
-        {
-            var candidatePerson = new Person(
-                applicant.Id,
-                applicant.Name,
-                applicant.Surname,
-                applicant.SocialSecurityNumber.Value
-            );
-
-            var record = _context.People.First(x => x.Id == applicant.Id);
-
-            if (record == candidatePerson)
-                return;
-
-            Action update = () =>
-            {
-                record.Name = candidatePerson.Name;
-                record.Surname = candidatePerson.Surname;
-                record.SocialSecurityNumber = candidatePerson.SocialSecurityNumber;
-            };
-
-            _context.People.Update(update);
-        }
-
         #endregion
     }
 }

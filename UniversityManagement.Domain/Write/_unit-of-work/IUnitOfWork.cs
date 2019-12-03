@@ -7,7 +7,7 @@ namespace UniversityManagement.Domain.Write
         #region Properties
 
         IApplicationRepository ApplicationRepository { get; }
-        IApplicantRepository ApplicantRepository { get; }
+        IPersonRepository PersonRepository { get; }
         IMinorRepository MinorRepository { get; }
         IProgramRepository ProgramRepository { get; }
 

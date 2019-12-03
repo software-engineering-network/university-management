@@ -54,7 +54,9 @@
   <ItemGroup>
     <Compile Include="Read\Enrollment\models\Discipline.cs" />
     <Compile Include="Read\Enrollment\models\ProgramType.cs" />
-    <Compile Include="Write\Enrollment\models\SocialSecurityNumber.cs" />
+    <Compile Include="Write\_models\person\person-service\PersonService.cs" />
+    <Compile Include="Write\_models\person\person-service\IPersonService.cs" />
+    <Compile Include="Write\_models\person\SocialSecurityNumber.cs" />
     <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\commands\CreateApplicationValidator.cs" />
     <Compile Include="Write\Enrollment\application-processor\ApplicationProcessor.cs" />
@@ -62,9 +64,9 @@
     <Compile Include="Read\Enrollment\models\Applicant.cs" />
     <Compile Include="Read\Enrollment\repositories\IApplicantRepository.cs" />
     <Compile Include="Read\Enrollment\models\Application.cs" />
-    <Compile Include="Write\Enrollment\models\Applicant.cs" />
+    <Compile Include="Write\_models\person\Person.cs" />
     <Compile Include="Write\Enrollment\models\ProgramType.cs" />
-    <Compile Include="Write\Enrollment\repositories\IApplicantRepository.cs" />
+    <Compile Include="Write\_models\person\IPersonRepository.cs" />
     <Compile Include="Write\Enrollment\models\Application.cs" />
     <Compile Include="Read\Enrollment\repositories\IApplicationRepository.cs" />
     <Compile Include="Read\Enrollment\models\College.cs" />

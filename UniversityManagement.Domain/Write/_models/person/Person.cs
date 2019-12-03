@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace UniversityManagement.Domain.Write.Enrollment
+namespace UniversityManagement.Domain.Write
 {
-    public class Applicant : Entity
+    public class Person : Entity
     {
         #region Properties
 
@@ -14,7 +14,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #region Construction
 
-        public Applicant(
+        public Person(
             string name, 
             string surname,
             string socialSecurityNumber
@@ -25,7 +25,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
             UpdateSocialSecurityNumber(socialSecurityNumber);
         }
 
-        public Applicant(
+        public Person(
             long id, 
             string name, 
             string surname,
@@ -39,7 +39,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
-        public Applicant UpdateName(string name)
+        public Person UpdateName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException();
@@ -49,7 +49,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
             return this;
         }
 
-        public Applicant UpdateSurname(string surname)
+        public Person UpdateSurname(string surname)
         {
             if (string.IsNullOrWhiteSpace(surname))
                 throw new ArgumentException();
@@ -59,7 +59,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
             return this;
         }
 
-        public Applicant UpdateSocialSecurityNumber(string socialSecurityNumber)
+        public Person UpdateSocialSecurityNumber(string socialSecurityNumber)
         {
             SocialSecurityNumber = new SocialSecurityNumber(socialSecurityNumber);
 

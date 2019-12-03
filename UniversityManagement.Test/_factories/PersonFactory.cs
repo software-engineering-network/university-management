@@ -1,12 +1,12 @@
-﻿using UniversityManagement.Domain.Write.Enrollment;
+﻿using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Test
 {
     public class PersonFactory
     {
-        public static Applicant CreateApplicant()
+        public static Person CreatePerson()
         {
-            return new Applicant(1, "John", "Doe", "111-11-1111");
+            return new Person(1, "John", "Doe", "111-11-1111");
         }
     }
 }

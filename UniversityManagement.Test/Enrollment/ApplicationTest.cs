@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
 using Xunit;
 
@@ -7,13 +8,13 @@ namespace UniversityManagement.Test.Enrollment
 {
     public class ApplicationTest
     {
-        private readonly Applicant _applicant;
+        private readonly Person _applicant;
         private readonly Program _computerScienceMajor;
         private readonly Minor _physicsMinor;
 
         public ApplicationTest()
         {
-            _applicant = PersonFactory.CreateApplicant();
+            _applicant = PersonFactory.CreatePerson();
             _physicsMinor = ProgramFactory.CreatePhysicsMinor();
             _computerScienceMajor = ProgramFactory.CreateComputerScienceMajor();
         }
@@ -31,7 +32,7 @@ namespace UniversityManagement.Test.Enrollment
         [Fact]
         public void WhenInstantiating_WithNonExistingApplicant_ThrowArgumentException()
         {
-            var applicant = new Applicant("John", "Doe", "111-11-1111");
+            var applicant = new Person("John", "Doe", "111-11-1111");
 
             Action createApplication = () => new Application(applicant, _computerScienceMajor, _physicsMinor);
 

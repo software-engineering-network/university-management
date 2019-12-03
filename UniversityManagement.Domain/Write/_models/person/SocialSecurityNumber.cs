@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace UniversityManagement.Domain.Write.Enrollment
+namespace UniversityManagement.Domain.Write
 {
     public class SocialSecurityNumber
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentAssertions;
-using UniversityManagement.Domain.Write.Enrollment;
+using UniversityManagement.Domain.Write;
 using Xunit;
 
 namespace UniversityManagement.Test.Enrollment

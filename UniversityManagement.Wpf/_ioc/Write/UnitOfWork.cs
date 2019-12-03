@@ -25,8 +25,8 @@ namespace UniversityManagement.Wpf.Write
         #region IUnitOfWork Members
 
         public IApplicationRepository ApplicationRepository => new ApplicationRepository(_context);
-        public IApplicantRepository ApplicantRepository => new ApplicantRepository(_context);
         public IMinorRepository MinorRepository => new MinorRepository(_context);
+        public IPersonRepository PersonRepository => new PersonRepository(_context);
         public IProgramRepository ProgramRepository => new ProgramRepository(_context);
 
         public void Commit()

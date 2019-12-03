@@ -23,7 +23,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
         #region Construction
 
         public Application(
-            Applicant applicant,
+            Person applicant,
             Program program,
             Minor minor,
             long id = 0
@@ -36,7 +36,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         #endregion
 
-        private void SetApplicant(Applicant applicant)
+        private void SetApplicant(Person applicant)
         {
             if (applicant == null || applicant.Id == 0)
                 throw new ArgumentException();
