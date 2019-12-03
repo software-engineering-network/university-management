@@ -11,6 +11,7 @@ namespace UniversityManagement.Services.Enrollment
     {
         ObservableCollection<College> FetchColleges();
         ObservableCollection<Minor> FetchMinors();
+        ObservableCollection<Minor> FetchMinors(long collegeId);
         ObservableCollection<Program> FetchPrograms();
         ObservableCollection<Program> FetchPrograms(long collegeId);
 

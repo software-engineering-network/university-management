@@ -75,8 +75,8 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
 
         public IEnumerable<Program> Fetch(long collegeId)
         {
-            var majors = Fetch().ToList();
-            return majors.Where(x => x.College.Id == collegeId);
+            var programs = Fetch().ToList();
+            return programs.Where(x => x.College.Id == collegeId);
         }
 
         #endregion

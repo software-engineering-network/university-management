@@ -72,6 +72,12 @@ namespace UniversityManagement.Infrastructure.Memory.Read.Enrollment
             throw new NotSupportedException();
         }
 
+        public IEnumerable<Minor> Fetch(long collegeId)
+        {
+            var minors = Fetch().ToList();
+            return minors.Where(x => x.College.Id == collegeId);
+        }
+
         #endregion
     }
 }

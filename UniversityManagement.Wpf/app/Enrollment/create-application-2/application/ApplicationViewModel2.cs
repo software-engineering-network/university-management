@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using UniversityManagement.Domain.Read.Enrollment;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Services.Enrollment;
@@ -114,15 +112,14 @@ namespace UniversityManagement.Wpf.Enrollment
                 : application;
 
             Applicant = CreateApplicant(_application);
-
             MinorSelector = CreateMinorSelector(_application);
             MinorSelectorCollegeFilter = CreateMinorSelectorCollegeFilter(_application);
             ProgramSelector = CreateProgramSelector(_application);
             ProgramSelectorCollegeFilter = CreateProgramSelectorCollegeFilter(_application);
 
+            PopulateCollegeFilters();
             PopulateMinorSelector();
             PopulateProgramSelector();
-            PopulateCollegeFilters();
 
             Validate();
         }
@@ -180,18 +177,6 @@ namespace UniversityManagement.Wpf.Enrollment
             );
         }
 
-        private void PopulateMinorSelector()
-        {
-            MinorSelector.Items = _service.FetchMinors();
-        }
-
-        private void PopulateProgramSelector()
-        {
-            ProgramSelector.Items = _application.College == null
-                ? _service.FetchPrograms()
-                : _service.FetchPrograms(_application.College.Id);
-        }
-
         private void PopulateCollegeFilters()
         {
             var colleges = _service.FetchColleges();
@@ -199,17 +184,42 @@ namespace UniversityManagement.Wpf.Enrollment
             ProgramSelectorCollegeFilter.Items = colleges;
         }
 
+        private void PopulateMinorSelector()
+        {
+            var college = MinorSelectorCollegeFilter.SelectedItem;
+
+            var minors = college == null || college.Id == 0
+                ? _service.FetchMinors()
+                : _service.FetchMinors(college.Id);
+
+            MinorSelector.Items = minors;
+        }
+
+        private void PopulateProgramSelector()
+        {
+            var college = ProgramSelectorCollegeFilter.SelectedItem;
+
+            var programs = college == null || college.Id == 0
+                ? _service.FetchPrograms()
+                : _service.FetchPrograms(college.Id);
+
+            ProgramSelector.Items = programs;
+        }
+
         private void SelectedMinorChangedHandler(object sender, EventArgs args)
         {
             var selectedMinor = ((SelectedItemChangedArgs<Minor>) args).SelectedItem;
             _application.Minor = selectedMinor;
+
+            if (selectedMinor != null && selectedMinor.College != MinorSelectorCollegeFilter.SelectedItem)
+                MinorSelectorCollegeFilter.SelectedItem = selectedMinor.College;
 
             Validate();
         }
 
         private void SelectedProgramChangedHandler(object sender, EventArgs args)
         {
-            var selectedProgram = ((SelectedItemChangedArgs<Program>)args).SelectedItem;
+            var selectedProgram = ((SelectedItemChangedArgs<Program>) args).SelectedItem;
             _application.Program = selectedProgram;
 
             if (selectedProgram != null && selectedProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
@@ -220,16 +230,11 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void SelectedMinorSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
-            var selectedCollege = ((SelectedItemChangedArgs<College>) args).SelectedItem;
-            
             UpdateMinorSelector();
         }
 
         private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
-            var selectedCollege = ((SelectedItemChangedArgs<College>) args).SelectedItem;
-            _application.College = selectedCollege;
-
             UpdateProgramSelector();
         }
 

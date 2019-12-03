@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using UniversityManagement.Domain.Write;
 using UniversityManagement.Domain.Write.Enrollment;
 using Application = UniversityManagement.Domain.Read.Enrollment.Application;
@@ -48,6 +47,18 @@ namespace UniversityManagement.Services.Enrollment
             return new ObservableCollection<College>(colleges);
         }
 
+        public ObservableCollection<Minor> FetchMinors()
+        {
+            var minors = _minorRepository.Fetch();
+            return new ObservableCollection<Minor>(minors);
+        }
+
+        public ObservableCollection<Minor> FetchMinors(long collegeId)
+        {
+            var minors = _minorRepository.Fetch(collegeId);
+            return new ObservableCollection<Minor>(minors);
+        }
+
         public ObservableCollection<Program> FetchPrograms()
         {
             var programs = _programRepository.Fetch();
@@ -58,12 +69,6 @@ namespace UniversityManagement.Services.Enrollment
         {
             var programs = _programRepository.Fetch(collegeId);
             return new ObservableCollection<Program>(programs);
-        }
-
-        public ObservableCollection<Minor> FetchMinors()
-        {
-            var minors = _minorRepository.Fetch();
-            return new ObservableCollection<Minor>(minors);
         }
 
         public void CreateApplication(Application application)
