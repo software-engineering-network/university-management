@@ -1,6 +1,6 @@
 ﻿using UniversityManagement.Domain.Write;
 
-namespace UniversityManagement.Wpf.Enrollment
+namespace UniversityManagement.Wpf
 {
     public interface IValidationResultViewModel
     {

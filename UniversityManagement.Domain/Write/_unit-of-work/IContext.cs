@@ -1,4 +1,4 @@
-﻿namespace UniversityManagement.Domain
+﻿namespace UniversityManagement.Domain.Write
 {
     public interface IContext
     {

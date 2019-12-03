@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UniversityManagement.Wpf.Enrollment
+namespace UniversityManagement.Wpf
 {
     public class SelectedItemChangedArgs<T> : EventArgs
     {

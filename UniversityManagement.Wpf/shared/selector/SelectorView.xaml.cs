@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace UniversityManagement.Wpf.Enrollment
+namespace UniversityManagement.Wpf
 {
     /// <summary>
     /// Interaction logic for SelectorView.xaml

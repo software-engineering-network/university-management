@@ -4,20 +4,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:enrollment="clr-namespace:UniversityManagement.Wpf.Enrollment"
+             xmlns:wpf="clr-namespace:UniversityManagement.Wpf"
              mc:Ignorable="d"
              Height="450" Width="800">
     <StackPanel>
         <enrollment:ApplicantView2 DataContext="{Binding Applicant}" />
         <GroupBox Header="Program" Margin="6">
             <StackPanel Orientation="Horizontal">
-                <enrollment:SelectorView DataContext="{Binding ProgramSelectorCollegeFilter}" />
-                <enrollment:SelectorView DataContext="{Binding ProgramSelector}" />
+                <wpf:SelectorView DataContext="{Binding ProgramSelectorCollegeFilter}" />
+                <wpf:SelectorView DataContext="{Binding ProgramSelector}" />
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Electives" Margin="6">
             <StackPanel Orientation="Horizontal">
-                <enrollment:SelectorView DataContext="{Binding MinorSelectorCollegeFilter}" />
-                <enrollment:SelectorView DataContext="{Binding MinorSelector}" />
+                <wpf:SelectorView DataContext="{Binding MinorSelectorCollegeFilter}" />
+                <wpf:SelectorView DataContext="{Binding MinorSelector}" />
             </StackPanel>
         </GroupBox>
     </StackPanel>

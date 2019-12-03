@@ -61,13 +61,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="app\Enrollment\create-application-2\selector\SelectedItemChangedArgs.cs" />
-    <Compile Include="app\Enrollment\create-application-2\selector\SelectorView.xaml.cs">
+    <Compile Include="shared\selector\SelectedItemChangedArgs.cs" />
+    <Compile Include="shared\selector\SelectorView.xaml.cs">
       <DependentUpon>SelectorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="app\Enrollment\create-application-2\selector\ISelectorViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application-2\IValidationResultViewModel.cs" />
-    <Compile Include="app\Enrollment\create-application-2\selector\SelectorViewModel.cs" />
+    <Compile Include="shared\selector\ISelectorViewModel.cs" />
+    <Compile Include="shared\IValidationResultViewModel.cs" />
+    <Compile Include="shared\selector\SelectorViewModel.cs" />
     <Compile Include="app\Enrollment\create-application-2\application\ApplicationView2.xaml.cs">
       <DependentUpon>ApplicationView2.xaml</DependentUpon>
     </Compile>
@@ -103,7 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="app\Enrollment\create-application-2\selector\SelectorView.xaml">
+    <Page Include="shared\selector\SelectorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

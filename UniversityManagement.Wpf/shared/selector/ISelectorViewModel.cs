@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using UniversityManagement.Wpf.Enrollment;
 
-namespace UniversityManagement.Wpf.Enrollment
+namespace UniversityManagement.Wpf
 {
     public interface ISelectorViewModel<T> : IValidationResultViewModel
     {

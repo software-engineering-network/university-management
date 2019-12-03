@@ -126,6 +126,8 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
+        #region Implementation Details
+
         private static IApplicantViewModel2 CreateApplicant(Application application)
         {
             if (application.Applicant == null)
@@ -145,7 +147,7 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             var college = MinorSelectorCollegeFilter.SelectedItem;
 
-            var minors = college == null || college.Id == 0
+            var minors = college == null
                 ? _service.FetchMinors()
                 : _service.FetchMinors(college.Id);
 
@@ -156,7 +158,7 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             var college = ProgramSelectorCollegeFilter.SelectedItem;
 
-            var programs = college == null || college.Id == 0
+            var programs = college == null
                 ? _service.FetchPrograms()
                 : _service.FetchPrograms(college.Id);
 
@@ -224,5 +226,7 @@ namespace UniversityManagement.Wpf.Enrollment
         {
             Validate();
         }
+
+        #endregion
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using UniversityManagement.Domain.Write;
 using Entity = UniversityManagement.Domain.Read.Entity;
 
-namespace UniversityManagement.Wpf.Enrollment
+namespace UniversityManagement.Wpf
 {
     public class SelectorViewModel<T> :
         ViewModelBase,
