@@ -6,9 +6,9 @@ namespace UniversityManagement.Wpf.Enrollment
     {
         #region Properties
 
-        event EventHandler NameChangedHandler;
-        event EventHandler SocialSecurityNumberChangedHandler;
-        event EventHandler SurnameChangedHandler;
+        event EventHandler NameChanged;
+        event EventHandler SocialSecurityNumberChanged;
+        event EventHandler SurnameChanged;
 
         string Name { get; set; }
         string NameValidationMessage { get; }

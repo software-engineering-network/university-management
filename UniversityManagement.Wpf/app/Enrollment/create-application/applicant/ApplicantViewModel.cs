@@ -42,9 +42,9 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #region IApplicantViewModel
 
-        public event EventHandler NameChangedHandler;
-        public event EventHandler SocialSecurityNumberChangedHandler;
-        public event EventHandler SurnameChangedHandler;
+        public event EventHandler NameChanged;
+        public event EventHandler SocialSecurityNumberChanged;
+        public event EventHandler SurnameChanged;
 
         public string Name
         {
@@ -56,7 +56,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
                 _applicant.Name = value;
                 OnPropertyChanged(nameof(Name));
-                NameChangedHandler?.Invoke(this, null);
+                NameChanged?.Invoke(this, null);
             }
         }
 
@@ -72,7 +72,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
                 _applicant.SocialSecurityNumber = value;
                 OnPropertyChanged(nameof(SocialSecurityNumber));
-                SocialSecurityNumberChangedHandler?.Invoke(this, null);
+                SocialSecurityNumberChanged?.Invoke(this, null);
             }
         }
 
@@ -89,7 +89,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
                 _applicant.Surname = value;
                 OnPropertyChanged(nameof(Surname));
-                SurnameChangedHandler?.Invoke(this, null);
+                SurnameChanged?.Invoke(this, null);
             }
         }
 

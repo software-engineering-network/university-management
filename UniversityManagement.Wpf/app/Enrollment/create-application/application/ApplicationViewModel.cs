@@ -115,9 +115,9 @@ namespace UniversityManagement.Wpf.Enrollment
             ProgramSelector.Items = programs;
         }
 
-        private void SelectedMinorChangedHandler(object sender, EventArgs args)
+        private void SelectedMinorChangedHandler(object sender, SelectedItemChangedArgs<Minor> args)
         {
-            var selectedMinor = ((SelectedItemChangedArgs<Minor>) args).SelectedItem;
+            var selectedMinor = args.SelectedItem;
             _application.Minor = selectedMinor;
 
             if (selectedMinor != null && selectedMinor.College != MinorCollegeFilter.SelectedItem)
@@ -125,10 +125,10 @@ namespace UniversityManagement.Wpf.Enrollment
 
             Validate();
         }
-
-        private void SelectedProgramChangedHandler(object sender, EventArgs args)
+        
+        private void SelectedProgramChangedHandler(object sender, SelectedItemChangedArgs<Program> args)
         {
-            var selectedProgram = ((SelectedItemChangedArgs<Program>) args).SelectedItem;
+            var selectedProgram = args.SelectedItem;
             _application.Program = selectedProgram;
 
             if (selectedProgram != null && selectedProgram.College != ProgramCollegeFilter.SelectedItem)
@@ -137,12 +137,12 @@ namespace UniversityManagement.Wpf.Enrollment
             Validate();
         }
 
-        private void SelectedMinorCollegeFilterChangedHandler(object sender, EventArgs args)
+        private void SelectedMinorCollegeFilterChangedHandler(object sender, SelectedItemChangedArgs<Minor> args)
         {
             UpdateMinorSelector();
         }
 
-        private void SelectedProgramCollegeFilterChangedHandler(object sender, EventArgs args)
+        private void SelectedProgramCollegeFilterChangedHandler(object sender, SelectedItemChangedArgs<College> args)
         {
             UpdateProgramSelector();
         }
@@ -187,9 +187,9 @@ namespace UniversityManagement.Wpf.Enrollment
             set
             {
                 _applicant = value;
-                _applicant.NameChangedHandler += ValidateHandler;
-                _applicant.SurnameChangedHandler += ValidateHandler;
-                _applicant.SocialSecurityNumberChangedHandler += ValidateHandler;
+                _applicant.NameChanged += ValidateHandler;
+                _applicant.SurnameChanged += ValidateHandler;
+                _applicant.SocialSecurityNumberChanged += ValidateHandler;
             }
         }
 

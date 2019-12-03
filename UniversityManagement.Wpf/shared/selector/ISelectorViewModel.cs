@@ -7,7 +7,7 @@ namespace UniversityManagement.Wpf
     {
         #region Properties
 
-        event EventHandler SelectedItemChanged;
+        event EventHandler<SelectedItemChangedArgs<T>> SelectedItemChanged;
 
         ObservableCollection<T> Items { get; set; }
         string LabelText { get; }

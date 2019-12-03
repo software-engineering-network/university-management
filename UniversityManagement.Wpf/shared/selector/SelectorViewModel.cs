@@ -42,7 +42,7 @@ namespace UniversityManagement.Wpf
 
         #region ISelectorViewModel<T>
 
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler<SelectedItemChangedArgs<T>> SelectedItemChanged;
 
         public ObservableCollection<T> Items
         {
