@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressMapper, Version=1.9.1.0, Culture=neutral, PublicKeyToken=ac363faa09311ba0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expressmapper.1.9.1\lib\net46\ExpressMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -51,19 +57,53 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="app\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="app\Enrollment\create-application\application\IApplicationViewModel.cs" />
+    <Compile Include="shared\selector\SelectedItemChangedArgs.cs" />
+    <Compile Include="shared\selector\SelectorView.xaml.cs">
+      <DependentUpon>SelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="shared\selector\ISelectorViewModel.cs" />
+    <Compile Include="shared\IValidationResultViewModel.cs" />
+    <Compile Include="shared\selector\SelectorViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\application\ApplicationView.xaml.cs">
+      <DependentUpon>ApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="app\Enrollment\create-application\applicant\IApplicantViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\applicant\ApplicantView.xaml.cs">
+      <DependentUpon>ApplicantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="app\Enrollment\create-application\application\ApplicationViewModel.cs" />
+    <Compile Include="app\Enrollment\create-application\applicant\ApplicantViewModel.cs" />
+    <Compile Include="app\main-window\MainWindowViewModel.cs" />
+    <Compile Include="shared\ViewModelBase.cs" />
+    <Compile Include="_ioc\WpfModule.cs" />
+    <Compile Include="_ioc\Write\UnitOfWork.cs" />
+    <Page Include="app\Enrollment\create-application\application\ApplicationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Page Include="shared\selector\SelectorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="app\Enrollment\create-application\applicant\ApplicantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="app\main-window\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="app\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="_ioc\AutofacConfiguration.cs" />
+    <Compile Include="app\main-window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -86,19 +126,29 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UniversityManagement.Domain\UniversityManagement.Domain.csproj">
+      <Project>{2EC06B67-FA4D-4244-8B13-9CE66336D479}</Project>
+      <Name>UniversityManagement.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversityManagement.Infrastructure.Memory\UniversityManagement.Infrastructure.Memory.csproj">
+      <Project>{3590C3C6-DE56-467C-A995-18307A5B24C6}</Project>
+      <Name>UniversityManagement.Infrastructure.Memory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UniversityManagement.Services\UniversityManagement.Services.csproj">
       <Project>{2a2a0efc-981f-43f9-acf1-530fe18ac3d2}</Project>
       <Name>UniversityManagement.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
