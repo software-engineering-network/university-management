@@ -1,5 +1,4 @@
 ﻿using System;
-using UniversityManagement.Domain.Write;
 
 namespace UniversityManagement.Wpf.Enrollment
 {

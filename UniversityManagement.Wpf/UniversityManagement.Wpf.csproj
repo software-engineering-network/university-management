@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="app\Enrollment\create-application-2\selector\SelectedItemChangedArgs.cs" />
     <Compile Include="app\Enrollment\create-application-2\selector\SelectorView.xaml.cs">
       <DependentUpon>SelectorView.xaml</DependentUpon>
     </Compile>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using UniversityManagement.Domain.Read.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {

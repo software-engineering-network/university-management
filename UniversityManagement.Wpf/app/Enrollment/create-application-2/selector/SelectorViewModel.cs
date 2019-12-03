@@ -2,12 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using UniversityManagement.Domain.Write;
+using Entity = UniversityManagement.Domain.Read.Entity;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
     public class SelectorViewModel<T> :
         ViewModelBase,
-        ISelectorViewModel<T> where T : UniversityManagement.Domain.Read.Entity
+        ISelectorViewModel<T> where T : Entity
     {
         #region Fields
 
@@ -22,13 +23,17 @@ namespace UniversityManagement.Wpf.Enrollment
         #region Construction
 
         public SelectorViewModel(
-            string labelText,
-            T selectedItem,
+            T selectedItem = null,
+            string labelText = null,
             string validationResultKey = null
         )
         {
-            LabelText = labelText;
             _selectedItem = selectedItem;
+            
+            LabelText = labelText != null 
+                ? $"{labelText}:"
+                : null;
+
             _validationResultKey = validationResultKey;
             ValidationResult = new ValidationResult();
         }
@@ -36,19 +41,6 @@ namespace UniversityManagement.Wpf.Enrollment
         #endregion
 
         #region ISelectorViewModel<T> Members
-
-        public string SelectedItemValidationMessage => _validationResult.GetMessage(_validationResultKey);
-        public event EventHandler SelectedItemChanged;
-
-        public IValidationResult ValidationResult
-        {
-            set
-            {
-                _validationResult = value;
-
-                OnPropertyChanged(nameof(SelectedItemValidationMessage));
-            }
-        }
 
         public ObservableCollection<T> Items
         {
@@ -85,11 +77,20 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        #endregion
-    }
+        public event EventHandler SelectedItemChanged;
 
-    public class SelectedItemChangedArgs<T> : EventArgs
-    {
-        public T SelectedItem { get; set; }
+        public string SelectedItemValidationMessage => _validationResult.GetMessage(_validationResultKey);
+
+        public IValidationResult ValidationResult
+        {
+            set
+            {
+                _validationResult = value;
+
+                OnPropertyChanged(nameof(SelectedItemValidationMessage));
+            }
+        }
+
+        #endregion
     }
 }
