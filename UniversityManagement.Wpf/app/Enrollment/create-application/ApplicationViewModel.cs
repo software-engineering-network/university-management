@@ -236,23 +236,19 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulateColleges()
         {
-            var colleges = _service.FetchColleges();
-            Colleges = new ObservableCollection<College>(colleges);
+            Colleges = _service.FetchColleges();
         }
 
         private void PopulateMinors()
         {
-            var minors = _service.FetchMinors();
-            Minors = new ObservableCollection<Minor>(minors);
+            Minors = _service.FetchMinors();
         }
 
         private void PopulatePrograms()
         {
-            var programs = _application.College == null
+            Programs = _application.College == null
                 ? _service.FetchPrograms()
                 : _service.FetchPrograms(_application.College.Id);
-
-            Programs = new ObservableCollection<Program>(programs);
         }
 
         private void SelectedCollegeChangedHandler()

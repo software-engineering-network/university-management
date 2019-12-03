@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using UniversityManagement.Domain.Write;
 using Application = UniversityManagement.Domain.Read.Enrollment.Application;
 using College = UniversityManagement.Domain.Read.Enrollment.College;
@@ -9,10 +9,10 @@ namespace UniversityManagement.Services.Enrollment
 {
     public interface ICreateApplicationService
     {
-        IEnumerable<College> FetchColleges();
-        IEnumerable<Minor> FetchMinors();
-        IEnumerable<Program> FetchPrograms();
-        IEnumerable<Program> FetchPrograms(long collegeId);
+        ObservableCollection<College> FetchColleges();
+        ObservableCollection<Minor> FetchMinors();
+        ObservableCollection<Program> FetchPrograms();
+        ObservableCollection<Program> FetchPrograms(long collegeId);
 
         void CreateApplication(Application application);
         IValidationResult Validate(Application application);

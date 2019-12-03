@@ -182,24 +182,21 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulateMinorSelector()
         {
-            var minors = _service.FetchMinors();
-            MinorSelector.Items = new ObservableCollection<Minor>(minors);
+            MinorSelector.Items = _service.FetchMinors();
         }
 
         private void PopulateProgramSelector()
         {
-            var programs = _application.College == null
+            ProgramSelector.Items = _application.College == null
                 ? _service.FetchPrograms()
                 : _service.FetchPrograms(_application.College.Id);
-
-            ProgramSelector.Items = new ObservableCollection<Program>(programs);
         }
 
         private void PopulateCollegeFilters()
         {
-            var colleges = _service.FetchColleges().ToList();
-            MinorSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
-            ProgramSelectorCollegeFilter.Items = new ObservableCollection<College>(colleges);
+            var colleges = _service.FetchColleges();
+            MinorSelectorCollegeFilter.Items = colleges;
+            ProgramSelectorCollegeFilter.Items = colleges;
         }
 
         private void SelectedMinorChangedHandler(object sender, EventArgs args)
