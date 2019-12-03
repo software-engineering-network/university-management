@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UniversityManagement.Wpf.Enrollment.ApplicationView2"
+﻿<UserControl x:Class="UniversityManagement.Wpf.Enrollment.ApplicationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              Height="450" Width="800">
     <StackPanel>
-        <enrollment:ApplicantView2 DataContext="{Binding Applicant}" />
+        <enrollment:ApplicantView DataContext="{Binding Applicant}" />
         <GroupBox Header="Program" Margin="6">
             <StackPanel Orientation="Horizontal">
                 <wpf:SelectorView DataContext="{Binding ProgramSelectorCollegeFilter}" />

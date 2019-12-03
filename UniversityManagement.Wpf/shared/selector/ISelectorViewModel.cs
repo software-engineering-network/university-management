@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using UniversityManagement.Wpf.Enrollment;
 
 namespace UniversityManagement.Wpf
 {
@@ -8,13 +7,13 @@ namespace UniversityManagement.Wpf
     {
         #region Properties
 
+        event EventHandler SelectedItemChanged;
+
         ObservableCollection<T> Items { get; set; }
         string LabelText { get; }
         T SelectedItem { get; set; }
         string SelectedItemValidationMessage { get; }
 
         #endregion
-
-        event EventHandler SelectedItemChanged;
     }
 }

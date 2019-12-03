@@ -6,7 +6,7 @@ namespace UniversityManagement.Wpf.Enrollment
 {
     public class ApplicantViewModel :
         ViewModelBase,
-        IApplicantViewModel2
+        IApplicantViewModel
     {
         #region Fields
 
@@ -40,7 +40,11 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
-        #region IApplicantViewModel2 Members
+        #region IApplicantViewModel
+
+        public event EventHandler NameChangedHandler;
+        public event EventHandler SocialSecurityNumberChangedHandler;
+        public event EventHandler SurnameChangedHandler;
 
         public string Name
         {
@@ -56,21 +60,7 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-
-
-        public string Surname
-        {
-            get => _applicant.Surname;
-            set
-            {
-                if (Surname == value)
-                    return;
-
-                _applicant.Surname = value;
-                OnPropertyChanged(nameof(Surname));
-                SurnameChangedHandler?.Invoke(this, null);
-            }
-        }
+        public string NameValidationMessage => _validationResult.GetMessage("ApplicantName");
 
         public string SocialSecurityNumber
         {
@@ -86,13 +76,24 @@ namespace UniversityManagement.Wpf.Enrollment
             }
         }
 
-        public event EventHandler NameChangedHandler;
-        public event EventHandler SurnameChangedHandler;
-        public event EventHandler SocialSecurityNumberChangedHandler;
+        public string SocialSecurityNumberValidationMessage =>
+            _validationResult.GetMessage("ApplicantSocialSecurityNumber");
 
-        public string NameValidationMessage => _validationResult.GetMessage("ApplicantName");
+        public string Surname
+        {
+            get => _applicant.Surname;
+            set
+            {
+                if (Surname == value)
+                    return;
+
+                _applicant.Surname = value;
+                OnPropertyChanged(nameof(Surname));
+                SurnameChangedHandler?.Invoke(this, null);
+            }
+        }
+
         public string SurnameValidationMessage => _validationResult.GetMessage("ApplicantSurname");
-        public string SocialSecurityNumberValidationMessage => _validationResult.GetMessage("ApplicantSocialSecurityNumber");
 
         public IValidationResult ValidationResult
         {

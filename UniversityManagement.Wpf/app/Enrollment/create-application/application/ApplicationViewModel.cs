@@ -6,75 +6,25 @@ using UniversityManagement.Services.Enrollment;
 
 namespace UniversityManagement.Wpf.Enrollment
 {
-    public class ApplicationViewModel2 : ViewModelBase
+    public class ApplicationViewModel :
+        ViewModelBase,
+        IApplicationViewModel
     {
         #region Fields
 
         private readonly Application _application;
         private readonly ICreateApplicationService _service;
 
-        private IApplicantViewModel2 _applicant;
+        private IApplicantViewModel _applicant;
+        private ISelectorViewModel<College> _minorCollegeFilter;
         private ISelectorViewModel<Minor> _minorSelector;
-        private ISelectorViewModel<College> _minorSelectorCollegeFilter;
+        private ISelectorViewModel<College> _programCollegeFilter;
         private ISelectorViewModel<Program> _programSelector;
-        private ISelectorViewModel<College> _programSelectorCollegeFilter;
         private IValidationResult _validationResult;
 
         #endregion
 
         #region Properties
-
-        public IApplicantViewModel2 Applicant
-        {
-            get => _applicant;
-            set
-            {
-                _applicant = value;
-                _applicant.NameChangedHandler += ValidateHandler;
-                _applicant.SurnameChangedHandler += ValidateHandler;
-                _applicant.SocialSecurityNumberChangedHandler += ValidateHandler;
-            }
-        }
-
-        public ISelectorViewModel<Minor> MinorSelector
-        {
-            get => _minorSelector;
-            set
-            {
-                _minorSelector = value;
-                _minorSelector.SelectedItemChanged += SelectedMinorChangedHandler;
-            }
-        }
-
-        public ISelectorViewModel<College> MinorSelectorCollegeFilter
-        {
-            get => _minorSelectorCollegeFilter;
-            set
-            {
-                _minorSelectorCollegeFilter = value;
-                _minorSelectorCollegeFilter.SelectedItemChanged += SelectedMinorSelectorCollegeFilterChangedHandler;
-            }
-        }
-
-        public ISelectorViewModel<Program> ProgramSelector
-        {
-            get => _programSelector;
-            set
-            {
-                _programSelector = value;
-                _programSelector.SelectedItemChanged += SelectedProgramChangedHandler;
-            }
-        }
-
-        public ISelectorViewModel<College> ProgramSelectorCollegeFilter
-        {
-            get => _programSelectorCollegeFilter;
-            set
-            {
-                _programSelectorCollegeFilter = value;
-                _programSelectorCollegeFilter.SelectedItemChanged += SelectedProgramSelectorCollegeFilterChangedHandler;
-            }
-        }
 
         private IValidationResult ValidationResult
         {
@@ -93,14 +43,14 @@ namespace UniversityManagement.Wpf.Enrollment
                 Applicant,
                 MinorSelector,
                 ProgramSelector,
-                ProgramSelectorCollegeFilter
+                ProgramCollegeFilter
             };
 
         #endregion
 
         #region Construction
 
-        public ApplicationViewModel2(
+        public ApplicationViewModel(
             ICreateApplicationService service,
             Application application = null
         )
@@ -113,9 +63,9 @@ namespace UniversityManagement.Wpf.Enrollment
 
             Applicant = CreateApplicant(_application);
             MinorSelector = new SelectorViewModel<Minor>(_application.Minor, "Minor", "MinorId");
-            MinorSelectorCollegeFilter = new SelectorViewModel<College>(labelText: "College");
+            MinorCollegeFilter = new SelectorViewModel<College>(labelText: "College");
             ProgramSelector = new SelectorViewModel<Program>(_application.Program, "Program", "ProgramId");
-            ProgramSelectorCollegeFilter = new SelectorViewModel<College>(_application.College, "College");
+            ProgramCollegeFilter = new SelectorViewModel<College>(_application.College, "College");
 
             PopulateCollegeFilters();
             PopulateMinorSelector();
@@ -126,9 +76,9 @@ namespace UniversityManagement.Wpf.Enrollment
 
         #endregion
 
-        #region Implementation Details
+        #region Methods
 
-        private static IApplicantViewModel2 CreateApplicant(Application application)
+        private static IApplicantViewModel CreateApplicant(Application application)
         {
             if (application.Applicant == null)
                 application.Applicant = new Applicant();
@@ -139,13 +89,13 @@ namespace UniversityManagement.Wpf.Enrollment
         private void PopulateCollegeFilters()
         {
             var colleges = _service.FetchColleges();
-            MinorSelectorCollegeFilter.Items = colleges;
-            ProgramSelectorCollegeFilter.Items = colleges;
+            MinorCollegeFilter.Items = colleges;
+            ProgramCollegeFilter.Items = colleges;
         }
 
         private void PopulateMinorSelector()
         {
-            var college = MinorSelectorCollegeFilter.SelectedItem;
+            var college = MinorCollegeFilter.SelectedItem;
 
             var minors = college == null
                 ? _service.FetchMinors()
@@ -156,7 +106,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
         private void PopulateProgramSelector()
         {
-            var college = ProgramSelectorCollegeFilter.SelectedItem;
+            var college = ProgramCollegeFilter.SelectedItem;
 
             var programs = college == null
                 ? _service.FetchPrograms()
@@ -170,8 +120,8 @@ namespace UniversityManagement.Wpf.Enrollment
             var selectedMinor = ((SelectedItemChangedArgs<Minor>) args).SelectedItem;
             _application.Minor = selectedMinor;
 
-            if (selectedMinor != null && selectedMinor.College != MinorSelectorCollegeFilter.SelectedItem)
-                MinorSelectorCollegeFilter.SelectedItem = selectedMinor.College;
+            if (selectedMinor != null && selectedMinor.College != MinorCollegeFilter.SelectedItem)
+                MinorCollegeFilter.SelectedItem = selectedMinor.College;
 
             Validate();
         }
@@ -181,18 +131,18 @@ namespace UniversityManagement.Wpf.Enrollment
             var selectedProgram = ((SelectedItemChangedArgs<Program>) args).SelectedItem;
             _application.Program = selectedProgram;
 
-            if (selectedProgram != null && selectedProgram.College != ProgramSelectorCollegeFilter.SelectedItem)
-                ProgramSelectorCollegeFilter.SelectedItem = selectedProgram.College;
+            if (selectedProgram != null && selectedProgram.College != ProgramCollegeFilter.SelectedItem)
+                ProgramCollegeFilter.SelectedItem = selectedProgram.College;
 
             Validate();
         }
 
-        private void SelectedMinorSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
+        private void SelectedMinorCollegeFilterChangedHandler(object sender, EventArgs args)
         {
             UpdateMinorSelector();
         }
 
-        private void SelectedProgramSelectorCollegeFilterChangedHandler(object sender, EventArgs args)
+        private void SelectedProgramCollegeFilterChangedHandler(object sender, EventArgs args)
         {
             UpdateProgramSelector();
         }
@@ -203,7 +153,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
             PopulateMinorSelector();
 
-            if (previousMinor != null && previousMinor.College == MinorSelectorCollegeFilter.SelectedItem)
+            if (previousMinor != null && previousMinor.College == MinorCollegeFilter.SelectedItem)
                 MinorSelector.SelectedItem = previousMinor;
         }
 
@@ -213,7 +163,7 @@ namespace UniversityManagement.Wpf.Enrollment
 
             PopulateProgramSelector();
 
-            if (previousProgram != null && previousProgram.College == ProgramSelectorCollegeFilter.SelectedItem)
+            if (previousProgram != null && previousProgram.College == ProgramCollegeFilter.SelectedItem)
                 ProgramSelector.SelectedItem = previousProgram;
         }
 
@@ -225,6 +175,62 @@ namespace UniversityManagement.Wpf.Enrollment
         private void ValidateHandler(object sender, EventArgs args)
         {
             Validate();
+        }
+
+        #endregion
+
+        #region IApplicationViewModel
+
+        public IApplicantViewModel Applicant
+        {
+            get => _applicant;
+            set
+            {
+                _applicant = value;
+                _applicant.NameChangedHandler += ValidateHandler;
+                _applicant.SurnameChangedHandler += ValidateHandler;
+                _applicant.SocialSecurityNumberChangedHandler += ValidateHandler;
+            }
+        }
+
+        public ISelectorViewModel<College> MinorCollegeFilter
+        {
+            get => _minorCollegeFilter;
+            set
+            {
+                _minorCollegeFilter = value;
+                _minorCollegeFilter.SelectedItemChanged += SelectedMinorCollegeFilterChangedHandler;
+            }
+        }
+
+        public ISelectorViewModel<Minor> MinorSelector
+        {
+            get => _minorSelector;
+            set
+            {
+                _minorSelector = value;
+                _minorSelector.SelectedItemChanged += SelectedMinorChangedHandler;
+            }
+        }
+
+        public ISelectorViewModel<College> ProgramCollegeFilter
+        {
+            get => _programCollegeFilter;
+            set
+            {
+                _programCollegeFilter = value;
+                _programCollegeFilter.SelectedItemChanged += SelectedProgramCollegeFilterChangedHandler;
+            }
+        }
+
+        public ISelectorViewModel<Program> ProgramSelector
+        {
+            get => _programSelector;
+            set
+            {
+                _programSelector = value;
+                _programSelector.SelectedItemChanged += SelectedProgramChangedHandler;
+            }
         }
 
         #endregion

@@ -8,7 +8,7 @@ namespace UniversityManagement.Wpf
     {
         #region Properties
 
-        public ApplicationViewModel2 ApplicationViewModel { get; }
+        public ApplicationViewModel ApplicationViewModel { get; }
 
         public string Title => "University Management";
 
@@ -24,8 +24,8 @@ namespace UniversityManagement.Wpf
             const long applicationId = 0;
 
             ApplicationViewModel = applicationId == 0
-                ? new ApplicationViewModel2(createApplicationService)
-                : new ApplicationViewModel2(
+                ? new ApplicationViewModel(createApplicationService)
+                : new ApplicationViewModel(
                     createApplicationService,
                     applicationRepository.Find(applicationId)
                 );

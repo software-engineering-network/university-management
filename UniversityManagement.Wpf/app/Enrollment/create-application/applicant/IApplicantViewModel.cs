@@ -2,21 +2,21 @@
 
 namespace UniversityManagement.Wpf.Enrollment
 {
-    public interface IApplicantViewModel2 : IValidationResultViewModel
+    public interface IApplicantViewModel : IValidationResultViewModel
     {
         #region Properties
 
+        event EventHandler NameChangedHandler;
+        event EventHandler SocialSecurityNumberChangedHandler;
+        event EventHandler SurnameChangedHandler;
+
         string Name { get; set; }
         string NameValidationMessage { get; }
-        string Surname { get; set; }
-        string SurnameValidationMessage { get; }
         string SocialSecurityNumber { get; set; }
         string SocialSecurityNumberValidationMessage { get; }
+        string Surname { get; set; }
+        string SurnameValidationMessage { get; }
 
         #endregion
-
-        event EventHandler NameChangedHandler;
-        event EventHandler SurnameChangedHandler;
-        event EventHandler SocialSecurityNumberChangedHandler;
     }
 }

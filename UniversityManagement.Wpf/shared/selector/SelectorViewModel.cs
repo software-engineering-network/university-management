@@ -29,8 +29,8 @@ namespace UniversityManagement.Wpf
         )
         {
             _selectedItem = selectedItem;
-            
-            LabelText = labelText != null 
+
+            LabelText = labelText != null
                 ? $"{labelText}:"
                 : null;
 
@@ -40,7 +40,9 @@ namespace UniversityManagement.Wpf
 
         #endregion
 
-        #region ISelectorViewModel<T> Members
+        #region ISelectorViewModel<T>
+
+        public event EventHandler SelectedItemChanged;
 
         public ObservableCollection<T> Items
         {
@@ -76,8 +78,6 @@ namespace UniversityManagement.Wpf
                 SelectedItemChanged?.Invoke(this, args);
             }
         }
-
-        public event EventHandler SelectedItemChanged;
 
         public string SelectedItemValidationMessage => _validationResult.GetMessage(_validationResultKey);
 

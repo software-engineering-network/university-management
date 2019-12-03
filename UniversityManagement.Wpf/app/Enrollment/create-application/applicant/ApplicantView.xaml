@@ -13,6 +13,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -25,28 +26,44 @@
                 Grid.Row="0"
                 Grid.Column="0"/>
             <TextBox
-                Text="{Binding Path=ApplicantName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Row="0"
                 Grid.Column="1"
                 Width="300" />
             <Label
-                Content="{Binding Path=ApplicantNameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=NameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                 Foreground="#FFFF0000"
                 Grid.Row="0"
                 Grid.Column="2"/>
+
             <Label
                 Content="Last Name:"
                 Grid.Row="1"
                 Grid.Column="0" />
             <TextBox
-                Text="{Binding Path=ApplicantSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Path=Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Row="1"
                 Grid.Column="1"
                 Width="300"/>
             <Label
-                Content="{Binding Path=ApplicantSurnameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=SurnameValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                 Foreground="#FFFF0000"
                 Grid.Row="1"
+                Grid.Column="2"/>
+
+            <Label
+                Content="SSN:"
+                Grid.Row="2"
+                Grid.Column="0" />
+            <TextBox
+                Text="{Binding Path=SocialSecurityNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="300"/>
+            <Label
+                Content="{Binding Path=SocialSecurityNumberValidationMessage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Foreground="#FFFF0000"
+                Grid.Row="2"
                 Grid.Column="2"/>
         </Grid>
     </GroupBox>
