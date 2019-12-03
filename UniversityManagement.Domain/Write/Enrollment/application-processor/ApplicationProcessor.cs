@@ -6,7 +6,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Fields
 
-        private readonly IPersonService _personService;
         private readonly CreateApplicationValidator _createApplicationValidator;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -21,7 +20,6 @@ namespace UniversityManagement.Domain.Write.Enrollment
         {
             _createApplicationValidator = createApplicationValidator;
             _unitOfWork = unitOfWork;
-            _personService = new PersonService(_unitOfWork);
         }
 
         #endregion
@@ -84,7 +82,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
                 command.ApplicantSocialSecurityNumber
             );
 
-            _personService.Create(applicant);
+            _unitOfWork.PersonRepository.Create(applicant);
             _unitOfWork.Commit();
         }
 
@@ -110,7 +108,7 @@ namespace UniversityManagement.Domain.Write.Enrollment
             applicant.UpdateSurname(command.ApplicantSurname);
             applicant.UpdateSocialSecurityNumber(command.ApplicantSocialSecurityNumber);
 
-            _personService.Update(applicant);
+            _unitOfWork.PersonRepository.Update(applicant);
         }
     }
 }

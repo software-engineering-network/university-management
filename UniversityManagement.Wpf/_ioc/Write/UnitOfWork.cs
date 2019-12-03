@@ -26,7 +26,7 @@ namespace UniversityManagement.Wpf.Write
 
         public IApplicationRepository ApplicationRepository => new ApplicationRepository(_context);
         public IMinorRepository MinorRepository => new MinorRepository(_context);
-        public IPersonRepository PersonRepository => new PersonRepository(_context);
+        public IPersonRepository PersonRepository => new SafetyPersonRepository(new PersonRepository(_context));
         public IProgramRepository ProgramRepository => new ProgramRepository(_context);
 
         public void Commit()
