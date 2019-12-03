@@ -7,5 +7,14 @@
         public ProgramType ProgramType { get; set; }
 
         public string Name => $"{Discipline.Name} - {ProgramType.Name}";
+
+        #region Overrides of Object
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        #endregion
     }
 }
