@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace UniversityManagement.Domain.Write
 {
+    /// <summary>
+    /// An IPersonRepository proxy that prevents invalid database operations.
+    /// </summary>
     public class SafetyPersonRepository : IPersonRepository
     {
         #region Fields
@@ -22,16 +25,6 @@ namespace UniversityManagement.Domain.Write
 
         #region IPersonRepository Members
 
-        public IEnumerable<Person> Fetch()
-        {
-            return _personRepository.Fetch();
-        }
-
-        public Person Find(long id)
-        {
-            return _personRepository.Find(id);
-        }
-
         public void Create(Person person)
         {
             if (person.Id != 0)
@@ -43,9 +36,33 @@ namespace UniversityManagement.Domain.Write
             _personRepository.Create(person);
         }
 
+        public bool Exists(SocialSecurityNumber socialSecurityNumber)
+        {
+            return _personRepository.Exists(socialSecurityNumber);
+        }
+
+        public IEnumerable<Person> Fetch()
+        {
+            return _personRepository.Fetch();
+        }
+
+        public Person Find(long id)
+        {
+            return _personRepository.Find(id);
+        }
+
+        public Person Find(SocialSecurityNumber socialSecurityNumber)
+        {
+            return _personRepository.Find(socialSecurityNumber);
+        }
+
         public void Update(Person person)
         {
             var existingPerson = _personRepository.Find(person.Id);
+
+            if (existingPerson == null)
+                throw new ArgumentException();
+
             if (existingPerson == person)
                 return;
 
@@ -55,16 +72,6 @@ namespace UniversityManagement.Domain.Write
                 throw new ArgumentException();
 
             _personRepository.Update(person);
-        }
-
-        public bool Exists(SocialSecurityNumber socialSecurityNumber)
-        {
-            return _personRepository.Exists(socialSecurityNumber);
-        }
-
-        public Person Find(SocialSecurityNumber socialSecurityNumber)
-        {
-            return _personRepository.Find(socialSecurityNumber);
         }
 
         #endregion
