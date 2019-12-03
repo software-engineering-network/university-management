@@ -7,7 +7,13 @@ namespace UniversityManagement.Domain.Write
     {
         private const string Pattern = @"^\d{3}-\d{2}-\d{4}$";
 
+        #region Properties
+
         public string Value { get; }
+
+        #endregion
+
+        #region Construction
 
         public SocialSecurityNumber(string socialSecurityNumber)
         {
@@ -16,6 +22,17 @@ namespace UniversityManagement.Domain.Write
 
             Value = socialSecurityNumber;
         }
+
+        #endregion
+
+        #region object Overrides
+
+        public override string ToString()
+        {
+            return Value;
+        }
+
+        #endregion
 
         private static bool IsValid(string socialSecurityNumber)
         {

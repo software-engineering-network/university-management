@@ -37,8 +37,8 @@ namespace UniversityManagement.Domain.Write
                 return;
 
             // don't overwrite different person's SSN
-            var x = _unitOfWork.PersonRepository.Find(person.SocialSecurityNumber);
-            if (x.Id != person.Id)
+            var differentPerson = _unitOfWork.PersonRepository.Find(person.SocialSecurityNumber);
+            if (differentPerson != null && differentPerson.Id != person.Id)
                 throw new ArgumentException();
             
             _unitOfWork.PersonRepository.Update(person);
