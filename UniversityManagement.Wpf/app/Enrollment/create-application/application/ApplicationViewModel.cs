@@ -137,7 +137,7 @@ namespace UniversityManagement.Wpf.Enrollment
             Validate();
         }
 
-        private void SelectedMinorCollegeFilterChangedHandler(object sender, SelectedItemChangedArgs<Minor> args)
+        private void SelectedMinorCollegeFilterChangedHandler(object sender, SelectedItemChangedArgs<College> args)
         {
             UpdateMinorSelector();
         }
