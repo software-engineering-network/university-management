@@ -22,6 +22,16 @@ namespace UniversityManagement.Domain.Write
 
         #region IPersonRepository Members
 
+        public IEnumerable<Person> Fetch()
+        {
+            return _personRepository.Fetch();
+        }
+
+        public Person Find(long id)
+        {
+            return _personRepository.Find(id);
+        }
+
         public void Create(Person person)
         {
             if (person.Id != 0)
@@ -45,16 +55,6 @@ namespace UniversityManagement.Domain.Write
                 throw new ArgumentException();
 
             _personRepository.Update(person);
-        }
-
-        public IEnumerable<Person> Fetch()
-        {
-            return _personRepository.Fetch();
-        }
-
-        public Person Find(long id)
-        {
-            return _personRepository.Find(id);
         }
 
         public bool Exists(SocialSecurityNumber socialSecurityNumber)
