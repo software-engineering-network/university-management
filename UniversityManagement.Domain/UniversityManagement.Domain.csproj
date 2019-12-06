@@ -75,8 +75,6 @@
     <Compile Include="Write\Enrollment\repositories\IProgramRepository.cs" />
     <Compile Include="Write\Enrollment\models\Minor.cs" />
     <Compile Include="Write\Enrollment\models\Program.cs" />
-    <Compile Include="Write\Enrollment\models\College.cs" />
-    <Compile Include="Write\Enrollment\repositories\ICollegeRepository.cs" />
     <Compile Include="Write\Enrollment\commands\CreateApplication.cs" />
     <Compile Include="Read\Enrollment\models\Program.cs" />
     <Compile Include="Write\_validation\IValidationResult.cs" />
