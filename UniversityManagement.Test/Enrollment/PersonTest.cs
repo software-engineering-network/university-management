@@ -52,9 +52,9 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void WhenUpdatingName_WithInvalidName_ThrowArgumentException(string name)
+        public void WhenSettingName_WithInvalidName_ThrowArgumentException(string name)
         {
-            Action updateName = () => _person.UpdateName(name);
+            Action updateName = () => _person.Name = name;
 
             updateName.Should().Throw<ArgumentException>();
         }
@@ -63,7 +63,7 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData("Jon")]
         public void WhenUpdatingName_WithValidName_NameIsSet(string name)
         {
-            _person.UpdateName(name);
+            _person.Name = name;
 
             _person.Name.Should().Be(name);
         }
@@ -72,18 +72,18 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void WhenUpdatingSurname_WithInvalidSurname_ThrowArgumentException(string surname)
+        public void WhenSettingSurname_WithInvalidSurname_ThrowArgumentException(string surname)
         {
-            Action updateSurname = () => _person.UpdateSurname(surname);
+            Action updateSurname = () => _person.Surname = surname;
 
             updateSurname.Should().Throw<ArgumentException>();
         }
 
         [Theory]
         [InlineData("Dough")]
-        public void WhenUpdatingSurname_WithValidSurname_SurnameIsSet(string surname)
+        public void WhenSettingSurname_WithValidSurname_SurnameIsSet(string surname)
         {
-            _person.UpdateSurname(surname);
+            _person.Surname = surname;
 
             _person.Surname.Should().Be(surname);
         }

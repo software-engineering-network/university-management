@@ -5,7 +5,11 @@ namespace UniversityManagement.Domain.Write
 {
     public class SocialSecurityNumber
     {
-        private const string Pattern = @"^\d{3}-\d{2}-\d{4}$";
+        #region Fields
+
+        private const string SocialSecurityNumberPattern = @"^\d{3}-\d{2}-\d{4}$";
+
+        #endregion
 
         #region Properties
 
@@ -17,7 +21,7 @@ namespace UniversityManagement.Domain.Write
 
         public SocialSecurityNumber(string socialSecurityNumber)
         {
-            Value = Regex.IsMatch(socialSecurityNumber, Pattern)
+            Value = Regex.IsMatch(socialSecurityNumber, SocialSecurityNumberPattern)
                 ? socialSecurityNumber
                 : throw new ArgumentException();
         }

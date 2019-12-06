@@ -6,11 +6,37 @@ namespace UniversityManagement.Domain.Write
         Entity,
         IEquatable<Person>
     {
+        #region Fields
+
+        private string _name;
+        private SocialSecurityNumber _socialSecurityNumber;
+        private string _surname;
+
+        #endregion
+
         #region Properties
 
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-        public SocialSecurityNumber SocialSecurityNumber { get; private set; }
+        public string Name
+        {
+            get => _name;
+            set => _name = string.IsNullOrWhiteSpace(value)
+                ? throw new ArgumentException()
+                : value;
+        }
+
+        public SocialSecurityNumber SocialSecurityNumber
+        {
+            get => _socialSecurityNumber;
+            set => _socialSecurityNumber = value ?? throw new ArgumentNullException(nameof(SocialSecurityNumber));
+        }
+
+        public string Surname
+        {
+            get => _surname;
+            set => _surname = string.IsNullOrWhiteSpace(value)
+                ? throw new ArgumentException()
+                : value;
+        }
 
         #endregion
 
@@ -19,12 +45,36 @@ namespace UniversityManagement.Domain.Write
         public Person(
             string name,
             string surname,
-            string socialSecurityNumber
+            SocialSecurityNumber socialSecurityNumber
         )
         {
-            UpdateName(name);
-            UpdateSurname(surname);
-            UpdateSocialSecurityNumber(socialSecurityNumber);
+            Name = name;
+            Surname = surname;
+            SocialSecurityNumber = socialSecurityNumber;
+        }
+
+        public Person(
+            string name,
+            string surname,
+            string socialSecurityNumber
+        ) : this(
+            name,
+            surname,
+            new SocialSecurityNumber(socialSecurityNumber)
+        )
+        {
+        }
+
+        public Person(
+            long id,
+            string name,
+            string surname,
+            SocialSecurityNumber socialSecurityNumber
+        ) : base(id)
+        {
+            Name = name;
+            Surname = surname;
+            SocialSecurityNumber = socialSecurityNumber;
         }
 
         public Person(
@@ -32,32 +82,13 @@ namespace UniversityManagement.Domain.Write
             string name,
             string surname,
             string socialSecurityNumber
-        ) : base(id)
+        ) : this(
+            id,
+            name,
+            surname,
+            new SocialSecurityNumber(socialSecurityNumber)
+        )
         {
-            UpdateName(name);
-            UpdateSurname(surname);
-            UpdateSocialSecurityNumber(socialSecurityNumber);
-        }
-
-        #endregion
-
-        #region IEquatable<Person> Members
-
-        public bool Equals(Person other)
-        {
-            if (ReferenceEquals(null, other))
-                return false;
-
-            if (ReferenceEquals(this, other))
-                return true;
-
-            return base.Equals(other) &&
-                   Name == other.Name &&
-                   Surname == other.Surname &&
-                   Equals(
-                       SocialSecurityNumber,
-                       other.SocialSecurityNumber
-                   );
         }
 
         #endregion
@@ -114,29 +145,25 @@ namespace UniversityManagement.Domain.Write
 
         #endregion
 
-        public Person UpdateName(string name)
-        {
-            Name = string.IsNullOrWhiteSpace(name)
-                ? throw new ArgumentException()
-                : name;
+        #region IEquatable<Person>
 
-            return this;
+        public bool Equals(Person other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return base.Equals(other) &&
+                   Name == other.Name &&
+                   Surname == other.Surname &&
+                   Equals(
+                       SocialSecurityNumber,
+                       other.SocialSecurityNumber
+                   );
         }
 
-        public Person UpdateSurname(string surname)
-        {
-            Surname = string.IsNullOrWhiteSpace(surname)
-                ? throw new ArgumentException()
-                : surname;
-
-            return this;
-        }
-
-        public Person UpdateSocialSecurityNumber(string socialSecurityNumber)
-        {
-            SocialSecurityNumber = new SocialSecurityNumber(socialSecurityNumber);
-
-            return this;
-        }
+        #endregion
     }
 }
