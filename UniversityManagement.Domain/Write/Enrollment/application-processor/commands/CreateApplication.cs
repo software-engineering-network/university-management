@@ -2,13 +2,19 @@
 {
     public class CreateApplication
     {
-        public long ApplicationId { get; }
+        #region Properties
+
         public long ApplicantId { get; }
         public string ApplicantName { get; }
-        public string ApplicantSurname { get; }
         public string ApplicantSocialSecurityNumber { get; }
+        public string ApplicantSurname { get; }
+        public long ApplicationId { get; }
         public long MinorId { get; }
         public long ProgramId { get; }
+
+        #endregion
+
+        #region Construction
 
         public CreateApplication(
             long applicationId,
@@ -29,15 +35,18 @@
             ProgramId = programId;
         }
 
-        public CreateApplication(Read.Enrollment.Application application)
+        public CreateApplication(Read.Enrollment.Application application) : this(
+            application.Id,
+            application.Applicant?.Id ?? 0,
+            application.Applicant?.Name,
+            application.Applicant?.Surname,
+            application.Applicant?.SocialSecurityNumber,
+            application.Program?.Id ?? 0,
+            application.Minor?.Id ?? 0
+        )
         {
-            ApplicationId = application.Id;
-            ApplicantId = application.Applicant?.Id ?? 0;
-            ApplicantName = application.Applicant?.Name;
-            ApplicantSurname = application.Applicant?.Surname;
-            ApplicantSocialSecurityNumber = application.Applicant?.SocialSecurityNumber;
-            ProgramId = application.Program?.Id ?? 0;
-            MinorId = application.Minor?.Id ?? 0;
         }
+
+        #endregion
     }
 }

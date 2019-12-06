@@ -21,14 +21,17 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData("John", null, "111-11-1111")]
         [InlineData("John", "", "111-11-1111")]
         [InlineData("John", " ", "111-11-1111")]
-        [InlineData("John", "Doe", "111-11-111")]
         public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(
             string name, 
             string surname, 
             string socialSecurityNumber
         )
         {
-            Action createApplicant = () => new Person(name, surname, socialSecurityNumber);
+            var ssn = new SocialSecurityNumber(socialSecurityNumber);
+            Action createApplicant = () =>
+            {
+                var person = new Person(name, surname, ssn);
+            };
 
             createApplicant.Should().Throw<ArgumentException>();
         }
@@ -52,9 +55,9 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void WhenUpdatingName_WithInvalidName_ThrowArgumentException(string name)
+        public void WhenSettingName_WithInvalidName_ThrowArgumentException(string name)
         {
-            Action updateName = () => _person.UpdateName(name);
+            Action updateName = () => _person.Name = name;
 
             updateName.Should().Throw<ArgumentException>();
         }
@@ -63,7 +66,7 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData("Jon")]
         public void WhenUpdatingName_WithValidName_NameIsSet(string name)
         {
-            _person.UpdateName(name);
+            _person.Name = name;
 
             _person.Name.Should().Be(name);
         }
@@ -72,18 +75,18 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void WhenUpdatingSurname_WithInvalidSurname_ThrowArgumentException(string surname)
+        public void WhenSettingSurname_WithInvalidSurname_ThrowArgumentException(string surname)
         {
-            Action updateSurname = () => _person.UpdateSurname(surname);
+            Action updateSurname = () => _person.Surname = surname;
 
             updateSurname.Should().Throw<ArgumentException>();
         }
 
         [Theory]
         [InlineData("Dough")]
-        public void WhenUpdatingSurname_WithValidSurname_SurnameIsSet(string surname)
+        public void WhenSettingSurname_WithValidSurname_SurnameIsSet(string surname)
         {
-            _person.UpdateSurname(surname);
+            _person.Surname = surname;
 
             _person.Surname.Should().Be(surname);
         }

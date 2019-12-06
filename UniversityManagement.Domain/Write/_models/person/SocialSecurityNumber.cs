@@ -5,11 +5,32 @@ namespace UniversityManagement.Domain.Write
 {
     public class SocialSecurityNumber
     {
-        private const string Pattern = @"^\d{3}-\d{2}-\d{4}$";
+        #region Fields
+
+        private const string SocialSecurityNumberPattern = @"^\d{3}-\d{2}-\d{4}$";
+        private string _value;
+
+        #endregion
 
         #region Properties
 
-        public string Value { get; }
+        public string Value
+        {
+            get => _value;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException(nameof(SocialSecurityNumber));
+
+                _value = Regex.IsMatch(value, SocialSecurityNumberPattern)
+                    ? value
+                    : throw new ArgumentOutOfRangeException(
+                        nameof(SocialSecurityNumber),
+                        value,
+                        $"\"{value}\" is not a valid social security number"
+                    );
+            }
+        }
 
         #endregion
 
@@ -17,9 +38,7 @@ namespace UniversityManagement.Domain.Write
 
         public SocialSecurityNumber(string socialSecurityNumber)
         {
-            Value = Regex.IsMatch(socialSecurityNumber, Pattern)
-                ? socialSecurityNumber
-                : throw new ArgumentException();
+            Value = socialSecurityNumber;
         }
 
         #endregion

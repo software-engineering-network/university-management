@@ -11,12 +11,20 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
+        public void WhenInstantiating_WithNullOrWhitespaceValue_ThrowArgumentException(string value)
+        {
+            Action createSocialSecurityNumber = () => new SocialSecurityNumber(value);
+
+            createSocialSecurityNumber.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
         [InlineData("111111111")]
         public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(string value)
         {
             Action createSocialSecurityNumber = () => new SocialSecurityNumber(value);
 
-            createSocialSecurityNumber.Should().Throw<ArgumentException>();
+            createSocialSecurityNumber.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Theory]
