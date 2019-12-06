@@ -4,9 +4,13 @@ namespace UniversityManagement.Domain.Write.Enrollment
 {
     public class ProgramType : Entity
     {
+        #region Fields
+
         private const long ConcentrationId = 1;
         private const long MinorId = 4;
         private static readonly long[] ProgramIds = {2, 3, 5, 6};
+
+        #endregion
 
         #region Properties
 
