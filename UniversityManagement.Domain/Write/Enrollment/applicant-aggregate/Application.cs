@@ -23,15 +23,15 @@ namespace UniversityManagement.Domain.Write.Enrollment
         #region Construction
 
         public Application(
-            Person applicant,
+            long applicantId,
             Program program,
             Minor minor,
             long id = 0
         ) : base(id)
         {
-            ApplicantId = applicant == null || applicant.Id == 0
+            ApplicantId = applicantId == 0
                 ? throw new ArgumentException()
-                : applicant.Id;
+                : applicantId;
 
             Program = program == null || !program.IsProgram
                 ? throw new ArgumentException()

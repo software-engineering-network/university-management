@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Read\Enrollment\models\Discipline.cs" />
     <Compile Include="Read\Enrollment\models\ProgramType.cs" />
+    <Compile Include="Write\Enrollment\applicant-aggregate\Applicant.cs" />
     <Compile Include="Write\_models\person\repository\SafetyPersonRepository.cs" />
     <Compile Include="Write\_models\person\SocialSecurityNumber.cs" />
     <Compile Include="Read\Enrollment\repositories\IProgramRepository.cs" />
@@ -64,17 +65,17 @@
     <Compile Include="Read\Enrollment\repositories\IApplicantRepository.cs" />
     <Compile Include="Read\Enrollment\models\Application.cs" />
     <Compile Include="Write\_models\person\Person.cs" />
-    <Compile Include="Write\Enrollment\_models\ProgramType.cs" />
+    <Compile Include="Write\Enrollment\applicant-aggregate\ProgramType.cs" />
     <Compile Include="Write\_models\person\repository\IPersonRepository.cs" />
-    <Compile Include="Write\Enrollment\_models\Application.cs" />
+    <Compile Include="Write\Enrollment\applicant-aggregate\Application.cs" />
     <Compile Include="Read\Enrollment\repositories\IApplicationRepository.cs" />
     <Compile Include="Read\Enrollment\models\College.cs" />
     <Compile Include="Read\Enrollment\repositories\IMinorRepository.cs" />
     <Compile Include="Read\Enrollment\models\Minor.cs" />
     <Compile Include="Write\Enrollment\_repositories\IMinorRepository.cs" />
     <Compile Include="Write\Enrollment\_repositories\IProgramRepository.cs" />
-    <Compile Include="Write\Enrollment\_models\Minor.cs" />
-    <Compile Include="Write\Enrollment\_models\Program.cs" />
+    <Compile Include="Write\Enrollment\applicant-aggregate\Minor.cs" />
+    <Compile Include="Write\Enrollment\applicant-aggregate\Program.cs" />
     <Compile Include="Write\Enrollment\application-processor\commands\CreateApplication.cs" />
     <Compile Include="Read\Enrollment\models\Program.cs" />
     <Compile Include="Write\_validation\IValidationResult.cs" />
