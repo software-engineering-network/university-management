@@ -21,14 +21,17 @@ namespace UniversityManagement.Test.Enrollment
         [InlineData("John", null, "111-11-1111")]
         [InlineData("John", "", "111-11-1111")]
         [InlineData("John", " ", "111-11-1111")]
-        [InlineData("John", "Doe", "111-11-111")]
         public void WhenInstantiating_WithAnInvalidArgument_ThrowArgumentException(
             string name, 
             string surname, 
             string socialSecurityNumber
         )
         {
-            Action createApplicant = () => new Person(name, surname, socialSecurityNumber);
+            var ssn = new SocialSecurityNumber(socialSecurityNumber);
+            Action createApplicant = () =>
+            {
+                var person = new Person(name, surname, ssn);
+            };
 
             createApplicant.Should().Throw<ArgumentException>();
         }
