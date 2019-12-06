@@ -8,8 +8,8 @@ namespace UniversityManagement.Domain.Write.Enrollment
 
         protected ProgramType ProgramType { get; set; }
 
-        public long CollegeId { get; private set; }
-        public long DisciplineId { get; private set; }
+        public long CollegeId { get; }
+        public long DisciplineId { get; }
         public bool IsProgram => ProgramType.IsProgram;
 
         #endregion
@@ -23,35 +23,24 @@ namespace UniversityManagement.Domain.Write.Enrollment
             ProgramType programType
         ) : base(id)
         {
-            SetCollegeId(collegeId);
-            SetDisciplineId(disciplineId);
+            CollegeId = collegeId == 0
+                ? throw new ArgumentException()
+                : collegeId;
+
+            DisciplineId = disciplineId == 0
+                ? throw new ArgumentException()
+                : disciplineId;
+
             SetProgramType(programType);
         }
 
         #endregion
 
-        private void SetCollegeId(long collegeId)
-        {
-            if (collegeId == 0)
-                throw new ArgumentException();
-
-            CollegeId = collegeId;
-        }
-
-        private void SetDisciplineId(long disciplineId)
-        {
-            if (disciplineId == 0)
-                throw new ArgumentException();
-
-            DisciplineId = disciplineId;
-        }
-
         protected virtual void SetProgramType(ProgramType programType)
         {
-            if (!programType.IsProgram)
-                throw new ArgumentException();
-
-            ProgramType = programType;
+            ProgramType = programType.IsProgram
+                ? programType
+                : throw new ArgumentException();
         }
     }
 }

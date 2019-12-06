@@ -47,8 +47,10 @@ namespace UniversityManagement.Domain.Write
         {
             if (ReferenceEquals(null, other))
                 return false;
+
             if (ReferenceEquals(this, other))
                 return true;
+
             return base.Equals(other) &&
                    Name == other.Name &&
                    Surname == other.Surname &&
@@ -66,10 +68,13 @@ namespace UniversityManagement.Domain.Write
         {
             if (ReferenceEquals(null, obj))
                 return false;
+
             if (ReferenceEquals(this, obj))
                 return true;
+
             if (obj.GetType() != GetType())
                 return false;
+
             return Equals((Person) obj);
         }
 
@@ -111,20 +116,18 @@ namespace UniversityManagement.Domain.Write
 
         public Person UpdateName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException();
-
-            Name = name;
+            Name = string.IsNullOrWhiteSpace(name)
+                ? throw new ArgumentException()
+                : name;
 
             return this;
         }
 
         public Person UpdateSurname(string surname)
         {
-            if (string.IsNullOrWhiteSpace(surname))
-                throw new ArgumentException();
-
-            Surname = surname;
+            Surname = string.IsNullOrWhiteSpace(surname)
+                ? throw new ArgumentException()
+                : surname;
 
             return this;
         }
