@@ -11,11 +11,11 @@ namespace UniversityManagement.Domain.Write.Enrollment
     {
         #region Properties
 
-        private Program Program { get; set; }
+        private Program Program { get; }
 
-        public long ApplicantId { get; private set; }
+        public long ApplicantId { get; }
         public long CollegeId => Program.CollegeId;
-        public long MinorId { get; private set; }
+        public long MinorId { get; }
         public long ProgramId => Program.Id;
 
         #endregion
@@ -29,38 +29,20 @@ namespace UniversityManagement.Domain.Write.Enrollment
             long id = 0
         ) : base(id)
         {
-            SetApplicant(applicant);
-            SetProgram(program);
-            SetMinor(minor);
+            ApplicantId = applicant == null || applicant.Id == 0
+                ? throw new ArgumentException()
+                : applicant.Id;
+
+            Program = program == null || !program.IsProgram
+                ? throw new ArgumentException()
+                : program;
+
+            if (minor != null)
+                MinorId = minor.DisciplineId == Program.DisciplineId
+                    ? throw new ArgumentException()
+                    : minor.Id;
         }
 
         #endregion
-
-        private void SetApplicant(Person applicant)
-        {
-            if (applicant == null || applicant.Id == 0)
-                throw new ArgumentException();
-
-            ApplicantId = applicant.Id;
-        }
-
-        private void SetMinor(Minor minor)
-        {
-            if (minor == null)
-                return;
-
-            if (minor.DisciplineId == Program.DisciplineId)
-                throw new ArgumentException();
-
-            MinorId = minor.Id;
-        }
-
-        private void SetProgram(Program program)
-        {
-            if (program == null || !program.IsProgram)
-                throw new ArgumentException();
-
-            Program = program;
-        }
     }
 }

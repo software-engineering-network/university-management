@@ -28,8 +28,12 @@ namespace UniversityManagement.Domain.Write
 
         public bool Equals(Entity other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other)) 
+                return false;
+
+            if (ReferenceEquals(this, other)) 
+                return true;
+
             return Id == other.Id;
         }
 

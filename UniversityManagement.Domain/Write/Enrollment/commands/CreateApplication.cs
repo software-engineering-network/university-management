@@ -40,14 +40,4 @@
             MinorId = application.Minor?.Id ?? 0;
         }
     }
-
-    public class UpdateApplication
-    {
-        private readonly Application _application;
-        
-        public UpdateApplication(Application application)
-        {
-            _application = application;
-        }
-    }
 }

@@ -17,10 +17,9 @@ namespace UniversityManagement.Domain.Write
 
         public SocialSecurityNumber(string socialSecurityNumber)
         {
-            if (!IsValid(socialSecurityNumber))
-                throw new ArgumentException();
-
-            Value = socialSecurityNumber;
+            Value = Regex.IsMatch(socialSecurityNumber, Pattern)
+                ? socialSecurityNumber
+                : throw new ArgumentException();
         }
 
         #endregion
@@ -33,10 +32,5 @@ namespace UniversityManagement.Domain.Write
         }
 
         #endregion
-
-        private static bool IsValid(string socialSecurityNumber)
-        {
-            return Regex.IsMatch(socialSecurityNumber, Pattern);
-        }
     }
 }
